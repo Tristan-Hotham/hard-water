@@ -1,0 +1,170 @@
+id,source,rock_description,share_carb,share_evap,share_clas,share_unc,share_sedu,share_volc,share_crys
+1,BGS,Mafic igneous-rock (igneous intrusion),0,0,0,0,0,0,1.0
+2,BGS,Wacke,0,0,1.0,0,0,0,0
+3,BGS,Chalk and sandstone,0.5,0,0.5,0,0,0,0
+4,BGS,Mafic lava and mafic tuff,0,0,0,0,0,1.0,0
+5,BGS,Felsic-rock (igneous intrusion),0,0,0,0,0,0,1.0
+6,BGS,"Sandstone, siltstone and mudstone",0,0,1.0,0,0,0,0
+7,BGS,Psammite and pelite,0,0,0,0,0,0,1.0
+8,BGS,"Sandstone, breccia and conglomerate",0,0,1.0,0,0,0,0
+9,BGS,"Gravel, sand, silt and clay",0,0,0,1.0,0,0,0
+10,BGS,"Sandstone and conglomerate, interbedded",0,0,1.0,0,0,0,0
+11,BGS,Metalimestone,1.0,0,0,0,0,0,0
+12,BGS,"Clay, silt, sand and gravel",0,0,0,1.0,0,0,0
+13,BGS,Mafic gneiss,0,0,0,0,0,0,1.0
+14,BGS,Mafic tuff,0,0,0,0,0,1.0,0
+15,BGS,"Sand, silt and clay",0,0,0,1.0,0,0,0
+16,BGS,"Mudstone, siltstone and sandstone",0,0,1.0,0,0,0,0
+17,BGS,"Graphitic pelite, calcareous pelite, calcsilicate-rock and psammite",0.125,0,0.125,0,0,0,0.75
+18,BGS,"Sandstone and siltstone, interbedded",0,0,1.0,0,0,0,0
+19,BGS,Quartzite,0,0,0,0,0,0,1.0
+20,BGS,"Sandstone, limestone and argillaceous rocks",0.333,0,0.667,0,0,0,0
+21,BGS,Sandstone with subordinate argillaceous rocks and limestone,0.125,0,0.875,0,0,0,0
+22,BGS,"Mudstone, chert and smectite-claystone",0,0,1.0,0,0,0,0
+23,BGS,Pyroclastic-rock (igneous intrusion),0,0,0,0,0,0,1.0
+24,BGS,"Limestone, sandstone, siltstone and mudstone",0.25,0,0.75,0,0,0,0
+25,BGS,Limestone with subordinate sandstone and argillaceous rocks,0.75,0,0.25,0,0,0,0
+26,BGS,"Psammite, semipelite and pelite",0,0,0,0,0,0,1.0
+27,BGS,Sandstone and mudstone,0,0,1.0,0,0,0,0
+28,BGS,"Limestone, argillaceous rocks and subordinate sandstone, interbedded",0.375,0,0.625,0,0,0,0
+29,BGS,Siltstone and sandstone with subordinate mudstone,0,0,1.0,0,0,0,0
+30,BGS,"Mudstone, sandstone and limestone",0.333,0,0.667,0,0,0,0
+31,BGS,Dolerite and tholeiitic basalt (igneous intrusion),0,0,0,0,0,0,1.0
+32,BGS,"Mudstone, siltstone, limestone and sandstone",0.25,0,0.75,0,0,0,0
+33,BGS,Psammite,0,0,0,0,0,0,1.0
+34,BGS,Dolomitised limestone and dolomite,1.0,0,0,0,0,0,0
+35,BGS,"Mudstone, siltstone, sandstone, coal, ironstone and ferricrete",0,0,1.0,0,0,0,0
+36,BGS,"Mudstone, sandstone and conglomerate",0,0,1.0,0,0,0,0
+37,BGS,Chalk,1.0,0,0,0,0,0,0
+38,BGS,Felsic lava and felsic tuff,0,0,0,0,0,1.0,0
+39,BGS,"Sandstone and [subequal/subordinate] limestone, interbedded",0.25,0,0.75,0,0,0,0
+40,BGS,Mafic lava,0,0,0,0,0,1.0,0
+41,BGS,"Limestone, mudstone, sandstone and siltstone, with subordinate chert, coal and conglomerate",0.188,0,0.813,0,0,0,0
+42,BGS,Gneiss,0,0,0,0,0,0,1.0
+43,BGS,Semipelite,0,0,0,0,0,0,1.0
+44,BGS,"Sedimentary rock cycles, clackmannan group type",0.25,0,0.75,0,0,0,0
+45,BGS,"Sandstone, mudstone, siltstone and conglomerate",0,0,1.0,0,0,0,0
+46,BGS,"Limestone, mudstone and calcareous mudstone",0.5,0,0.5,0,0,0,0
+47,BGS,Pelite,0,0,0,0,0,0,1.0
+48,BGS,Felsic tuff,0,0,0,0,0,1.0,0
+49,BGS,"Sandstone with subordinate conglomerate, siltstone and mudstone",0,0,1.0,0,0,0,0
+50,BGS,"Conglomerate, sandstone, siltstone and mudstone",0,0,1.0,0,0,0,0
+51,BGS,"Clay, silt and sand",0,0,0,1.0,0,0,0
+52,BGS,Limestone and calcareous sandstone,0.75,0,0.25,0,0,0,0
+53,BGS,"Sedimentary rock cycles, strathclyde group type",0.25,0,0.75,0,0,0,0
+54,BGS,Ultramafitite (igneous intrusion),0,0,0,0,0,0,1.0
+55,BGS,"Lava, tuff, volcaniclastic rock and sedimentary rock",0,0,0,0,0.25,0.75,0
+56,BGS,Gneissose psammite and gneissose semipelite,0,0,0,0,0,0,1.0
+57,BGS,Hornblende schist,0,0,0,0,0,0,1.0
+58,BGS,Diamictite,0,0,1.0,0,0,0,0
+59,BGS,Sandstone and subordinate breccia,0,0,1.0,0,0,0,0
+60,BGS,Semipelite and pelite,0,0,0,0,0,0,1.0
+61,BGS,Dolostone,1.0,0,0,0,0,0,0
+62,BGS,"Limestone and mudstone, interbedded",0.5,0,0.5,0,0,0,0
+63,BGS,Migmatitic rock,0,0,0,0,0,0,1.0
+64,BGS,Limestone,1.0,0,0,0,0,0,0
+65,BGS,Quartz-arenite,0,0,1.0,0,0,0,0
+66,BGS,Psammite and semipelite,0,0,0,0,0,0,1.0
+67,BGS,"Sandstone, conglomerate and [subordinate] argillaceous rocks",0,0,1.0,0,0,0,0
+68,BGS,Metavolcaniclastic igneous-rock and metavolcaniclastic sedimentary-rock,0,0,0,0,0,1.0,0
+69,BGS,Metasedimentary rock,0,0,0,0,0,0,1.0
+70,BGS,Mylonitic-rock and fault-breccia,0,0,0.5,0,0,0,0.5
+71,BGS,Syenitic-rock (igneous intrusion),0,0,0,0,0,0,1.0
+72,BGS,"Serpentinite, metabasalt, metalimestone and psammite",0.25,0,0,0,0,0.25,0.5
+73,BGS,Lava and tuff,0,0,0,0,0,1.0,0
+74,BGS,"Conglomerate and [subequal/subordinate] sandstone, interbedded",0,0,1.0,0,0,0,0
+75,BGS,Felsic lava,0,0,0,0,0,1.0,0
+76,BGS,Mica schist,0,0,0,0,0,0,1.0
+77,BGS,Anorthosite (igneous intrusion),0,0,0,0,0,0,1.0
+78,BGS,Mafite (igneous intrusion),0,0,0,0,0,0,1.0
+79,BGS,"Breccia, conglomerate and sandstone",0,0,1.0,0,0,0,0
+80,BGS,Schist,0,0,0,0,0,0,1.0
+81,BGS,Gneissose semipelite and gneissose psammite,0,0,0,0,0,0,1.0
+82,BGS,"Psammite, pelite, semipelite and calcsilicate-rock",0,0,0,0,0,0,1.0
+83,BGS,Clay and lignite,0,0,0.5,0.5,0,0,0
+84,BGS,Breccia and metabreccia,0,0,1.0,0,0,0,0
+85,BGS,Sandstone with subordinate conglomerate and siltstone,0,0,1.0,0,0,0,0
+86,BGS,"Sandstone and [subequal/subordinate] argillaceous rocks, interbedded",0,0,1.0,0,0,0,0
+87,GSI,"Basalt, trachyte, syenite & tuff",0,0,0,0,0,0.75,0.25
+88,GSI,"Continental redbed facies, lagoonal & shallow marine; Sandstone & mudstone with evaporite",0,0.333,0.667,0,0,0,0
+89,GSI,Marine; Greywacke & shale,0,0,1.0,0,0,0,0
+90,GSI,"Melange (Ordovician or Silurian); Greywacke, sandstone & conglomerate",0,0,1.0,0,0,0,0
+91,GSI,"Shallow marine (Upper Cretaceous); Chalk, flint, glauconitic sandstone& chalk breccia",0.85,0,0.15,0,0,0,0
+92,GSI,"Marine to fluvial; Greywacke, shale, sandstone & conglomerate",0,0,1.0,0,0,0,0
+93,GSI,"Shallow marine, (Cork Group, Old Head Sandstone Fm); Sandstone & mudstone",0,0,1.0,0,0,0,0
+94,GSI,Inishkea Division (possibly Dalradian); Psammitic & pelitic schist,0,0,0,0,0,0,1.0
+95,GSI,Lower Basalt Formation; Olivine basalt lava,0,0,0,0,0,1.0,0
+96,GSI,Dolerite & gabbro,0,0,0,0,0,0,1.0
+97,GSI,Marine; Quartzite & minor slate,0,0,0,0,0,0,1.0
+98,GSI,Cross Point Gneiss; Granitic orthogneiss,0,0,0,0,0,0,1.0
+99,GSI,Greenore Point Group; Schistose amphibolite,0,0,0,0,0,0,1.0
+100,GSI,"Southern Highland Group; Pelitic & psammitic schist, phyllite & marble",0.25,0,0,0,0,0,0.75
+101,GSI,"Marine (Cork Group) (extends into the Visean); Mudstone, sandstone & thin limestone",0.111,0,0.889,0,0,0,0
+102,GSI,Argyll Group; Quartzite,0,0,0,0,0,0,1.0
+103,GSI,"Continental redbed facies (Permo-Triassic, Wexford); Sandstone, conglomerate & siltstone",0,0,1.0,0,0,0,0
+104,GSI,"Rhinns Complex (Inishtrahull); Syenitic orthogneiss, minor metagabbro",0,0,0,0,0,0,1.0
+105,GSI,Doolough Gneiss & Granite; Granitic orthogneiss & granite,0,0,0,0,0,0,1.0
+106,GSI,Mullet Gneiss; Granitic orthogneiss,0,0,0,0,0,0,1.0
+107,GSI,"Deep marine; Slate, shale, minor sandstone & siltstone",0,0,0.692,0,0,0,0.308
+108,GSI,"Granite, granodiorite",0,0,0,0,0,0,1.0
+109,GSI,"Marine shelf & ramp facies; Argillaceous dark-grey bioclastic limestone, subsidiary shale",0.8,0,0.2,0,0,0,0
+110,GSI,Rhyolite & rhyolitic tuff,0,0,0,0,0,1.0,0
+111,GSI,"Interbasaltic Formation; Laterite, bauxite & lithomarge",0,0,0,1.0,0,0,0
+112,GSI,"Transgression to regression sequence (Killary Hbr to Joyces Country Succ.); Sandstone, conglomerate, greywacke, mudstone, tuff",0,0,0.8,0,0,0.2,0
+113,GSI,"""Moffat shale"" facies (Ordovician to Silurian); Shale & greywacke",0,0,1.0,0,0,0,0
+114,GSI,"Granodiorite, tonalite, dacite, granite",0,0,0,0,0,0,1.0
+115,GSI,"Orthogneiss suite, mainly quartz diorite (Connemara)",0,0,0,0,0,0,1.0
+116,GSI,"Continental redbed facies; Sandstone, conglomerate & siltstone (in places extends into the Carboniferous)",0,0,1.0,0,0,0,0
+117,GSI,Shallow marine (Lias); Mudstone & limestone,0.5,0,0.5,0,0,0,0
+118,GSI,"Argyll Group; Psammitic & pelitic schist, marble, amphibolite, diamictite",0.2,0,0.2,0,0,0,0.6
+119,GSI,Appin Group; Quartzite,0,0,0,0,0,0,1.0
+120,GSI,"Shallow & marginal marine (Navan Group); Dark-grey limestone, mudstone, sandstone, minor evaporite",0.308,0.077,0.615,0,0,0,0
+121,GSI,Grampian Group; Psammitic & pelitic schist,0,0,0,0,0,0,1.0
+122,GSI,Microgranite & porphyry,0,0,0,0,0,0,1.0
+123,GSI,Appinite Suite,0,0,0,0,0,0,1.0
+124,GSI,"Serpentinite, Neoproterozoic (NE Ox Mts) & Lower Ordovician (Clew Bay, Carnew)",0,0,0,0,0,0,1.0
+125,GSI,"Basalt, andesite, basaltic & andesitic tuff",0,0,0,0,0,1.0,0
+126,GSI,Argyll Group; Paragneiss & migmatite,0,0,0,0,0,0,1.0
+127,GSI,Causeway Tholeiite Member; Columnar tholeiitic basalt lava,0,0,0,0,0,1.0,0
+128,GSI,Marine; Slate,0,0,0,0,0,0,1.0
+129,GSI,Southern Highland Group; (Epidote-)amphibolitic schist & tuff,0,0,0,0,0,0.5,0.5
+130,GSI,Marine shelf facies; Limestone & calcareous shale,0.75,0,0.25,0,0,0,0
+131,GSI,"Deep marine; Slate, schist & minor greywacke",0,0,0.111,0,0,0,0.889
+132,GSI,Quartzite (in Croagh Patrick Succession),0,0,0,0,0,0,1.0
+133,GSI,"Fluvio-deltaic & basinal marine (Turbiditic); Shale, sandstone, siltstone & coal",0,0,1.0,0,0,0,0
+134,GSI,"Gabbro, dolerite & diorite",0,0,0,0,0,0,1.0
+135,GSI,Argyll Group; Amphibolite & amphibolitic schist,0,0,0,0,0,0,1.0
+136,GSI,Waulsortian mudbank; Pale-grey massive limestone,1.0,0,0,0,0,0,0
+137,GSI,"Shallow marine (""Lower Limestone Shale""); Shale, sandstone & thin limestone",0.111,0,0.889,0,0,0,0
+138,GSI,"Shallow marine (Dunquin Group, Dingle); Siltstone, sandstone, tuff, limestone",0.25,0,0.5,0,0,0.25,0
+139,GSI,"Deep marine turbidite sequence; Mudstone, greywacke & conglomerate",0,0,1.0,0,0,0,0
+140,GSI,"Marginal marine (Mullaghmore, Downpatrick & Clogher Valley Fms); Sandstone, mudstone & evaporite",0,0.333,0.667,0,0,0,0
+141,GSI,Appin Group; Psammitic & pelitic schist & marble,0.333,0,0,0,0,0,0.667
+142,GSI,"Fluvio-deltaic & minor marine (late Visean to Namurian: Ballycastle); Sandstone, mudstone, thin limestone & coal",0.077,0,0.923,0,0,0,0
+143,GSI,"Continental redbed facies (late Visean to early Westphalian); Sandstone, conglomerate & mudstone",0,0,1.0,0,0,0,0
+144,GSI,"Basalt to andesite, tuff & shale",0,0,0.333,0,0,0.667,0
+145,GSI,"Basalt to andesite, tuff, slate & mudstone",0,0,0.25,0,0,0.5,0.25
+146,GSI,Upper Basalt Formation; Olivine basalt lava,0,0,0,0,0,1.0,0
+147,GSI,"Lacustrine; Clay, sand & lignite",0,0,0.333,0.667,0,0,0
+148,GSI,"Granite, granophyre",0,0,0,0,0,0,1.0
+149,GSI,Rhyolite,0,0,0,0,0,1.0,0
+150,GSI,"Deep marine; Greywacke, shale, sandstone & conglomerate",0,0,1.0,0,0,0,0
+151,GSI,"Rhyolitic tuff, basalt & andesite (in Dunquin Group)",0,0,0,0,0,1.0,0
+152,GSI,"Continental redbed facies & shallow marine; Sandstone, conglomerate, magnesian limestone, marl, evaporite",0.3,0.2,0.5,0,0,0,0
+153,GSI,"Fluvio-deltaic & shallow marine; Shale, sandstone & siltstone with coal",0,0,1.0,0,0,0,0
+154,GSI,Rhyolite and rhyolitic tuff,0,0,0,0,0,1.0,0
+155,GSI,Undifferentiated minor volcanic rocks,0,0,0,0,0,1.0,0
+156,GSI,"Continental redbed facies; Sandstone, siltstone & mudstone",0,0,1.0,0,0,0,0
+157,GSI,Tyrone Central Inlier; Quartzo-feldspathic paragneiss & schist,0,0,0,0,0,0,1.0
+158,GSI,"Continental redbed facies; Sandstone, siltstone & mudstone (base of Dingle Group is in the Upper Silurian)",0,0,1.0,0,0,0,0
+159,GSI,"Kilmore Quay Group; Paragneiss, schist",0,0,0,0,0,0,1.0
+160,GSI,"Shallow marine & coastal plain (basal clastics); Sandstone, mudstone & conglomerate",0,0,1.0,0,0,0,0
+161,GSI,"Meta-dolerite, meta-gabbro",0,0,0,0,0,0,1.0
+162,GSI,"Marine basinal facies (Tobercolleen & Lucan Fms to ""Calp""); Dark-grey argillaceous & cherty limestone & shale",0.7,0,0.3,0,0,0,0
+163,GSI,"Rhyolite, rhyolitic tuff & slate",0,0,0,0,0,0.667,0.333
+164,GSI,"Marginal marine (Meenymore Formation); Mudstone, sandstone & evaporite",0,0.333,0.667,0,0,0,0
+165,GSI,"Shallow water marine (Armagh Group); Limestone, limestone conglomerate, palaeokarst with red palaeosols",0.9,0,0.1,0,0,0,0
+166,GSI,"Shallow marine & coastal plain (Basal Clastics); Sandstone, mudstone & conglomerate",0,0,1.0,0,0,0,0
+167,GSI,"Alluvial to playa (Louisburgh to Clare Island Succession); Sandstone, siltstone, conglomerate",0,0,1.0,0,0,0,0
+168,GSI,Slishwood Division; Quartzo-feldspathic paragneiss,0,0,0,0,0,0,1.0
+169,GSI,"Shallow marine (Croagh Patrick Succession); Sandstone, siltstone, conglomerate",0,0,1.0,0,0,0,0
