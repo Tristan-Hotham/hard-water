@@ -1,0 +1,4076 @@
+{
+ "stations": {
+  "source": "UNEP GEMS/Water Global Freshwater Quality Archive v3 (GFQA_v3.zip, Zenodo 10.5281/zenodo.18459694), CC BY 4.0",
+  "retrieved": "2026-10-28",
+  "stations_in_metadata": 22981,
+  "stations_unique_ids": 22946,
+  "rows": {
+   "hardness": 473383,
+   "calcium": 489609,
+   "magnesium": 461585
+  },
+  "licence_field_filled": 0,
+  "hardness_codes": {
+   "H-T": 450496,
+   "H-Ca": 17706,
+   "H-NC": 4937,
+   "H-Mg": 244
+  },
+  "camg_pairs": 430896,
+  "crosscheck": {
+   "pairs": 247576,
+   "median_ratio": 1.0019364449157284,
+   "share_within_20pct": 0.9464649239021553,
+   "by_country": [
+    {
+     "country": "Argentina",
+     "median_ratio": 1.122,
+     "n": 11
+    },
+    {
+     "country": "Austria",
+     "median_ratio": 1.0,
+     "n": 6621
+    },
+    {
+     "country": "Belgium",
+     "median_ratio": 0.9985,
+     "n": 3028
+    },
+    {
+     "country": "Bosnia and Herzegovina",
+     "median_ratio": 0.9986,
+     "n": 184
+    },
+    {
+     "country": "Bulgaria",
+     "median_ratio": 0.02009,
+     "n": 1218
+    },
+    {
+     "country": "Canada",
+     "median_ratio": 0.9999,
+     "n": 23676
+    },
+    {
+     "country": "Croatia",
+     "median_ratio": 1.001,
+     "n": 6944
+    },
+    {
+     "country": "Cyprus",
+     "median_ratio": 0.9995,
+     "n": 1194
+    },
+    {
+     "country": "Estonia",
+     "median_ratio": 0.0004014,
+     "n": 518
+    },
+    {
+     "country": "France",
+     "median_ratio": 0.9998,
+     "n": 18561
+    },
+    {
+     "country": "Iceland",
+     "median_ratio": 1.0,
+     "n": 158
+    },
+    {
+     "country": "India",
+     "median_ratio": 1.006,
+     "n": 100456
+    },
+    {
+     "country": "Ireland",
+     "median_ratio": 1.056,
+     "n": 8624
+    },
+    {
+     "country": "Italy",
+     "median_ratio": 0.9999,
+     "n": 39637
+    },
+    {
+     "country": "Latvia",
+     "median_ratio": 1.001,
+     "n": 4902
+    },
+    {
+     "country": "Lithuania",
+     "median_ratio": 0.9881,
+     "n": 92
+    },
+    {
+     "country": "Macedonia (the former Yugoslav Republic of)",
+     "median_ratio": 0.9999,
+     "n": 2741
+    },
+    {
+     "country": "Mexico",
+     "median_ratio": 0.9878,
+     "n": 10214
+    },
+    {
+     "country": "Netherlands (-the )",
+     "median_ratio": 0.9997,
+     "n": 2004
+    },
+    {
+     "country": "Poland",
+     "median_ratio": 1.0,
+     "n": 4758
+    },
+    {
+     "country": "Romania",
+     "median_ratio": 1.0,
+     "n": 1333
+    },
+    {
+     "country": "Serbia",
+     "median_ratio": 0.9981,
+     "n": 5784
+    },
+    {
+     "country": "Spain",
+     "median_ratio": 1.0,
+     "n": 4747
+    },
+    {
+     "country": "United States of America (the)",
+     "median_ratio": 1.004,
+     "n": 58
+    },
+    {
+     "country": "Uruguay",
+     "median_ratio": 0.9988,
+     "n": 113
+    }
+   ]
+  },
+  "ht_dropped_countries": [
+   "Bulgaria",
+   "Estonia"
+  ],
+  "ht_rows_dropped_units": 5016,
+  "samples_dropped_implausible": 401,
+  "samples": 611858,
+  "samples_from_ht": 426994,
+  "samples_from_camg": 184864,
+  "quality": {
+   "Fair": 493390,
+   "Unknown": 113850,
+   "Good": 4509,
+   "Pending review": 109
+  },
+  "below_detection_flags": 3659,
+  "years": [
+   1906,
+   2023
+  ],
+  "stations": 16682,
+  "countries": 34,
+  "by_wtype": {
+   "River": 10515,
+   "Groundwater": 3861,
+   "Lake": 1458,
+   "Reservoir": 791,
+   "Wetland": 57
+  },
+  "class_counts": [
+   1975,
+   1801,
+   2079,
+   2399,
+   4162,
+   4266
+  ],
+  "median_all": 202.3,
+  "station_years": 108700
+ },
+ "world_geo": {
+  "sources": {
+   "Arctic": {
+    "units": 1332,
+    "pixels": 11581080
+   },
+   "GMNA": {
+    "units": 588,
+    "pixels": 4053416
+   },
+   "Generalized Geology of the World": {
+    "units": 687,
+    "pixels": 13826622
+   },
+   "Europe 1:5M": {
+    "units": 1802,
+    "pixels": 3933119
+   },
+   "Africa": {
+    "units": 100,
+    "pixels": 1463837
+   },
+   "Australia 1:2.5M": {
+    "units": 159,
+    "pixels": 402805
+   }
+  },
+  "coarse_sources": [
+   "Africa",
+   "Generalized Geology of the World"
+  ],
+  "detailed_share_of_mapped_land": 0.2532035276486105,
+  "units": 4668,
+  "units_classified": 4524,
+  "units_submarine": 23,
+  "land_km2": 138489286.76015082,
+  "mapped_share_of_land": 0.9470222310137977,
+  "group_share_of_mapped_land": {
+   "carb": 0.04528405894539588,
+   "evap": 0.006090595577519915,
+   "clas": 0.08880895734506945,
+   "unc": 0.049404466582167454,
+   "sedu": 0.49688383776870565,
+   "volc": 0.11516540707754085,
+   "crys": 0.19836267779906408
+  }
+ },
+ "bi_geo": {
+  "units": 169,
+  "units_bgs": 86,
+  "units_gsi": 83,
+  "grid": [
+   1120,
+   867
+  ],
+  "box": [
+   -11.0,
+   2.0,
+   49.8,
+   61.0
+  ],
+  "cell_deg": [
+   0.01,
+   0.015
+  ]
+ },
+ "model": {
+  "world_radius_cap_km": 50,
+  "world_radius_scores": [
+   {
+    "radius_km": 10,
+    "n": 14793,
+    "r2": 0.23565680830150693,
+    "rmse_log10": 0.4148910472448245,
+    "median_factor": 1.756587582274815,
+    "within_factor_2": 0.592712769553167,
+    "class_exact": 0.29203001419590346,
+    "class_within1": 0.6439532211180964,
+    "spearman": 0.5168012820379622
+   },
+   {
+    "radius_km": 25,
+    "n": 15285,
+    "r2": 0.22809084824068204,
+    "rmse_log10": 0.4125095307404509,
+    "median_factor": 1.735343059811913,
+    "within_factor_2": 0.5976447497546614,
+    "class_exact": 0.29911678115799806,
+    "class_within1": 0.6491331370624795,
+    "spearman": 0.5090649052071503
+   },
+   {
+    "radius_km": 50,
+    "n": 15844,
+    "r2": 0.22197903440762112,
+    "rmse_log10": 0.4089783944705368,
+    "median_factor": 1.7111088661813443,
+    "within_factor_2": 0.6088740217116889,
+    "class_exact": 0.2955061853067407,
+    "class_within1": 0.6500883615248675,
+    "spearman": 0.5015221949073947
+   },
+   {
+    "radius_km": 100,
+    "n": 16465,
+    "r2": 0.2315689826674623,
+    "rmse_log10": 0.4008547286228864,
+    "median_factor": 1.673853160336547,
+    "within_factor_2": 0.6298815669602187,
+    "class_exact": 0.2870331005162466,
+    "class_within1": 0.6515031885818403,
+    "spearman": 0.48519015413391
+   },
+   {
+    "radius_km": 200,
+    "n": 16682,
+    "r2": 0.27261965402125177,
+    "rmse_log10": 0.38809250371232673,
+    "median_factor": 1.6607351142857871,
+    "within_factor_2": 0.6390720537105863,
+    "class_exact": 0.2761659273468409,
+    "class_within1": 0.6472844982615993,
+    "spearman": 0.481156251254207
+   }
+  ],
+  "world_radius_km": 10,
+  "conf_min": 0.5,
+  "stations_without_geology": 1889,
+  "world_cv": {
+   "baseline_global_median": {
+    "n": 14793,
+    "r2": -0.262775280039655,
+    "rmse_log10": 0.5332770557065063,
+    "median_factor": 2.5862845079676346,
+    "within_factor_2": 0.34272966943824784,
+    "class_exact": 0.11911039004934766,
+    "class_within1": 0.38186980328533765,
+    "spearman": NaN
+   },
+   "rain_and_type_only": {
+    "n": 14793,
+    "r2": -0.1596980590253283,
+    "rmse_log10": 0.5110487470680526,
+    "median_factor": 2.3566801284387595,
+    "within_factor_2": 0.40154126951936725,
+    "class_exact": 0.18380315013857906,
+    "class_within1": 0.48847427837490703,
+    "spearman": 0.3709908004850805
+   },
+   "rocks_only": {
+    "n": 14793,
+    "r2": 0.17015251845079016,
+    "rmse_log10": 0.4323037500663256,
+    "median_factor": 1.7908743153281366,
+    "within_factor_2": 0.566889745149733,
+    "class_exact": 0.26039342932468057,
+    "class_within1": 0.5949435543838302,
+    "spearman": 0.4256992214442032
+   },
+   "rocks_and_type": {
+    "n": 14793,
+    "r2": 0.21115405529880427,
+    "rmse_log10": 0.42148872480235594,
+    "median_factor": 1.7532748809895802,
+    "within_factor_2": 0.5848712228756845,
+    "class_exact": 0.2791185019941864,
+    "class_within1": 0.6401676468600014,
+    "spearman": 0.4876604029667258
+   },
+   "rocks_rain_and_type": {
+    "n": 14793,
+    "r2": 0.23565680830150693,
+    "rmse_log10": 0.4148910472448245,
+    "median_factor": 1.756587582274815,
+    "within_factor_2": 0.592712769553167,
+    "class_exact": 0.29203001419590346,
+    "class_within1": 0.6439532211180964,
+    "spearman": 0.5168012820379622
+   },
+   "rocks_rain_and_type_leave_country_out": {
+    "n": 14793,
+    "r2": 0.09985151880323218,
+    "rmse_log10": 0.4502429686398857,
+    "median_factor": 1.8432109908223586,
+    "within_factor_2": 0.5493814642060434,
+    "class_exact": 0.2633678090988981,
+    "class_within1": 0.6086662610694247,
+    "spearman": 0.4866765900874401
+   }
+  },
+  "world_cv_by_confidence": {
+   "high": {
+    "n": 10363,
+    "r2": 0.35763156633416293,
+    "rmse_log10": 0.3841488584956828,
+    "median_factor": 1.6677196918165615,
+    "within_factor_2": 0.6343722860175625,
+    "class_exact": 0.3173791373154492,
+    "class_within1": 0.6803049310045354,
+    "spearman": 0.584801163902647
+   },
+   "low": {
+    "n": 4430,
+    "r2": -0.11670186216342526,
+    "rmse_log10": 0.47916296650660695,
+    "median_factor": 2.0134526917945545,
+    "within_factor_2": 0.49525959367945827,
+    "class_exact": 0.2327313769751693,
+    "class_within1": 0.5589164785553047,
+    "spearman": 0.3519823866967917
+   }
+  },
+  "world_cv_by_type": {
+   "River": {
+    "n": 9101,
+    "r2": 0.21434503806155247,
+    "rmse_log10": 0.39012115417981974,
+    "median_factor": 1.6945260283919106,
+    "within_factor_2": 0.6230084606087243,
+    "class_exact": 0.2683221623997363,
+    "class_within1": 0.6400395560927371,
+    "spearman": 0.5113394370934513
+   },
+   "Groundwater": {
+    "n": 3750,
+    "r2": 0.0073369146079560466,
+    "rmse_log10": 0.3705907548189296,
+    "median_factor": 1.6208665407182814,
+    "within_factor_2": 0.6522666666666667,
+    "class_exact": 0.34053333333333335,
+    "class_within1": 0.7021333333333334,
+    "spearman": 0.26552675486940003
+   },
+   "Lake": {
+    "n": 1125,
+    "r2": 0.22747992984394505,
+    "rmse_log10": 0.6272939935257855,
+    "median_factor": 2.76914077763924,
+    "within_factor_2": 0.3466666666666667,
+    "class_exact": 0.41155555555555556,
+    "class_within1": 0.5875555555555556,
+    "spearman": 0.5890657956436471
+   },
+   "Reservoir": {
+    "n": 760,
+    "r2": -0.8202455093306711,
+    "rmse_log10": 0.4935792767653205,
+    "median_factor": 2.5710118392036887,
+    "within_factor_2": 0.3236842105263158,
+    "class_exact": 0.17763157894736842,
+    "class_within1": 0.5131578947368421,
+    "spearman": 0.41800606758572834
+   }
+  },
+  "world_cv_country_medians": [
+   {
+    "country": "Austria",
+    "n": 134,
+    "measured_median": 159.3,
+    "cv_pred_median": 98.33584941852915
+   },
+   {
+    "country": "Belgium",
+    "n": 83,
+    "measured_median": 330.0,
+    "cv_pred_median": 289.68398107515236
+   },
+   {
+    "country": "Bosnia and Herzegovina",
+    "n": 15,
+    "measured_median": 225.5,
+    "cv_pred_median": 90.98931199102782
+   },
+   {
+    "country": "Bulgaria",
+    "n": 108,
+    "measured_median": 203.35000000000002,
+    "cv_pred_median": 132.5888701869967
+   },
+   {
+    "country": "Canada",
+    "n": 276,
+    "measured_median": 31.65,
+    "cv_pred_median": 87.8197239739437
+   },
+   {
+    "country": "Croatia",
+    "n": 122,
+    "measured_median": 242.35,
+    "cv_pred_median": 182.22776633091252
+   },
+   {
+    "country": "Cyprus",
+    "n": 37,
+    "measured_median": 293.0,
+    "cv_pred_median": 81.6338913523937
+   },
+   {
+    "country": "Denmark",
+    "n": 30,
+    "measured_median": 158.45,
+    "cv_pred_median": 336.89791252482115
+   },
+   {
+    "country": "Estonia",
+    "n": 78,
+    "measured_median": 226.1,
+    "cv_pred_median": 163.2399681972144
+   },
+   {
+    "country": "Finland",
+    "n": 202,
+    "measured_median": 15.45,
+    "cv_pred_median": 22.026051740661728
+   },
+   {
+    "country": "France",
+    "n": 1966,
+    "measured_median": 189.75,
+    "cv_pred_median": 172.646557942639
+   },
+   {
+    "country": "Greece",
+    "n": 579,
+    "measured_median": 291.6,
+    "cv_pred_median": 285.1001840353107
+   },
+   {
+    "country": "India",
+    "n": 709,
+    "measured_median": 110.4,
+    "cv_pred_median": 87.98556242857572
+   },
+   {
+    "country": "Ireland",
+    "n": 388,
+    "measured_median": 69.4,
+    "cv_pred_median": 73.22209128598497
+   },
+   {
+    "country": "Italy",
+    "n": 2743,
+    "measured_median": 244.0,
+    "cv_pred_median": 197.5311654291375
+   },
+   {
+    "country": "Latvia",
+    "n": 43,
+    "measured_median": 182.0,
+    "cv_pred_median": 125.4339064438214
+   },
+   {
+    "country": "Mexico",
+    "n": 5242,
+    "measured_median": 197.7,
+    "cv_pred_median": 126.43676489527812
+   },
+   {
+    "country": "Montenegro",
+    "n": 11,
+    "measured_median": 153.3,
+    "cv_pred_median": 162.8735507341816
+   },
+   {
+    "country": "Netherlands",
+    "n": 167,
+    "measured_median": 178.2,
+    "cv_pred_median": 82.63523474602167
+   },
+   {
+    "country": "North Macedonia",
+    "n": 19,
+    "measured_median": 180.5,
+    "cv_pred_median": 68.12322514303554
+   },
+   {
+    "country": "Norway",
+    "n": 133,
+    "measured_median": 8.2,
+    "cv_pred_median": 31.59170119743488
+   },
+   {
+    "country": "Poland",
+    "n": 688,
+    "measured_median": 215.5,
+    "cv_pred_median": 224.78971555948596
+   },
+   {
+    "country": "Portugal",
+    "n": 93,
+    "measured_median": 84.0,
+    "cv_pred_median": 59.908846646245614
+   },
+   {
+    "country": "Romania",
+    "n": 79,
+    "measured_median": 183.9,
+    "cv_pred_median": 163.48138112728338
+   },
+   {
+    "country": "Serbia",
+    "n": 44,
+    "measured_median": 210.0,
+    "cv_pred_median": 86.5460398852081
+   },
+   {
+    "country": "Spain",
+    "n": 318,
+    "measured_median": 289.85,
+    "cv_pred_median": 148.33786488480115
+   },
+   {
+    "country": "Sweden",
+    "n": 232,
+    "measured_median": 14.7,
+    "cv_pred_median": 27.125204089976606
+   },
+   {
+    "country": "Switzerland",
+    "n": 45,
+    "measured_median": 276.0,
+    "cv_pred_median": 210.59220017430965
+   },
+   {
+    "country": "United States",
+    "n": 113,
+    "measured_median": 125.8,
+    "cv_pred_median": 119.75472343904649
+   },
+   {
+    "country": "Uruguay",
+    "n": 82,
+    "measured_median": 40.45,
+    "cv_pred_median": 99.36423394532613
+   }
+  ],
+  "world_cv_country_r2": 0.5869969673659575,
+  "world_cv_country_spearman": 0.6369299221357063,
+  "world_coef": {
+   "s_carb": 2.324078469422617,
+   "s_evap": 2.709078738762684,
+   "s_clas": 1.8253746223245881,
+   "s_unc": 2.410031464981456,
+   "s_sedu": 2.10101272820812,
+   "s_volc": 1.8579625545687342,
+   "s_crys": 1.336833361480711,
+   "log10_rain_per_1000mm": -0.3430278548924799,
+   "groundwater": 0.2986591738898755,
+   "lake_or_reservoir": -0.3168344582444606
+  },
+  "world_typical": {
+   "carb": 210.90091766084043,
+   "evap": 511.77461324941487,
+   "clas": 66.89206796065807,
+   "unc": 257.0582016738897,
+   "sedu": 126.18645164992523,
+   "volc": 72.10453070448132,
+   "crys": 21.71867674707011
+  },
+  "dry_mask_mm": 200,
+  "station_rain_p01": 193.0,
+  "stations_below_dry": 201,
+  "land_share_too_dry": 0.17597981143221436,
+  "world_pred_class_share": [
+   0.18496850009752752,
+   0.24990007460252658,
+   0.28478354546402845,
+   0.1601913846847235,
+   0.0821900093221359,
+   0.03796648582905808
+  ],
+  "world_pred_low_conf_share": 0.7139480513288413,
+  "world_pred_class_share_high_conf": [
+   0.20460440627239518,
+   0.28125564306805995,
+   0.1817509817398789,
+   0.08686255761801644,
+   0.14246247476921967,
+   0.1030639365324297
+  ],
+  "world_pred_land_share_with_prediction": 0.7975944618844543,
+  "ireland_stations": 388,
+  "bi_radius_cap_km": 10,
+  "bi_radius_scores": [
+   {
+    "radius_km": 1,
+    "n": 388,
+    "r2": 0.5875903261073405,
+    "rmse_log10": 0.3517003143514312,
+    "median_factor": 1.7515702198013516,
+    "within_factor_2": 0.615979381443299,
+    "class_exact": 0.4639175257731959,
+    "class_within1": 0.8092783505154639,
+    "spearman": 0.7696895572227119
+   },
+   {
+    "radius_km": 2,
+    "n": 388,
+    "r2": 0.5872692072808315,
+    "rmse_log10": 0.35183721174192384,
+    "median_factor": 1.7276636325870576,
+    "within_factor_2": 0.6365979381443299,
+    "class_exact": 0.45103092783505155,
+    "class_within1": 0.8247422680412371,
+    "spearman": 0.7755035596568584
+   },
+   {
+    "radius_km": 5,
+    "n": 388,
+    "r2": 0.5999880895386016,
+    "rmse_log10": 0.34637360993182126,
+    "median_factor": 1.6603417868891295,
+    "within_factor_2": 0.6417525773195877,
+    "class_exact": 0.4639175257731959,
+    "class_within1": 0.8324742268041238,
+    "spearman": 0.7890003175756614
+   },
+   {
+    "radius_km": 10,
+    "n": 388,
+    "r2": 0.6022220948603814,
+    "rmse_log10": 0.34540503389138577,
+    "median_factor": 1.6811524528638313,
+    "within_factor_2": 0.6211340206185567,
+    "class_exact": 0.4896907216494845,
+    "class_within1": 0.8221649484536082,
+    "spearman": 0.7924979812741186
+   },
+   {
+    "radius_km": 20,
+    "n": 388,
+    "r2": 0.6237607503455928,
+    "rmse_log10": 0.3359234982405302,
+    "median_factor": 1.7300286402473113,
+    "within_factor_2": 0.5902061855670103,
+    "class_exact": 0.4639175257731959,
+    "class_within1": 0.7963917525773195,
+    "spearman": 0.7920907514226042
+   }
+  ],
+  "bi_radius_km": 10,
+  "bi_cv": {
+   "rocks_type_and_world_rain_effect": {
+    "n": 388,
+    "r2": 0.6022220948603814,
+    "rmse_log10": 0.34540503389138577,
+    "median_factor": 1.6811524528638313,
+    "within_factor_2": 0.6211340206185567,
+    "class_exact": 0.4896907216494845,
+    "class_within1": 0.8221649484536082,
+    "spearman": 0.7924979812741186
+   },
+   "baseline_median": {
+    "n": 388,
+    "r2": -0.019285763933677647,
+    "rmse_log10": 0.5529123795782594,
+    "median_factor": 2.782085548648711,
+    "within_factor_2": 0.3324742268041237,
+    "class_exact": 0.13917525773195877,
+    "class_within1": 0.7087628865979382,
+    "spearman": NaN
+   },
+   "rocks_only": {
+    "n": 388,
+    "r2": 0.41228511689217007,
+    "rmse_log10": 0.4198476038225829,
+    "median_factor": 2.008591490118874,
+    "within_factor_2": 0.49742268041237114,
+    "class_exact": 0.43556701030927836,
+    "class_within1": 0.75,
+    "spearman": 0.6995800990000595
+   },
+   "rocks_and_type": {
+    "n": 388,
+    "r2": 0.5725007537665654,
+    "rmse_log10": 0.3580766577123524,
+    "median_factor": 1.7260881165064283,
+    "within_factor_2": 0.615979381443299,
+    "class_exact": 0.4742268041237113,
+    "class_within1": 0.8092783505154639,
+    "spearman": 0.7741393378054039
+   },
+   "rocks_type_and_free_rain_effect": {
+    "n": 388,
+    "r2": 0.7022054946410123,
+    "rmse_log10": 0.2988592310091648,
+    "median_factor": 1.6164063276072118,
+    "within_factor_2": 0.6855670103092784,
+    "class_exact": 0.5541237113402062,
+    "class_within1": 0.8350515463917526,
+    "spearman": 0.8606773084537779
+   },
+   "world_model_at_irish_stations": {
+    "n": 388,
+    "r2": 0.4463655919765144,
+    "rmse_log10": 0.407492735844795,
+    "median_factor": 1.9706967476365291,
+    "within_factor_2": 0.5128865979381443,
+    "class_exact": 0.36597938144329895,
+    "class_within1": 0.7061855670103093,
+    "spearman": 0.7001057088859766
+   }
+  },
+  "bi_free_rain_coef": -2.860953830473757,
+  "bi_coef": {
+   "b_carb": 2.4804587301132632,
+   "b_clas": 1.510100185528808,
+   "b_volc": 2.2728375315893166,
+   "b_crys": 1.358754726685483,
+   "log10_rain_per_1000mm": -0.3430278548924799,
+   "groundwater": 0.21556217469433883,
+   "lake_or_reservoir": -0.4096910470164371
+  },
+  "bi_typical": {
+   "carb": 302.3143275337238,
+   "clas": 32.36683139713898,
+   "volc": 187.42932087937325,
+   "crys": 22.84308346910175
+  },
+  "bi_groups": {
+   "carb": [
+    "carb",
+    "evap"
+   ],
+   "clas": [
+    "clas",
+    "unc",
+    "sedu"
+   ],
+   "volc": [
+    "volc"
+   ],
+   "crys": [
+    "crys"
+   ]
+  },
+  "n_model_stations": 14793
+ },
+ "classes": [
+  {
+   "key": "soft",
+   "label": "Soft",
+   "range": "0 to 50",
+   "colour": "#E6F2F7"
+  },
+  {
+   "key": "msoft",
+   "label": "Moderately soft",
+   "range": "51 to 100",
+   "colour": "#BCDDEA"
+  },
+  {
+   "key": "shard",
+   "label": "Slightly hard",
+   "range": "101 to 150",
+   "colour": "#86C1D9"
+  },
+  {
+   "key": "mhard",
+   "label": "Moderately hard",
+   "range": "151 to 200",
+   "colour": "#4D9CC2"
+  },
+  {
+   "key": "hard",
+   "label": "Hard",
+   "range": "201 to 300",
+   "colour": "#22709E"
+  },
+  {
+   "key": "vhard",
+   "label": "Very hard",
+   "range": "over 300",
+   "colour": "#0E3F66"
+  }
+ ],
+ "units": {
+  "ppm": 1.0,
+  "dH": 0.056028686687584046,
+  "eH": 0.07015574575557738,
+  "fH": 0.1
+ },
+ "overall": {
+  "median": 202.3,
+  "n": 16682,
+  "share_by_class": [
+   0.11839108020621028,
+   0.10784078647644167,
+   0.12462534468289174,
+   0.14386764176957198,
+   0.24937057906725812,
+   0.25590456779762616
+  ],
+  "by_type": {
+   "Groundwater": {
+    "n": 3861,
+    "median": 276.5
+   },
+   "Lake": {
+    "n": 1458,
+    "median": 138.6
+   },
+   "Reservoir": {
+    "n": 791,
+    "median": 111.0
+   },
+   "River": {
+    "n": 10515,
+    "median": 199.4
+   },
+   "Wetland": {
+    "n": 57,
+    "median": 201.3
+   }
+  },
+  "samples_median_per_station": 18.0,
+  "stations_10plus_samples": 12401,
+  "first_year_median": 2012,
+  "last_year_median": 2020,
+  "stations_with_data_since_2010": 16376,
+  "max_station": {
+   "sname": "DISE?O, CONSTRUCCION Y SERVICIOS, S.A. DE C.V.",
+   "country": "Mexico",
+   "median": 8940.9,
+   "wtype": "River"
+  },
+  "min_station": {
+   "sname": "KAKKISENLAMPI",
+   "country": "Finland",
+   "median": 0.9,
+   "wtype": "Lake"
+  }
+ },
+ "countries_measured": [
+  {
+   "country": "Liechtenstein",
+   "stations": 1,
+   "samples": 48,
+   "median": 508.9,
+   "river_median": NaN,
+   "groundwater_median": 508.9,
+   "share_soft": 0.0,
+   "share_hard": 1.0,
+   "first": "1996",
+   "last": "2010"
+  },
+  {
+   "country": "Belgium",
+   "stations": 83,
+   "samples": 3930,
+   "median": 330.0,
+   "river_median": 340.0,
+   "groundwater_median": 50.5,
+   "share_soft": 0.181,
+   "share_hard": 0.663,
+   "first": "2008",
+   "last": "2023"
+  },
+  {
+   "country": "Argentina",
+   "stations": 1,
+   "samples": 12,
+   "median": 295.0,
+   "river_median": 295.0,
+   "groundwater_median": NaN,
+   "share_soft": 0.0,
+   "share_hard": 1.0,
+   "first": "2011",
+   "last": "2021"
+  },
+  {
+   "country": "Cyprus",
+   "stations": 39,
+   "samples": 1244,
+   "median": 292.0,
+   "river_median": 302.0,
+   "groundwater_median": 342.4,
+   "share_soft": 0.0,
+   "share_hard": 0.872,
+   "first": "2008",
+   "last": "2023"
+  },
+  {
+   "country": "Greece",
+   "stations": 579,
+   "samples": 4187,
+   "median": 291.6,
+   "river_median": NaN,
+   "groundwater_median": 291.6,
+   "share_soft": 0.021,
+   "share_hard": 0.798,
+   "first": "2006",
+   "last": "2021"
+  },
+  {
+   "country": "Spain",
+   "stations": 318,
+   "samples": 5973,
+   "median": 289.9,
+   "river_median": 295.5,
+   "groundwater_median": NaN,
+   "share_soft": 0.154,
+   "share_hard": 0.645,
+   "first": "2009",
+   "last": "2012"
+  },
+  {
+   "country": "Switzerland",
+   "stations": 45,
+   "samples": 1762,
+   "median": 276.0,
+   "river_median": 5.0,
+   "groundwater_median": 284.0,
+   "share_soft": 0.156,
+   "share_hard": 0.711,
+   "first": "2002",
+   "last": "2013"
+  },
+  {
+   "country": "Lithuania",
+   "stations": 83,
+   "samples": 1802,
+   "median": 268.4,
+   "river_median": 268.4,
+   "groundwater_median": NaN,
+   "share_soft": 0.0,
+   "share_hard": 0.892,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Latvia",
+   "stations": 148,
+   "samples": 5068,
+   "median": 252.0,
+   "river_median": 253.0,
+   "groundwater_median": 292.5,
+   "share_soft": 0.068,
+   "share_hard": 0.662,
+   "first": "2008",
+   "last": "2023"
+  },
+  {
+   "country": "Italy",
+   "stations": 2743,
+   "samples": 75745,
+   "median": 244.0,
+   "river_median": 235.0,
+   "groundwater_median": 375.0,
+   "share_soft": 0.09,
+   "share_hard": 0.658,
+   "first": "2001",
+   "last": "2023"
+  },
+  {
+   "country": "Croatia",
+   "stations": 122,
+   "samples": 8924,
+   "median": 242.3,
+   "river_median": 220.6,
+   "groundwater_median": 301.5,
+   "share_soft": 0.008,
+   "share_hard": 0.738,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Poland",
+   "stations": 2042,
+   "samples": 41852,
+   "median": 232.0,
+   "river_median": 236.1,
+   "groundwater_median": NaN,
+   "share_soft": 0.048,
+   "share_hard": 0.652,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Estonia",
+   "stations": 78,
+   "samples": 948,
+   "median": 226.1,
+   "river_median": 211.9,
+   "groundwater_median": 365.9,
+   "share_soft": 0.013,
+   "share_hard": 0.615,
+   "first": "2010",
+   "last": "2023"
+  },
+  {
+   "country": "Bosnia and Herzegovina",
+   "stations": 15,
+   "samples": 363,
+   "median": 225.5,
+   "river_median": 225.5,
+   "groundwater_median": NaN,
+   "share_soft": 0.0,
+   "share_hard": 0.8,
+   "first": "2009",
+   "last": "2012"
+  },
+  {
+   "country": "Serbia",
+   "stations": 44,
+   "samples": 6674,
+   "median": 210.0,
+   "river_median": 210.8,
+   "groundwater_median": NaN,
+   "share_soft": 0.0,
+   "share_hard": 0.568,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Netherlands",
+   "stations": 456,
+   "samples": 20688,
+   "median": 204.2,
+   "river_median": 171.5,
+   "groundwater_median": NaN,
+   "share_soft": 0.059,
+   "share_hard": 0.524,
+   "first": "2010",
+   "last": "2023"
+  },
+  {
+   "country": "Bulgaria",
+   "stations": 108,
+   "samples": 2181,
+   "median": 203.4,
+   "river_median": 188.8,
+   "groundwater_median": 306.1,
+   "share_soft": 0.102,
+   "share_hard": 0.519,
+   "first": "2008",
+   "last": "2023"
+  },
+  {
+   "country": "Mexico",
+   "stations": 5242,
+   "samples": 94394,
+   "median": 197.7,
+   "river_median": 201.7,
+   "groundwater_median": 236.5,
+   "share_soft": 0.221,
+   "share_hard": 0.494,
+   "first": "2012",
+   "last": "2021"
+  },
+  {
+   "country": "France",
+   "stations": 1966,
+   "samples": 55515,
+   "median": 189.8,
+   "river_median": 175.0,
+   "groundwater_median": 294.0,
+   "share_soft": 0.31,
+   "share_hard": 0.471,
+   "first": "2008",
+   "last": "2023"
+  },
+  {
+   "country": "Denmark",
+   "stations": 91,
+   "samples": 1331,
+   "median": 184.6,
+   "river_median": NaN,
+   "groundwater_median": 184.6,
+   "share_soft": 0.253,
+   "share_hard": 0.473,
+   "first": "1988",
+   "last": "2015"
+  },
+  {
+   "country": "Romania",
+   "stations": 79,
+   "samples": 2414,
+   "median": 183.9,
+   "river_median": 190.0,
+   "groundwater_median": NaN,
+   "share_soft": 0.152,
+   "share_hard": 0.392,
+   "first": "2009",
+   "last": "2012"
+  },
+  {
+   "country": "North Macedonia",
+   "stations": 19,
+   "samples": 2751,
+   "median": 180.5,
+   "river_median": 180.5,
+   "groundwater_median": NaN,
+   "share_soft": 0.0,
+   "share_hard": 0.105,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Austria",
+   "stations": 134,
+   "samples": 6927,
+   "median": 159.3,
+   "river_median": 161.3,
+   "groundwater_median": NaN,
+   "share_soft": 0.142,
+   "share_hard": 0.261,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Montenegro",
+   "stations": 11,
+   "samples": 122,
+   "median": 153.3,
+   "river_median": 153.3,
+   "groundwater_median": NaN,
+   "share_soft": 0.0,
+   "share_hard": 0.091,
+   "first": "2020",
+   "last": "2022"
+  },
+  {
+   "country": "United States",
+   "stations": 113,
+   "samples": 46724,
+   "median": 125.8,
+   "river_median": 125.8,
+   "groundwater_median": NaN,
+   "share_soft": 0.442,
+   "share_hard": 0.345,
+   "first": "1906",
+   "last": "2020"
+  },
+  {
+   "country": "India",
+   "stations": 709,
+   "samples": 108271,
+   "median": 110.4,
+   "river_median": 110.5,
+   "groundwater_median": NaN,
+   "share_soft": 0.45,
+   "share_hard": 0.09,
+   "first": "1963",
+   "last": "2021"
+  },
+  {
+   "country": "Portugal",
+   "stations": 93,
+   "samples": 4775,
+   "median": 84.0,
+   "river_median": 68.5,
+   "groundwater_median": NaN,
+   "share_soft": 0.538,
+   "share_hard": 0.183,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Ireland",
+   "stations": 388,
+   "samples": 38387,
+   "median": 69.4,
+   "river_median": 108.5,
+   "groundwater_median": 275.9,
+   "share_soft": 0.582,
+   "share_hard": 0.211,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Uruguay",
+   "stations": 82,
+   "samples": 1919,
+   "median": 40.5,
+   "river_median": 43.0,
+   "groundwater_median": NaN,
+   "share_soft": 0.793,
+   "share_hard": 0.049,
+   "first": "2009",
+   "last": "2023"
+  },
+  {
+   "country": "Canada",
+   "stations": 276,
+   "samples": 34012,
+   "median": 31.6,
+   "river_median": 45.9,
+   "groundwater_median": NaN,
+   "share_soft": 0.786,
+   "share_hard": 0.054,
+   "first": "2000",
+   "last": "2019"
+  },
+  {
+   "country": "Iceland",
+   "stations": 3,
+   "samples": 173,
+   "median": 16.8,
+   "river_median": 16.9,
+   "groundwater_median": NaN,
+   "share_soft": 1.0,
+   "share_hard": 0.0,
+   "first": "2009",
+   "last": "2022"
+  },
+  {
+   "country": "Finland",
+   "stations": 202,
+   "samples": 3058,
+   "median": 15.4,
+   "river_median": 17.7,
+   "groundwater_median": NaN,
+   "share_soft": 1.0,
+   "share_hard": 0.0,
+   "first": "2009",
+   "last": "2012"
+  },
+  {
+   "country": "Sweden",
+   "stations": 236,
+   "samples": 20251,
+   "median": 15.0,
+   "river_median": 21.1,
+   "groundwater_median": 45.2,
+   "share_soft": 0.903,
+   "share_hard": 0.03,
+   "first": "2007",
+   "last": "2023"
+  },
+  {
+   "country": "Norway",
+   "stations": 133,
+   "samples": 9433,
+   "median": 8.2,
+   "river_median": 8.4,
+   "groundwater_median": NaN,
+   "share_soft": 0.977,
+   "share_hard": 0.008,
+   "first": "1973",
+   "last": "2023"
+  }
+ ],
+ "countries_measured_n20": 28,
+ "softest_country": {
+  "country": "Norway",
+  "stations": 133,
+  "samples": 9433,
+  "median": 8.2,
+  "river_median": 8.4,
+  "groundwater_median": NaN,
+  "share_soft": 0.977,
+  "share_hard": 0.008,
+  "first": "1973",
+  "last": "2023"
+ },
+ "hardest_country": {
+  "country": "Belgium",
+  "stations": 83,
+  "samples": 3930,
+  "median": 330.0,
+  "river_median": 340.0,
+  "groundwater_median": 50.5,
+  "share_soft": 0.181,
+  "share_hard": 0.663,
+  "first": "2008",
+  "last": "2023"
+ },
+ "type_shares": [
+  {
+   "label": "Rivers",
+   "n": 10515,
+   "shares": [
+    0.1129,
+    0.1058,
+    0.1267,
+    0.1585,
+    0.2809,
+    0.2151
+   ]
+  },
+  {
+   "label": "Lakes and reservoirs",
+   "n": 2249,
+   "shares": [
+    0.2632,
+    0.1458,
+    0.1565,
+    0.1472,
+    0.1694,
+    0.1178
+   ]
+  },
+  {
+   "label": "Groundwater",
+   "n": 3861,
+   "shares": [
+    0.0495,
+    0.0904,
+    0.1008,
+    0.102,
+    0.2095,
+    0.4478
+   ]
+  },
+  {
+   "label": "All stations",
+   "n": 16682,
+   "shares": [
+    0.1184,
+    0.1078,
+    0.1246,
+    0.1439,
+    0.2494,
+    0.2559
+   ]
+  }
+ ],
+ "by_carbonate": [
+  {
+   "lo": 0,
+   "hi": 0.05,
+   "n": 8471,
+   "median": 153.0,
+   "river": 139.64999999999998,
+   "q25": 69.2,
+   "q75": 281.95
+  },
+  {
+   "lo": 0.05,
+   "hi": 0.15,
+   "n": 2442,
+   "median": 236.6,
+   "river": 227.5,
+   "q25": 138.525,
+   "q75": 325.0
+  },
+  {
+   "lo": 0.15,
+   "hi": 0.3,
+   "n": 1038,
+   "median": 219.75,
+   "river": 217.7,
+   "q25": 128.625,
+   "q75": 298.0
+  },
+  {
+   "lo": 0.3,
+   "hi": 0.5,
+   "n": 1107,
+   "median": 228.2,
+   "river": 218.4,
+   "q25": 160.95,
+   "q75": 314.2
+  },
+  {
+   "lo": 0.5,
+   "hi": 1,
+   "n": 1735,
+   "median": 247.5,
+   "river": 238.5,
+   "q25": 182.1,
+   "q75": 320.15
+  }
+ ],
+ "by_crystalline": [
+  {
+   "lo": 0,
+   "hi": 0.2,
+   "n": 11468,
+   "median": 220.3,
+   "q25": 133.3,
+   "q75": 324.7
+  },
+  {
+   "lo": 0.2,
+   "hi": 0.5,
+   "n": 1230,
+   "median": 163.8,
+   "q25": 77.0,
+   "q75": 279.725
+  },
+  {
+   "lo": 0.5,
+   "hi": 0.8,
+   "n": 1012,
+   "median": 75.1,
+   "q25": 24.375,
+   "q75": 168.8
+  },
+  {
+   "lo": 0.8,
+   "hi": 1,
+   "n": 1083,
+   "median": 33.6,
+   "q25": 13.2,
+   "q75": 92.4
+  }
+ ],
+ "corr_carb_spearman": 0.19409321555128867,
+ "corr_crys_spearman": -0.3544584889431373,
+ "corr_rain_spearman": -0.25544187573435173,
+ "resid_by_country": [
+  {
+   "country": "Norway",
+   "n": 133,
+   "median_resid_factor": 0.23902439024390254
+  },
+  {
+   "country": "Canada",
+   "n": 276,
+   "median_resid_factor": 0.3337830249796038
+  },
+  {
+   "country": "Denmark",
+   "n": 30,
+   "median_resid_factor": 0.3418750978084414
+  },
+  {
+   "country": "Uruguay",
+   "n": 82,
+   "median_resid_factor": 0.5216578609196308
+  },
+  {
+   "country": "Sweden",
+   "n": 232,
+   "median_resid_factor": 0.586670794826374
+  },
+  {
+   "country": "Finland",
+   "n": 202,
+   "median_resid_factor": 0.6460303543896693
+  },
+  {
+   "country": "Ireland",
+   "n": 388,
+   "median_resid_factor": 0.8961370514613896
+  },
+  {
+   "country": "Portugal",
+   "n": 93,
+   "median_resid_factor": 0.9387755102040818
+  },
+  {
+   "country": "United States",
+   "n": 113,
+   "median_resid_factor": 0.9476643598615914
+  },
+  {
+   "country": "Romania",
+   "n": 79,
+   "median_resid_factor": 1.0428571428571427
+  },
+  {
+   "country": "Greece",
+   "n": 579,
+   "median_resid_factor": 1.0616340181557573
+  },
+  {
+   "country": "Belgium",
+   "n": 83,
+   "median_resid_factor": 1.1273031825795652
+  },
+  {
+   "country": "France",
+   "n": 1966,
+   "median_resid_factor": 1.1467715736464998
+  },
+  {
+   "country": "Poland",
+   "n": 688,
+   "median_resid_factor": 1.1802756558560634
+  },
+  {
+   "country": "Italy",
+   "n": 2743,
+   "median_resid_factor": 1.2491781722550956
+  },
+  {
+   "country": "Switzerland",
+   "n": 45,
+   "median_resid_factor": 1.2877777777777781
+  },
+  {
+   "country": "India",
+   "n": 709,
+   "median_resid_factor": 1.3069908814589664
+  },
+  {
+   "country": "Croatia",
+   "n": 122,
+   "median_resid_factor": 1.3737060298982995
+  },
+  {
+   "country": "Estonia",
+   "n": 78,
+   "median_resid_factor": 1.375809350386769
+  },
+  {
+   "country": "Latvia",
+   "n": 43,
+   "median_resid_factor": 1.4554411106135248
+  },
+  {
+   "country": "Bulgaria",
+   "n": 108,
+   "median_resid_factor": 1.457275250316912
+  },
+  {
+   "country": "Mexico",
+   "n": 5242,
+   "median_resid_factor": 1.6679110712555938
+  },
+  {
+   "country": "Austria",
+   "n": 134,
+   "median_resid_factor": 1.668269246989406
+  },
+  {
+   "country": "Spain",
+   "n": 318,
+   "median_resid_factor": 2.034562900499977
+  },
+  {
+   "country": "Netherlands",
+   "n": 167,
+   "median_resid_factor": 2.2477876106194703
+  },
+  {
+   "country": "Serbia",
+   "n": 44,
+   "median_resid_factor": 2.46446313102371
+  },
+  {
+   "country": "Cyprus",
+   "n": 37,
+   "median_resid_factor": 4.620567375886527
+  }
+ ],
+ "stories": {
+  "yucatan": {
+   "box": [
+    17.8,
+    21.7,
+    -92.0,
+    -86.5
+   ],
+   "n": 187,
+   "median": 513.6,
+   "groundwater_n": 131,
+   "share_vhard": 0.9197860962566845,
+   "share_hard_or_vhard": 0.9679144385026738,
+   "pred_cv_median": 234.0,
+   "carb_share_median": 0.0,
+   "sedu_share_median": 1.0,
+   "model_map_median": 117.3125,
+   "low_conf_share": 1.0
+  },
+  "mexico": {
+   "n": 5242,
+   "median": 197.7,
+   "groundwater_n": 2173
+  },
+  "northern_france_chalk": {
+   "box": [
+    48.6,
+    50.6,
+    0.0,
+    3.6
+   ],
+   "n": 141,
+   "median": 301.0,
+   "river_median": 299.25,
+   "share_hard_or_vhard": 0.9645390070921985
+  },
+  "scandinavia": {
+   "n": 571,
+   "median": 14.1,
+   "share_soft": 0.9019264448336253,
+   "by_country": {
+    "Finland": 15.45,
+    "Norway": 8.2,
+    "Sweden": 15.0
+   }
+  },
+  "canada": {
+   "n": 276,
+   "median": 31.65,
+   "shield_n": 54,
+   "shield_median": 5.0,
+   "other_n": 222,
+   "other_median": 41.6
+  },
+  "ireland": {
+   "n": 388,
+   "median": 69.4,
+   "by_type": {
+    "Groundwater": {
+     "n": 18,
+     "median": 275.95
+    },
+    "Lake": {
+     "n": 176,
+     "median": 28.85
+    },
+    "Reservoir": {
+     "n": 4,
+     "median": 33.7
+    },
+    "River": {
+     "n": 190,
+     "median": 108.5
+    }
+   },
+   "high_carb_n": 117,
+   "high_carb_median": 192.0,
+   "low_carb_n": 103,
+   "low_carb_median": 17.0
+  },
+  "italy": {
+   "n": 2743,
+   "median": 244.0
+  },
+  "india": {
+   "n": 709,
+   "median": 110.4,
+   "groundwater_n": 0,
+   "groundwater_median": NaN
+  },
+  "south_china": {
+   "box": [
+    22,
+    27,
+    104,
+    112
+   ],
+   "stations": 0,
+   "pred_median": 108.3125,
+   "low_conf_share": 1.0,
+   "carb_share_mapped": 0.0,
+   "sedu_share_mapped": 0.8133719563484192
+  }
+ },
+ "countries_modelled_n": 132,
+ "countries_modelled": [
+  {
+   "country": "Moldova",
+   "a3": "MDA",
+   "land_km2": 39674,
+   "coverage": 1.0,
+   "modelled_median": 294.2,
+   "share_low_confidence": 0.119,
+   "share_soft": 0.007,
+   "share_hard": 0.917
+  },
+  {
+   "country": "Belarus",
+   "a3": "BLR",
+   "land_km2": 201461,
+   "coverage": 1.0,
+   "modelled_median": 268.5,
+   "share_low_confidence": 0.012,
+   "share_soft": 0.004,
+   "share_hard": 0.965
+  },
+  {
+   "country": "Ukraine",
+   "a3": "UKR",
+   "land_km2": 556849,
+   "coverage": 1.0,
+   "modelled_median": 259.0,
+   "share_low_confidence": 0.627,
+   "share_soft": 0.055,
+   "share_hard": 0.773
+  },
+  {
+   "country": "Estonia",
+   "a3": "EST",
+   "land_km2": 51615,
+   "coverage": 1.0,
+   "modelled_median": 209.1,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.006,
+   "share_hard": 0.519
+  },
+  {
+   "country": "Belgium",
+   "a3": "BEL",
+   "land_km2": 32506,
+   "coverage": 0.993,
+   "modelled_median": 204.5,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.268,
+   "share_hard": 0.511
+  },
+  {
+   "country": "Kazakhstan",
+   "a3": "KAZ",
+   "land_km2": 2698134,
+   "coverage": 0.662,
+   "modelled_median": 188.8,
+   "share_low_confidence": 0.976,
+   "share_soft": 0.072,
+   "share_hard": 0.357
+  },
+  {
+   "country": "Pakistan",
+   "a3": "PAK",
+   "land_km2": 889809,
+   "coverage": 0.535,
+   "modelled_median": 183.8,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.147,
+   "share_hard": 0.257
+  },
+  {
+   "country": "Australia",
+   "a3": "AUS",
+   "land_km2": 7897197,
+   "coverage": 0.885,
+   "modelled_median": 180.4,
+   "share_low_confidence": 0.391,
+   "share_soft": 0.207,
+   "share_hard": 0.435
+  },
+  {
+   "country": "Somalia",
+   "a3": "SOM",
+   "land_km2": 486034,
+   "coverage": 0.678,
+   "modelled_median": 172.5,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.056,
+   "share_hard": 0.137
+  },
+  {
+   "country": "Botswana",
+   "a3": "BWA",
+   "land_km2": 595556,
+   "coverage": 0.997,
+   "modelled_median": 170.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.101,
+   "share_hard": 0.035
+  },
+  {
+   "country": "Afghanistan",
+   "a3": "AFG",
+   "land_km2": 664259,
+   "coverage": 0.721,
+   "modelled_median": 169.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.249,
+   "share_hard": 0.105
+  },
+  {
+   "country": "Italy",
+   "a3": "ITA",
+   "land_km2": 333417,
+   "coverage": 0.977,
+   "modelled_median": 169.0,
+   "share_low_confidence": 0.021,
+   "share_soft": 0.195,
+   "share_hard": 0.34
+  },
+  {
+   "country": "Croatia",
+   "a3": "HRV",
+   "land_km2": 61758,
+   "coverage": 0.983,
+   "modelled_median": 166.5,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.329,
+   "share_hard": 0.176
+  },
+  {
+   "country": "Romania",
+   "a3": "ROU",
+   "land_km2": 231282,
+   "coverage": 1.0,
+   "modelled_median": 165.2,
+   "share_low_confidence": 0.003,
+   "share_soft": 0.179,
+   "share_hard": 0.333
+  },
+  {
+   "country": "Falkland Is.",
+   "a3": "FLK",
+   "land_km2": 20875,
+   "coverage": 0.831,
+   "modelled_median": 158.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Namibia",
+   "a3": "NAM",
+   "land_km2": 812402,
+   "coverage": 0.627,
+   "modelled_median": 157.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.108,
+   "share_hard": 0.096
+  },
+  {
+   "country": "Kyrgyzstan",
+   "a3": "KGZ",
+   "land_km2": 217145,
+   "coverage": 0.986,
+   "modelled_median": 157.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.132,
+   "share_hard": 0.054
+  },
+  {
+   "country": "Spain",
+   "a3": "ESP",
+   "land_km2": 530841,
+   "coverage": 0.981,
+   "modelled_median": 150.8,
+   "share_low_confidence": 0.012,
+   "share_soft": 0.332,
+   "share_hard": 0.282
+  },
+  {
+   "country": "Slovenia",
+   "a3": "SVN",
+   "land_km2": 25597,
+   "coverage": 0.997,
+   "modelled_median": 147.0,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.074,
+   "share_hard": 0.057
+  },
+  {
+   "country": "Bosnia and Herz.",
+   "a3": "BIH",
+   "land_km2": 58389,
+   "coverage": 1.0,
+   "modelled_median": 144.9,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.289,
+   "share_hard": 0.046
+  },
+  {
+   "country": "Senegal",
+   "a3": "SEN",
+   "land_km2": 195192,
+   "coverage": 0.998,
+   "modelled_median": 144.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.099,
+   "share_hard": 0.004
+  },
+  {
+   "country": "South Africa",
+   "a3": "ZAF",
+   "land_km2": 1225585,
+   "coverage": 0.86,
+   "modelled_median": 143.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.217,
+   "share_hard": 0.081
+  },
+  {
+   "country": "Argentina",
+   "a3": "ARG",
+   "land_km2": 2826105,
+   "coverage": 0.808,
+   "modelled_median": 136.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.089,
+   "share_hard": 0.05
+  },
+  {
+   "country": "Russia",
+   "a3": "RUS",
+   "land_km2": 17255401,
+   "coverage": 0.969,
+   "modelled_median": 136.2,
+   "share_low_confidence": 0.477,
+   "share_soft": 0.306,
+   "share_hard": 0.217
+  },
+  {
+   "country": "Tajikistan",
+   "a3": "TJK",
+   "land_km2": 139382,
+   "coverage": 0.982,
+   "modelled_median": 135.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.231,
+   "share_hard": 0.038
+  },
+  {
+   "country": "Greece",
+   "a3": "GRC",
+   "land_km2": 183501,
+   "coverage": 0.948,
+   "modelled_median": 135.6,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.253,
+   "share_hard": 0.106
+  },
+  {
+   "country": "France",
+   "a3": "FRA",
+   "land_km2": 647742,
+   "coverage": 0.994,
+   "modelled_median": 134.5,
+   "share_low_confidence": 0.137,
+   "share_soft": 0.427,
+   "share_hard": 0.256
+  },
+  {
+   "country": "Germany",
+   "a3": "DEU",
+   "land_km2": 361252,
+   "coverage": 0.976,
+   "modelled_median": 134.5,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.323,
+   "share_hard": 0.274
+  },
+  {
+   "country": "United States of America",
+   "a3": "USA",
+   "land_km2": 9652957,
+   "coverage": 0.943,
+   "modelled_median": 129.9,
+   "share_low_confidence": 0.565,
+   "share_soft": 0.229,
+   "share_hard": 0.151
+  },
+  {
+   "country": "S. Sudan",
+   "a3": "SDS",
+   "land_km2": 615779,
+   "coverage": 1.0,
+   "modelled_median": 126.8,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.414,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Hungary",
+   "a3": "HUN",
+   "land_km2": 88724,
+   "coverage": 1.0,
+   "modelled_median": 124.1,
+   "share_low_confidence": 0.001,
+   "share_soft": 0.015,
+   "share_hard": 0.009
+  },
+  {
+   "country": "Malaysia",
+   "a3": "MYS",
+   "land_km2": 360195,
+   "coverage": 0.978,
+   "modelled_median": 121.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.461,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Paraguay",
+   "a3": "PRY",
+   "land_km2": 422144,
+   "coverage": 1.0,
+   "modelled_median": 121.8,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.165,
+   "share_hard": 0.0
+  },
+  {
+   "country": "China",
+   "a3": "CHN",
+   "land_km2": 9391518,
+   "coverage": 0.721,
+   "modelled_median": 121.5,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.315,
+   "share_hard": 0.046
+  },
+  {
+   "country": "Bahamas",
+   "a3": "BHS",
+   "land_km2": 36820,
+   "coverage": 0.985,
+   "modelled_median": 121.5,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Ireland",
+   "a3": "IRL",
+   "land_km2": 79289,
+   "coverage": 0.997,
+   "modelled_median": 121.2,
+   "share_low_confidence": 0.033,
+   "share_soft": 0.372,
+   "share_hard": 0.043
+  },
+  {
+   "country": "Azerbaijan",
+   "a3": "AZE",
+   "land_km2": 86655,
+   "coverage": 0.533,
+   "modelled_median": 120.2,
+   "share_low_confidence": 0.142,
+   "share_soft": 0.382,
+   "share_hard": 0.223
+  },
+  {
+   "country": "Djibouti",
+   "a3": "DJI",
+   "land_km2": 25846,
+   "coverage": 0.709,
+   "modelled_median": 118.0,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Timor-Leste",
+   "a3": "TLS",
+   "land_km2": 21183,
+   "coverage": 0.942,
+   "modelled_median": 117.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.08,
+   "share_hard": 0.006
+  },
+  {
+   "country": "Mexico",
+   "a3": "MEX",
+   "land_km2": 2061335,
+   "coverage": 0.92,
+   "modelled_median": 117.2,
+   "share_low_confidence": 0.629,
+   "share_soft": 0.34,
+   "share_hard": 0.03
+  },
+  {
+   "country": "Albania",
+   "a3": "ALB",
+   "land_km2": 28566,
+   "coverage": 0.977,
+   "modelled_median": 117.0,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.274,
+   "share_hard": 0.037
+  },
+  {
+   "country": "Bulgaria",
+   "a3": "BGR",
+   "land_km2": 123252,
+   "coverage": 1.0,
+   "modelled_median": 115.0,
+   "share_low_confidence": 0.006,
+   "share_soft": 0.409,
+   "share_hard": 0.186
+  },
+  {
+   "country": "Angola",
+   "a3": "AGO",
+   "land_km2": 1289545,
+   "coverage": 0.985,
+   "modelled_median": 114.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.345,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Mongolia",
+   "a3": "MNG",
+   "land_km2": 1569203,
+   "coverage": 0.567,
+   "modelled_median": 112.7,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.421,
+   "share_hard": 0.117
+  },
+  {
+   "country": "Slovakia",
+   "a3": "SVK",
+   "land_km2": 50101,
+   "coverage": 1.0,
+   "modelled_median": 111.0,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.425,
+   "share_hard": 0.173
+  },
+  {
+   "country": "Cuba",
+   "a3": "CUB",
+   "land_km2": 143949,
+   "coverage": 0.972,
+   "modelled_median": 110.4,
+   "share_low_confidence": 0.858,
+   "share_soft": 0.289,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Austria",
+   "a3": "AUT",
+   "land_km2": 86476,
+   "coverage": 1.0,
+   "modelled_median": 110.0,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.466,
+   "share_hard": 0.07
+  },
+  {
+   "country": "Georgia",
+   "a3": "GEO",
+   "land_km2": 71532,
+   "coverage": 1.0,
+   "modelled_median": 108.6,
+   "share_low_confidence": 0.041,
+   "share_soft": 0.443,
+   "share_hard": 0.084
+  },
+  {
+   "country": "Thailand",
+   "a3": "THA",
+   "land_km2": 543566,
+   "coverage": 0.988,
+   "modelled_median": 107.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.373,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Bolivia",
+   "a3": "BOL",
+   "land_km2": 1069705,
+   "coverage": 0.921,
+   "modelled_median": 107.8,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.254,
+   "share_hard": 0.017
+  },
+  {
+   "country": "Nepal",
+   "a3": "NPL",
+   "land_km2": 162532,
+   "coverage": 0.98,
+   "modelled_median": 104.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.436,
+   "share_hard": 0.003
+  },
+  {
+   "country": "Guinea-Bissau",
+   "a3": "GNB",
+   "land_km2": 44007,
+   "coverage": 0.945,
+   "modelled_median": 104.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.216,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Cambodia",
+   "a3": "KHM",
+   "land_km2": 185964,
+   "coverage": 0.988,
+   "modelled_median": 103.8,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.387,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Dem. Rep. Congo",
+   "a3": "COD",
+   "land_km2": 2312338,
+   "coverage": 0.994,
+   "modelled_median": 103.0,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.407,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Congo",
+   "a3": "COG",
+   "land_km2": 324005,
+   "coverage": 1.0,
+   "modelled_median": 102.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.403,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Zambia",
+   "a3": "ZMB",
+   "land_km2": 766094,
+   "coverage": 0.992,
+   "modelled_median": 100.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.495,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Dominican Rep.",
+   "a3": "DOM",
+   "land_km2": 57683,
+   "coverage": 0.994,
+   "modelled_median": 100.6,
+   "share_low_confidence": 0.749,
+   "share_soft": 0.498,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Switzerland",
+   "a3": "CHE",
+   "land_km2": 47608,
+   "coverage": 0.998,
+   "modelled_median": 99.9,
+   "share_low_confidence": 0.002,
+   "share_soft": 0.508,
+   "share_hard": 0.051
+  },
+  {
+   "country": "Venezuela",
+   "a3": "VEN",
+   "land_km2": 967900,
+   "coverage": 0.999,
+   "modelled_median": 97.4,
+   "share_low_confidence": 0.864,
+   "share_soft": 0.528,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Haiti",
+   "a3": "HTI",
+   "land_km2": 33289,
+   "coverage": 0.986,
+   "modelled_median": 97.2,
+   "share_low_confidence": 0.807,
+   "share_soft": 0.554,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Belize",
+   "a3": "BLZ",
+   "land_km2": 29230,
+   "coverage": 0.972,
+   "modelled_median": 96.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.531,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Eritrea",
+   "a3": "ERI",
+   "land_km2": 140167,
+   "coverage": 0.571,
+   "modelled_median": 96.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.568,
+   "share_hard": 0.006
+  },
+  {
+   "country": "Bangladesh",
+   "a3": "BGD",
+   "land_km2": 160629,
+   "coverage": 0.991,
+   "modelled_median": 96.0,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.69,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Taiwan",
+   "a3": "TWN",
+   "land_km2": 44120,
+   "coverage": 0.941,
+   "modelled_median": 95.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.774,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Peru",
+   "a3": "PER",
+   "land_km2": 1293190,
+   "coverage": 0.879,
+   "modelled_median": 95.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.66,
+   "share_hard": 0.004
+  },
+  {
+   "country": "Vietnam",
+   "a3": "VNM",
+   "land_km2": 343444,
+   "coverage": 0.988,
+   "modelled_median": 93.8,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.656,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Kenya",
+   "a3": "KEN",
+   "land_km2": 594712,
+   "coverage": 0.987,
+   "modelled_median": 91.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.548,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Nigeria",
+   "a3": "NGA",
+   "land_km2": 900291,
+   "coverage": 0.995,
+   "modelled_median": 91.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.588,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Armenia",
+   "a3": "ARM",
+   "land_km2": 34974,
+   "coverage": 0.9,
+   "modelled_median": 90.2,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.74,
+   "share_hard": 0.009
+  },
+  {
+   "country": "Ecuador",
+   "a3": "ECU",
+   "land_km2": 276794,
+   "coverage": 0.987,
+   "modelled_median": 89.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.651,
+   "share_hard": 0.003
+  },
+  {
+   "country": "Colombia",
+   "a3": "COL",
+   "land_km2": 1161838,
+   "coverage": 0.997,
+   "modelled_median": 88.4,
+   "share_low_confidence": 0.957,
+   "share_soft": 0.854,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Myanmar",
+   "a3": "MMR",
+   "land_km2": 723367,
+   "coverage": 0.985,
+   "modelled_median": 88.0,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.669,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Canada",
+   "a3": "CAN",
+   "land_km2": 10388050,
+   "coverage": 0.861,
+   "modelled_median": 87.8,
+   "share_low_confidence": 0.265,
+   "share_soft": 0.542,
+   "share_hard": 0.128
+  },
+  {
+   "country": "Ethiopia",
+   "a3": "ETH",
+   "land_km2": 1104451,
+   "coverage": 0.972,
+   "modelled_median": 87.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.583,
+   "share_hard": 0.013
+  },
+  {
+   "country": "Ghana",
+   "a3": "GHA",
+   "land_km2": 254432,
+   "coverage": 0.988,
+   "modelled_median": 87.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.587,
+   "share_hard": 0.0
+  },
+  {
+   "country": "India",
+   "a3": "IND",
+   "land_km2": 3156371,
+   "coverage": 0.977,
+   "modelled_median": 87.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.585,
+   "share_hard": 0.014
+  },
+  {
+   "country": "Guatemala",
+   "a3": "GTM",
+   "land_km2": 104881,
+   "coverage": 0.989,
+   "modelled_median": 86.8,
+   "share_low_confidence": 0.706,
+   "share_soft": 0.807,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Indonesia",
+   "a3": "IDN",
+   "land_km2": 2178630,
+   "coverage": 0.952,
+   "modelled_median": 86.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.766,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Japan",
+   "a3": "JPN",
+   "land_km2": 457370,
+   "coverage": 0.94,
+   "modelled_median": 86.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.77,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Serbia",
+   "a3": "SRB",
+   "land_km2": 77302,
+   "coverage": 1.0,
+   "modelled_median": 83.2,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.659,
+   "share_hard": 0.003
+  },
+  {
+   "country": "Philippines",
+   "a3": "PHL",
+   "land_km2": 399855,
+   "coverage": 0.909,
+   "modelled_median": 82.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.948,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Laos",
+   "a3": "LAO",
+   "land_km2": 232723,
+   "coverage": 1.0,
+   "modelled_median": 82.3,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.721,
+   "share_hard": 0.0
+  },
+  {
+   "country": "United Kingdom",
+   "a3": "GBR",
+   "land_km2": 287207,
+   "coverage": 1.0,
+   "modelled_median": 82.0,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.65,
+   "share_hard": 0.041
+  },
+  {
+   "country": "Brazil",
+   "a3": "BRA",
+   "land_km2": 8620225,
+   "coverage": 0.998,
+   "modelled_median": 80.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.78,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Lesotho",
+   "a3": "LSO",
+   "land_km2": 35022,
+   "coverage": 1.0,
+   "modelled_median": 80.3,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.757,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Papua New Guinea",
+   "a3": "PNG",
+   "land_km2": 541839,
+   "coverage": 0.957,
+   "modelled_median": 79.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.951,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Burundi",
+   "a3": "BDI",
+   "land_km2": 28945,
+   "coverage": 0.94,
+   "modelled_median": 79.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.759,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Czechia",
+   "a3": "CZE",
+   "land_km2": 70250,
+   "coverage": 1.0,
+   "modelled_median": 78.2,
+   "share_low_confidence": 0.024,
+   "share_soft": 0.765,
+   "share_hard": 0.049
+  },
+  {
+   "country": "Turkey",
+   "a3": "TUR",
+   "land_km2": 806557,
+   "coverage": 0.612,
+   "modelled_median": 75.9,
+   "share_low_confidence": 0.024,
+   "share_soft": 0.839,
+   "share_hard": 0.058
+  },
+  {
+   "country": "New Zealand",
+   "a3": "NZL",
+   "land_km2": 310252,
+   "coverage": 0.976,
+   "modelled_median": 74.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.74,
+   "share_hard": 0.087
+  },
+  {
+   "country": "Iceland",
+   "a3": "ISL",
+   "land_km2": 116342,
+   "coverage": 0.928,
+   "modelled_median": 71.9,
+   "share_low_confidence": 0.0,
+   "share_soft": 1.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Portugal",
+   "a3": "PRT",
+   "land_km2": 107618,
+   "coverage": 0.971,
+   "modelled_median": 71.4,
+   "share_low_confidence": 0.015,
+   "share_soft": 0.636,
+   "share_hard": 0.124
+  },
+  {
+   "country": "Honduras",
+   "a3": "HND",
+   "land_km2": 126972,
+   "coverage": 1.0,
+   "modelled_median": 69.5,
+   "share_low_confidence": 0.445,
+   "share_soft": 0.963,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Uruguay",
+   "a3": "URY",
+   "land_km2": 188515,
+   "coverage": 0.999,
+   "modelled_median": 69.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.657,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Nicaragua",
+   "a3": "NIC",
+   "land_km2": 132921,
+   "coverage": 0.956,
+   "modelled_median": 69.1,
+   "share_low_confidence": 0.415,
+   "share_soft": 0.974,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Bhutan",
+   "a3": "BTN",
+   "land_km2": 46419,
+   "coverage": 1.0,
+   "modelled_median": 68.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.889,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Panama",
+   "a3": "PAN",
+   "land_km2": 96082,
+   "coverage": 0.995,
+   "modelled_median": 67.2,
+   "share_low_confidence": 0.424,
+   "share_soft": 0.991,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Guinea",
+   "a3": "GIN",
+   "land_km2": 238846,
+   "coverage": 0.999,
+   "modelled_median": 67.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.897,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Costa Rica",
+   "a3": "CRI",
+   "land_km2": 56272,
+   "coverage": 0.985,
+   "modelled_median": 66.4,
+   "share_low_confidence": 0.485,
+   "share_soft": 1.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "El Salvador",
+   "a3": "SLV",
+   "land_km2": 20471,
+   "coverage": 0.994,
+   "modelled_median": 65.6,
+   "share_low_confidence": 0.154,
+   "share_soft": 0.964,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Burkina Faso",
+   "a3": "BFA",
+   "land_km2": 285573,
+   "coverage": 1.0,
+   "modelled_median": 63.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.747,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Chile",
+   "a3": "CHL",
+   "land_km2": 814626,
+   "coverage": 0.627,
+   "modelled_median": 63.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.764,
+   "share_hard": 0.013
+  },
+  {
+   "country": "Tanzania",
+   "a3": "TZA",
+   "land_km2": 946712,
+   "coverage": 0.951,
+   "modelled_median": 63.0,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.751,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Rwanda",
+   "a3": "RWA",
+   "land_km2": 29350,
+   "coverage": 0.983,
+   "modelled_median": 62.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.82,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Zimbabwe",
+   "a3": "ZWE",
+   "land_km2": 392794,
+   "coverage": 0.993,
+   "modelled_median": 60.3,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.679,
+   "share_hard": 0.0
+  },
+  {
+   "country": "North Macedonia",
+   "a3": "MKD",
+   "land_km2": 21496,
+   "coverage": 0.741,
+   "modelled_median": 57.4,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.895,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Fiji",
+   "a3": "FJI",
+   "land_km2": 38520,
+   "coverage": 0.715,
+   "modelled_median": 53.5,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.974,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Mozambique",
+   "a3": "MOZ",
+   "land_km2": 834102,
+   "coverage": 0.987,
+   "modelled_median": 52.7,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.598,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Norway",
+   "a3": "NOR",
+   "land_km2": 442609,
+   "coverage": 0.999,
+   "modelled_median": 52.6,
+   "share_low_confidence": 0.001,
+   "share_soft": 0.846,
+   "share_hard": 0.004
+  },
+  {
+   "country": "Vanuatu",
+   "a3": "VUT",
+   "land_km2": 26529,
+   "coverage": 0.82,
+   "modelled_median": 51.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 1.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Madagascar",
+   "a3": "MDG",
+   "land_km2": 623295,
+   "coverage": 0.994,
+   "modelled_median": 50.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.718,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Guyana",
+   "a3": "GUY",
+   "land_km2": 210303,
+   "coverage": 0.995,
+   "modelled_median": 49.8,
+   "share_low_confidence": 0.957,
+   "share_soft": 0.998,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Solomon Is.",
+   "a3": "SLB",
+   "land_km2": 56178,
+   "coverage": 0.793,
+   "modelled_median": 48.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 1.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "C\u00f4te d'Ivoire",
+   "a3": "CIV",
+   "land_km2": 323346,
+   "coverage": 0.996,
+   "modelled_median": 46.7,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.985,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Central African Rep.",
+   "a3": "CAF",
+   "land_km2": 624239,
+   "coverage": 1.0,
+   "modelled_median": 43.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.802,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Gabon",
+   "a3": "GAB",
+   "land_km2": 277485,
+   "coverage": 0.996,
+   "modelled_median": 42.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.956,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Togo",
+   "a3": "TGO",
+   "land_km2": 57217,
+   "coverage": 1.0,
+   "modelled_median": 40.7,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.793,
+   "share_hard": 0.0
+  },
+  {
+   "country": "eSwatini",
+   "a3": "SWZ",
+   "land_km2": 20502,
+   "coverage": 1.0,
+   "modelled_median": 40.5,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.984,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Malawi",
+   "a3": "MWI",
+   "land_km2": 103922,
+   "coverage": 0.86,
+   "modelled_median": 40.5,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.912,
+   "share_hard": 0.0
+  },
+  {
+   "country": "South Korea",
+   "a3": "KOR",
+   "land_km2": 116964,
+   "coverage": 0.924,
+   "modelled_median": 39.5,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.929,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Sweden",
+   "a3": "SWE",
+   "land_km2": 466876,
+   "coverage": 0.982,
+   "modelled_median": 38.4,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.982,
+   "share_hard": 0.0
+  },
+  {
+   "country": "New Caledonia",
+   "a3": "NCL",
+   "land_km2": 29795,
+   "coverage": 0.903,
+   "modelled_median": 37.9,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.828,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Finland",
+   "a3": "FIN",
+   "land_km2": 351360,
+   "coverage": 1.0,
+   "modelled_median": 36.4,
+   "share_low_confidence": 0.0,
+   "share_soft": 0.995,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Uganda",
+   "a3": "UGA",
+   "land_km2": 259099,
+   "coverage": 0.868,
+   "modelled_median": 35.6,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.836,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Sierra Leone",
+   "a3": "SLE",
+   "land_km2": 69730,
+   "coverage": 0.993,
+   "modelled_median": 32.4,
+   "share_low_confidence": 1.0,
+   "share_soft": 1.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Liberia",
+   "a3": "LBR",
+   "land_km2": 99965,
+   "coverage": 0.994,
+   "modelled_median": 30.0,
+   "share_low_confidence": 1.0,
+   "share_soft": 1.0,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Suriname",
+   "a3": "SUR",
+   "land_km2": 144084,
+   "coverage": 0.999,
+   "modelled_median": 28.7,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.961,
+   "share_hard": 0.0
+  },
+  {
+   "country": "North Korea",
+   "a3": "PRK",
+   "land_km2": 138093,
+   "coverage": 0.984,
+   "modelled_median": 24.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.867,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Benin",
+   "a3": "BEN",
+   "land_km2": 114694,
+   "coverage": 1.0,
+   "modelled_median": 23.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.799,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Cameroon",
+   "a3": "CMR",
+   "land_km2": 489369,
+   "coverage": 0.994,
+   "modelled_median": 19.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.933,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Sri Lanka",
+   "a3": "LKA",
+   "land_km2": 76006,
+   "coverage": 0.96,
+   "modelled_median": 18.1,
+   "share_low_confidence": 1.0,
+   "share_soft": 0.914,
+   "share_hard": 0.0
+  },
+  {
+   "country": "Eq. Guinea",
+   "a3": "GNQ",
+   "land_km2": 32326,
+   "coverage": 0.981,
+   "modelled_median": 17.2,
+   "share_low_confidence": 1.0,
+   "share_soft": 1.0,
+   "share_hard": 0.0
+  }
+ ],
+ "measured_vs_modelled_countries": {
+  "n": 21,
+  "spearman": 0.7623376623376623
+ },
+ "bi_nations": [
+  {
+   "km2": 132173,
+   "median": 74.9,
+   "shares": [
+    0.3621,
+    0.2559,
+    0.181,
+    0.0593,
+    0.0776,
+    0.064
+   ],
+   "name": "England",
+   "kind": "nation"
+  },
+  {
+   "km2": 21301,
+   "median": 37.8,
+   "shares": [
+    0.7368,
+    0.2385,
+    0.0247,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Wales",
+   "kind": "nation"
+  },
+  {
+   "km2": 83475,
+   "median": 30.5,
+   "shares": [
+    0.7736,
+    0.1748,
+    0.0502,
+    0.0014,
+    0.0,
+    0.0
+   ],
+   "name": "Scotland",
+   "kind": "nation"
+  },
+  {
+   "km2": 14518,
+   "median": 99.9,
+   "shares": [
+    0.1956,
+    0.3084,
+    0.2425,
+    0.2535,
+    0.0,
+    0.0
+   ],
+   "name": "Northern Ireland",
+   "kind": "nation"
+  },
+  {
+   "km2": 70179,
+   "median": 105.1,
+   "shares": [
+    0.2444,
+    0.239,
+    0.1515,
+    0.1524,
+    0.2126,
+    0.0
+   ],
+   "name": "Republic of Ireland",
+   "kind": "nation"
+  }
+ ],
+ "bi_counties_n": 87,
+ "bi_counties_hardest": [
+  {
+   "km2": 2472,
+   "median": 329.8,
+   "shares": [
+    0.1169,
+    0.0812,
+    0.0461,
+    0.0439,
+    0.117,
+    0.5949
+   ],
+   "name": "East Riding of Yorkshire",
+   "kind": "England"
+  },
+  {
+   "km2": 1774,
+   "median": 280.0,
+   "shares": [
+    0.0019,
+    0.0591,
+    0.098,
+    0.1096,
+    0.3283,
+    0.403
+   ],
+   "name": "Hertfordshire",
+   "kind": "England"
+  },
+  {
+   "km2": 5420,
+   "median": 251.2,
+   "shares": [
+    0.1765,
+    0.1004,
+    0.0657,
+    0.0732,
+    0.1736,
+    0.4105
+   ],
+   "name": "Norfolk",
+   "kind": "England"
+  },
+  {
+   "km2": 3634,
+   "median": 224.8,
+   "shares": [
+    0.0,
+    0.1683,
+    0.164,
+    0.1101,
+    0.4033,
+    0.1542
+   ],
+   "name": "Wiltshire",
+   "kind": "England"
+  },
+  {
+   "km2": 3832,
+   "median": 185.6,
+   "shares": [
+    0.176,
+    0.1275,
+    0.1165,
+    0.117,
+    0.2631,
+    0.1999
+   ],
+   "name": "Hampshire",
+   "kind": "England"
+  },
+  {
+   "km2": 1139,
+   "median": 157.8,
+   "shares": [
+    0.0988,
+    0.2056,
+    0.171,
+    0.1556,
+    0.3345,
+    0.0345
+   ],
+   "name": "Berkshire",
+   "kind": "England"
+  },
+  {
+   "km2": 2679,
+   "median": 154.8,
+   "shares": [
+    0.0426,
+    0.1748,
+    0.2595,
+    0.2211,
+    0.3021,
+    0.0
+   ],
+   "name": "Dorset",
+   "kind": "England"
+  },
+  {
+   "km2": 3920,
+   "median": 148.0,
+   "shares": [
+    0.2442,
+    0.1321,
+    0.1314,
+    0.2457,
+    0.2148,
+    0.0318
+   ],
+   "name": "Kent",
+   "kind": "England"
+  }
+ ],
+ "bi_counties_softest": [
+  {
+   "km2": 3893,
+   "median": 20.4,
+   "shares": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Na h-Eileanan Siar",
+   "kind": "Scotland"
+  },
+  {
+   "km2": 27373,
+   "median": 22.8,
+   "shares": [
+    0.9236,
+    0.0357,
+    0.0406,
+    0.0001,
+    0.0,
+    0.0
+   ],
+   "name": "Highland",
+   "kind": "Scotland"
+  },
+  {
+   "km2": 161,
+   "median": 24.8,
+   "shares": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Aberdeen City",
+   "kind": "Scotland"
+  },
+  {
+   "km2": 6287,
+   "median": 25.8,
+   "shares": [
+    0.9596,
+    0.0404,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Aberdeenshire",
+   "kind": "Scotland"
+  },
+  {
+   "km2": 6477,
+   "median": 28.7,
+   "shares": [
+    0.9589,
+    0.0411,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Dumfries and Galloway",
+   "kind": "Scotland"
+  },
+  {
+   "km2": 6892,
+   "median": 30.9,
+   "shares": [
+    0.8406,
+    0.1339,
+    0.0256,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Devon",
+   "kind": "England"
+  },
+  {
+   "km2": 5281,
+   "median": 31.3,
+   "shares": [
+    0.9849,
+    0.0151,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Powys",
+   "kind": "Wales"
+  },
+  {
+   "km2": 1260,
+   "median": 31.5,
+   "shares": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": "Greater Manchester",
+   "kind": "England"
+  }
+ ],
+ "bi_counties": [
+  {
+   "name": "East Riding of Yorkshire",
+   "nation": "England",
+   "median": 329.8,
+   "hard_share": 0.712
+  },
+  {
+   "name": "Hertfordshire",
+   "nation": "England",
+   "median": 280.0,
+   "hard_share": 0.731
+  },
+  {
+   "name": "Norfolk",
+   "nation": "England",
+   "median": 251.2,
+   "hard_share": 0.584
+  },
+  {
+   "name": "Wiltshire",
+   "nation": "England",
+   "median": 224.8,
+   "hard_share": 0.557
+  },
+  {
+   "name": "Hampshire",
+   "nation": "England",
+   "median": 185.6,
+   "hard_share": 0.463
+  },
+  {
+   "name": "Berkshire",
+   "nation": "England",
+   "median": 157.8,
+   "hard_share": 0.369
+  },
+  {
+   "name": "Dorset",
+   "nation": "England",
+   "median": 154.8,
+   "hard_share": 0.302
+  },
+  {
+   "name": "Kent",
+   "nation": "England",
+   "median": 148.0,
+   "hard_share": 0.247
+  },
+  {
+   "name": "East Renfrewshire",
+   "nation": "Scotland",
+   "median": 137.5,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Renfrewshire",
+   "nation": "Scotland",
+   "median": 127.4,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Durham",
+   "nation": "England",
+   "median": 125.2,
+   "hard_share": 0.162
+  },
+  {
+   "name": "Oxfordshire",
+   "nation": "England",
+   "median": 119.5,
+   "hard_share": 0.227
+  },
+  {
+   "name": "West Sussex",
+   "nation": "England",
+   "median": 118.1,
+   "hard_share": 0.19
+  },
+  {
+   "name": "Rutland",
+   "nation": "England",
+   "median": 118.0,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Northamptonshire",
+   "nation": "England",
+   "median": 117.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Northumberland",
+   "nation": "England",
+   "median": 116.6,
+   "hard_share": 0.004
+  },
+  {
+   "name": "Buckinghamshire",
+   "nation": "England",
+   "median": 113.2,
+   "hard_share": 0.33
+  },
+  {
+   "name": "Suffolk",
+   "nation": "England",
+   "median": 111.7,
+   "hard_share": 0.3
+  },
+  {
+   "name": "Gloucestershire",
+   "nation": "England",
+   "median": 103.4,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Inverclyde",
+   "nation": "Scotland",
+   "median": 98.6,
+   "hard_share": 0.0
+  },
+  {
+   "name": "East Dunbartonshire",
+   "nation": "Scotland",
+   "median": 96.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Glasgow City",
+   "nation": "Scotland",
+   "median": 94.1,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Fife",
+   "nation": "Scotland",
+   "median": 92.4,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Lincolnshire",
+   "nation": "England",
+   "median": 90.0,
+   "hard_share": 0.187
+  },
+  {
+   "name": "Bedfordshire",
+   "nation": "England",
+   "median": 87.9,
+   "hard_share": 0.182
+  },
+  {
+   "name": "City of Edinburgh",
+   "nation": "Scotland",
+   "median": 87.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "East Lothian",
+   "nation": "Scotland",
+   "median": 84.6,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Clackmannanshire",
+   "nation": "Scotland",
+   "median": 83.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "West Lothian",
+   "nation": "Scotland",
+   "median": 83.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Somerset",
+   "nation": "England",
+   "median": 82.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Leicestershire",
+   "nation": "England",
+   "median": 82.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "South Glamorgan",
+   "nation": "Wales",
+   "median": 80.3,
+   "hard_share": 0.0
+  },
+  {
+   "name": "North Yorkshire",
+   "nation": "England",
+   "median": 77.9,
+   "hard_share": 0.032
+  },
+  {
+   "name": "Midlothian",
+   "nation": "Scotland",
+   "median": 76.0,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Isle of Wight",
+   "nation": "England",
+   "median": 74.6,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Dundee City",
+   "nation": "Scotland",
+   "median": 74.4,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Cumbria",
+   "nation": "England",
+   "median": 72.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Falkirk",
+   "nation": "Scotland",
+   "median": 71.2,
+   "hard_share": 0.0
+  },
+  {
+   "name": "West Dunbartonshire",
+   "nation": "Scotland",
+   "median": 70.4,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Bristol",
+   "nation": "England",
+   "median": 70.2,
+   "hard_share": 0.0
+  },
+  {
+   "name": "South Lanarkshire",
+   "nation": "Scotland",
+   "median": 67.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Warwickshire",
+   "nation": "England",
+   "median": 67.1,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Surrey",
+   "nation": "England",
+   "median": 66.6,
+   "hard_share": 0.0
+  },
+  {
+   "name": "North Ayrshire",
+   "nation": "Scotland",
+   "median": 64.3,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Nottinghamshire",
+   "nation": "England",
+   "median": 61.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Tyne and Wear",
+   "nation": "England",
+   "median": 58.7,
+   "hard_share": 0.042
+  },
+  {
+   "name": "Cambridgeshire",
+   "nation": "England",
+   "median": 56.8,
+   "hard_share": 0.241
+  },
+  {
+   "name": "Derbyshire",
+   "nation": "England",
+   "median": 55.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "North Lanarkshire",
+   "nation": "Scotland",
+   "median": 55.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Greater London",
+   "nation": "England",
+   "median": 51.1,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Gwynedd",
+   "nation": "Wales",
+   "median": 50.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Clwyd",
+   "nation": "Wales",
+   "median": 49.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "South Yorkshire",
+   "nation": "England",
+   "median": 47.0,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Angus",
+   "nation": "Scotland",
+   "median": 44.3,
+   "hard_share": 0.0
+  },
+  {
+   "name": "East Ayrshire",
+   "nation": "Scotland",
+   "median": 44.2,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Shropshire",
+   "nation": "England",
+   "median": 44.0,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Worcestershire",
+   "nation": "England",
+   "median": 43.6,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Mid Glamorgan",
+   "nation": "Wales",
+   "median": 42.1,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Argyll and Bute",
+   "nation": "Scotland",
+   "median": 41.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "South Ayrshire",
+   "nation": "Scotland",
+   "median": 41.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Scottish Borders",
+   "nation": "Scotland",
+   "median": 40.3,
+   "hard_share": 0.0
+  },
+  {
+   "name": "East Sussex",
+   "nation": "England",
+   "median": 39.8,
+   "hard_share": 0.126
+  },
+  {
+   "name": "Essex",
+   "nation": "England",
+   "median": 39.8,
+   "hard_share": 0.108
+  },
+  {
+   "name": "Gwent",
+   "nation": "Wales",
+   "median": 39.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Herefordshire",
+   "nation": "England",
+   "median": 39.1,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Perth and Kinross",
+   "nation": "Scotland",
+   "median": 39.1,
+   "hard_share": 0.0
+  },
+  {
+   "name": "West Midlands",
+   "nation": "England",
+   "median": 37.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Moray",
+   "nation": "Scotland",
+   "median": 37.5,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Staffordshire",
+   "nation": "England",
+   "median": 36.2,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Cheshire",
+   "nation": "England",
+   "median": 35.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Merseyside",
+   "nation": "England",
+   "median": 35.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Lancashire",
+   "nation": "England",
+   "median": 34.2,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Stirling",
+   "nation": "Scotland",
+   "median": 33.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "West Glamorgan",
+   "nation": "Wales",
+   "median": 33.4,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Dyfed",
+   "nation": "Wales",
+   "median": 32.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Shetland Islands",
+   "nation": "Scotland",
+   "median": 32.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "West Yorkshire",
+   "nation": "England",
+   "median": 32.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Cornwall",
+   "nation": "England",
+   "median": 32.3,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Orkney Islands",
+   "nation": "Scotland",
+   "median": 31.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Greater Manchester",
+   "nation": "England",
+   "median": 31.5,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Powys",
+   "nation": "Wales",
+   "median": 31.3,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Devon",
+   "nation": "England",
+   "median": 30.9,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Dumfries and Galloway",
+   "nation": "Scotland",
+   "median": 28.7,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Aberdeenshire",
+   "nation": "Scotland",
+   "median": 25.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Aberdeen City",
+   "nation": "Scotland",
+   "median": 24.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Highland",
+   "nation": "Scotland",
+   "median": 22.8,
+   "hard_share": 0.0
+  },
+  {
+   "name": "Na h-Eileanan Siar",
+   "nation": "Scotland",
+   "median": 20.4,
+   "hard_share": 0.0
+  }
+ ],
+ "bi_gb": {
+  "km2": 236949,
+  "median": 45.6,
+  "shares": [
+   0.5408,
+   0.2258,
+   0.1209,
+   0.0336,
+   0.0433,
+   0.0357
+  ]
+ },
+ "bi_ireland_island": {
+  "km2": 84696,
+  "median": 103.9,
+  "shares": [
+   0.236,
+   0.2509,
+   0.1671,
+   0.1698,
+   0.1762,
+   0.0
+  ]
+ },
+ "bi_gb_rain": {
+  "p05": 597.0,
+  "p50": 969.0,
+  "p95": 2287.0
+ },
+ "bi_tees_exe": {
+  "line": [
+   [
+    -3.5,
+    50.6
+   ],
+   [
+    -1.2,
+    54.6
+   ]
+  ],
+  "south_east": {
+   "km2": 88894,
+   "median": 92.3,
+   "shares": [
+    0.2653,
+    0.2751,
+    0.1895,
+    0.065,
+    0.1104,
+    0.0948
+   ]
+  },
+  "north_west": {
+   "km2": 148055,
+   "median": 35.2,
+   "shares": [
+    0.7061,
+    0.1962,
+    0.0797,
+    0.0147,
+    0.003,
+    0.0003
+   ]
+  }
+ },
+ "places_n": 34146,
+ "places_with_value": 32682,
+ "bi_towns": [
+  {
+   "name": "London",
+   "bi": 40.0,
+   "world": 82.0
+  },
+  {
+   "name": "Birmingham",
+   "bi": 37.0,
+   "world": 100.0
+  },
+  {
+   "name": "Manchester",
+   "bi": 34.0,
+   "world": 78.0
+  },
+  {
+   "name": "Leeds",
+   "bi": 45.0,
+   "world": 86.0
+  },
+  {
+   "name": "Cambridge",
+   "bi": 244.0,
+   "world": 132.0
+  },
+  {
+   "name": "Brighton",
+   "bi": 268.0,
+   "world": 112.0
+  },
+  {
+   "name": "Norwich",
+   "bi": 200.0,
+   "world": 244.0
+  },
+  {
+   "name": "Bristol",
+   "bi": 71.0,
+   "world": 103.0
+  },
+  {
+   "name": "Cardiff",
+   "bi": 59.0,
+   "world": 102.0
+  },
+  {
+   "name": "Swansea",
+   "bi": 37.0,
+   "world": 65.0
+  },
+  {
+   "name": "Glasgow",
+   "bi": 87.0,
+   "world": 64.0
+  },
+  {
+   "name": "Edinburgh",
+   "bi": 86.0,
+   "world": 67.0
+  },
+  {
+   "name": "Aberdeen",
+   "bi": 25.0,
+   "world": 47.0
+  },
+  {
+   "name": "Inverness",
+   "bi": 27.0,
+   "world": 48.0
+  },
+  {
+   "name": "Belfast",
+   "bi": 107.0,
+   "world": 84.0
+  },
+  {
+   "name": "Dublin",
+   "bi": 168.0,
+   "world": 133.0
+  },
+  {
+   "name": "Galway",
+   "bi": 169.0,
+   "world": 125.0
+  },
+  {
+   "name": "Cork",
+   "bi": 68.0,
+   "world": 118.0
+  },
+  {
+   "name": "Exeter",
+   "bi": 33.0,
+   "world": 86.0
+  },
+  {
+   "name": "Plymouth",
+   "bi": 43.0,
+   "world": 61.0
+  },
+  {
+   "name": "Newcastle upon Tyne",
+   "bi": 40.0,
+   "world": 98.0
+  },
+  {
+   "name": "Liverpool",
+   "bi": 36.0,
+   "world": 86.0
+  },
+  {
+   "name": "Lancaster",
+   "bi": 37.0,
+   "world": 79.0
+  },
+  {
+   "name": "Oxford",
+   "bi": 74.0,
+   "world": 104.0
+  }
+ ]
+}
