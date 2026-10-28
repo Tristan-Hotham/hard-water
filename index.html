@@ -7,8 +7,8 @@
 <meta name="description" content="A world map of water hardness from 16,682 river, lake and groundwater stations in 34 countries, with a simple, cross-validated estimate from the rocks and rainfall, and a sharper 1 km estimate for Britain and Ireland.">
 <meta property="og:title" content="Hard water: the world's water hardness and the rocks behind it">
 <meta property="og:description" content="16,682 stations, 611,858 samples. Soft over granite, hard over limestone and chalk: see where your water sits, and how well the rocks alone can guess it.">
-<meta property="og:image" content="https://tristan-hotham.github.io/hard-water/header.png">
-<meta property="og:url" content="https://tristan-hotham.github.io/hard-water/">
+<meta property="og:image" content="https://maps.tristanhotham.com/hard-water/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/hard-water/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -259,7 +259,7 @@ footer a{color:var(--fg)}
 <li>Macrostrat geological map tiles (Peters, Husson and Czaplewski 2018), <a href="https://macrostrat.org">macrostrat.org</a>, CC BY 4.0, compiled from many regional maps including the Geologic Map of North America and the Generalized Geology of the World.</li>
 <li>BGS Geology 625k (DiGMapGB-625), British Geological Survey, Open Government Licence v3.0.</li>
 <li>Geological Survey Ireland and Geological Survey of Northern Ireland, 1:500,000 bedrock geology, CC BY 4.0 and Open Government Licence.</li>
-<li>CRU CL 2.0 (New, Lister, Hulme and Makin 2002, Climate Research 21: 1 to 25), Climatic Research Unit, University of East Anglia; annual rainfall on a half-degree grid as derived in my <a href="https://tristan-hotham.github.io/sun-and-rain/">Sun and rain</a> study.</li>
+<li>CRU CL 2.0 (New, Lister, Hulme and Makin 2002, Climate Research 21: 1 to 25), Climatic Research Unit, University of East Anglia; annual rainfall on a half-degree grid as derived in my <a href="https://maps.tristanhotham.com/sun-and-rain/">Sun and rain</a> study.</li>
 <li>Natural Earth 1:10m and 1:50m land and countries (public domain); GeoNames cities15000 (CC BY 4.0); ONS local authority boundaries (Open Government Licence v3.0); AWS Terrain Tiles (Mapzen and Tilezen; ETOPO1, GMTED2010, SRTM and others) for hill shading.</li>
 <li>Leaflet 1.9.4; base map tiles © Esri when they load.</li>
 </ul>
@@ -268,7 +268,7 @@ footer a{color:var(--fg)}
 <footer>
   <p>Dr Tristan Hotham, Independent researcher. ORCID 0000-0003-4931-9349. Cite as: Hotham, T. (2026) Hard water: the world's water hardness and the rocks behind it. https://doi.org/10.5281/zenodo.23735824</p>
   <p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
-  <p>Other studies: <a href="https://tristan-hotham.github.io/sun-and-rain/">Sun and rain</a>, <a href="https://tristan-hotham.github.io/sea-level/">Drowned and rising</a>, <a href="https://blog.tristanhotham.com/">all posts</a>.</p>
+  <p>Other studies: <a href="https://maps.tristanhotham.com/sun-and-rain/">Sun and rain</a>, <a href="https://maps.tristanhotham.com/sea-level/">Drowned and rising</a>, <a href="https://blog.tristanhotham.com/">all posts</a>.</p>
 </footer>
 </div>
 <div class="tip" id="tip"></div>
@@ -726,5 +726,6 @@ drawCountries();
 })();
 document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; setTiles(); drawKey(); applyLayers(); redraws.forEach(f => f()); };
 </script>
+<script src="/assets/site-nav.js" defer></script>
 </body>
 </html>
