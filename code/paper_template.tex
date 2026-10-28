@@ -1,0 +1,255 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\newfontfamily\headfont{Inter}[UprightFont=*-ExtraBold,BoldFont=*-ExtraBold,Extension=.otf,Path=/usr/share/fonts/opentype/inter/]
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{graphicx,booktabs,float,caption,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{setspace}
+\setstretch{1.05}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\titleformat{\section}{\headfont\Large}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\headfont\large}{\thesubsection}{0.8em}{}
+\captionsetup{font=small,labelfont=bf}
+\urlstyle{same}
+\hypersetup{pdftitle={Hard Water: Measured and Modelled Hardness of the World's Rivers, Lakes and Groundwater, and the Rocks Behind It},pdfauthor={Tristan Hotham}}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries Hard Water:\\[2pt] Measured and Modelled Hardness of the World's Rivers,\\[2pt] Lakes and Groundwater, and the Rocks Behind It\par}
+\vspace{1.2em}
+{\large Tristan Hotham\par}
+\vspace{0.3em}
+{\small Independent researcher\\
+ORCID: 0000-0003-4931-9349\\
+DOI: \href{https://doi.org/10.5281/zenodo.23735824}{https://doi.org/10.5281/zenodo.23735824}\par}
+\vspace{0.8em}
+2026
+\end{center}
+
+\begin{quote}
+\small
+\begin{center}\textbf{Abstract}\end{center}
+Maps of water hardness by supply zone are familiar in England and Wales, but there is no open world equivalent. I assembled one from the open subset of the UNEP GEMS/Water Global Freshwater Quality Archive: {{overall.n|int}} river, lake, reservoir and groundwater stations in {{stations.countries|int}} countries with {{stations.samples|int}} usable samples, each station summarised by its median hardness in mg/l as calcium carbonate. The median station is {{overall.median|int}} mg/l; groundwater ({{overall.by_type.Groundwater.median|int}} mg/l) is harder than rivers ({{overall.by_type.River.median|int}}) and lakes ({{overall.by_type.Lake.median|int}}). I then fitted a deliberately simple mixing model that predicts hardness from the shares of seven rock groups within {{model.world_radius_km|int}} km (from Macrostrat's generalised world geology), annual rainfall and the type of water. Under spatial cross-validation, which hides whole 5 degree squares, it places {{model.world_cv.rocks_rain_and_type.class_exact|pct}} of stations in the right one of six hardness classes and {{model.world_cv.rocks_rain_and_type.class_within1|pct}} within one class, against {{model.world_cv.baseline_global_median.class_within1|pct}} for a constant guess; it explains {{model.world_cv.rocks_rain_and_type.r2|pct}} of the variance of log hardness. Crystalline rock is the clearest signal: stations surrounded mostly by it have a median of {{by_crystalline.3.median|int}} mg/l. For Britain and Ireland, where the archive has no British stations, a sharper model using 1 km BGS and GSI bedrock and calibrated on {{stories.ireland.n|int}} Irish stations reaches {{model.bi_cv.rocks_type_and_world_rain_effect.class_within1|pct}} within one class in Ireland and reproduces the soft north and west and the hard chalk of the south and east, while missing places such as London whose water comes from far away. The measurements are not tap water, and the modelled layer is an estimate with the errors stated.
+
+\textbf{Keywords:} water hardness; calcium carbonate; GEMS/Water; geology; lithology; limestone; chalk; rainfall; spatial cross-validation; Britain and Ireland; open data
+\end{quote}
+
+\section{Introduction}
+
+Hard water is water that carries a lot of dissolved calcium and magnesium. It is harmless to drink, but it furs kettles and pipes with limescale, takes more soap to lather, and is the reason many households fit softeners. The familiar maps of England and Wales, drawn by water supply zone, show a striking pattern: soft water in the west and north, in Wales, Cornwall, the Lake District and the Pennines, and hard to very hard water across the south and east. The pattern follows the rocks. Rain is a very weak acid, carrying carbon dioxide from the air and the soil as carbonic acid, and it dissolves limestone, chalk and dolomite readily while it barely attacks granite, gneiss or most sandstones.
+
+This note asks two questions. What does water hardness look like across the world, in the open measurements that exist? And how well can the rocks alone, with a little help from rainfall, predict it where nobody has measured? The answers are explorable in an interactive map at \url{https://tristan-hotham.github.io/hard-water/}, with the station measurements, the modelled layer, a sharper estimate for Britain and Ireland, a search for any town, and a choice of units.
+
+Two warnings frame everything that follows. First, the measurements are of rivers, lakes, reservoirs and groundwater at monitoring stations, not of water from taps: suppliers blend sources, move water long distances and sometimes soften it. Second, the modelled layer is an estimate from a simple, transparent model, and I report how wrong it can be.
+
+\section{Data}
+
+\subsection{Station measurements}
+
+The UNEP GEMS/Water Global Freshwater Quality Archive (version 3) gathers monitoring data from national agencies; its open subset is released under CC BY 4.0 (UNEP GEMS/Water 2026). I used its hardness, calcium and magnesium tables ({{stations.rows.hardness|int}}, {{stations.rows.calcium|int}} and {{stations.rows.magnesium|int}} records) and its station list ({{stations.stations_in_metadata|int}} stations, with country, type of water and coordinates). The licence field is empty on every row of this subset, which the archive releases as a whole under CC BY 4.0, so I kept all rows. The open subset covers {{stations.countries|int}} countries with a hardness figure, mostly in Europe, North America and India, and none in Great Britain, China, Russia, Africa or Australia.
+
+\subsection{Geology}
+
+For the world I used Macrostrat's generalised geological map tiles at zoom 4, about 5 km per pixel (Peters, Husson and Czaplewski 2018). They are compiled from many regional maps, including the Geologic Map of North America (Garrity and Soller 2009), the Generalized Geology of the World (Chorlton 2007) and the International Geological Map of Europe (Asch 2003). Each of the {{world_geo.units|int}} map units carries a short lithology text, from a precise ``limestone, dolostone, shale'' to a bare ``sedimentary''. For Great Britain I used the BGS Geology 625k bedrock map (British Geological Survey 2008) and for the island of Ireland the Geological Survey Ireland and Geological Survey of Northern Ireland 1:500,000 bedrock map.
+
+\subsection{Rainfall and places}
+
+Annual rainfall comes from the CRU CL 2.0 climatology for 1961 to 1990 (New et al. 2002), on the half-degree grid derived in my earlier study of sunshine and rain (Hotham 2026). Land and country outlines are from Natural Earth, places for the search from GeoNames (cities over 15,000 people), counties and council areas from Office for National Statistics boundaries, and hill shading from AWS Terrain Tiles.
+
+\section{Methods}
+
+\subsection{Hardness of each sample and station}
+
+Hardness is expressed as the calcium carbonate that would carry the same calcium and magnesium, in mg/l (the same as parts per million). Each sample's value is the measured total hardness where it exists; otherwise it is computed from calcium and magnesium measured at the same station on the same day as 2.497 Ca + 4.118 Mg, both in mg/l, preferring dissolved over total concentrations ({{stations.samples_from_camg|int}} of the {{stations.samples|int}} usable samples). Where both exist, the two agree within 20\% for {{stations.crosscheck.share_within_20pct|pct}} of {{stations.crosscheck.pairs|int}} same-day pairs. Two countries, Bulgaria and Estonia, report total hardness in other units: their values are about {{d.bg_factor|int}} and {{d.ee_factor|int}} times smaller than their calcium and magnesium imply, so for them I used calcium and magnesium only. I dropped {{stations.samples_dropped_implausible|int}} values below 0.5 mg/l or above 10,000 mg/l. Each station is summarised by the median of all its samples (half of the stations have {{overall.samples_median_per_station|int}} or more samples), and classed in the six bands of the England and Wales maps: soft (0 to 50 mg/l), moderately soft (51 to 100), slightly hard (101 to 150), moderately hard (151 to 200), hard (201 to 300) and very hard (over 300).
+
+\subsection{Rock groups}
+
+Every map unit was given shares of seven rock groups from its lithology text by fixed word rules: carbonate rocks (limestone, chalk, dolomite, marble; marl and ``calcareous'' rocks count half); evaporites (gypsum, anhydrite, salt); sandstone, mudstone and other hard sedimentary rock; loose young sediments (alluvium, sand, gravel, till, loess); sedimentary rock whose type the map does not state; volcanic rocks; and crystalline rocks (granite, gneiss, schist, slate, quartzite and other igneous and metamorphic rocks). Listed rocks share a unit equally; Macrostrat's ``major'' and ``minor'' lists take three quarters and a quarter; words such as ``minor'', ``thin'' and ``subordinate'' give a quarter weight. The shares were summed into a 0.1 degree grid of mapped land. The unit table with every share is published with the data. For Britain and Ireland the same rules were applied to the BGS rock descriptions and the GSI unit names (with four GSI limestone units set by hand from their names), igneous intrusions were counted as crystalline, and the results were summed into a grid of 0.01 by 0.015 degrees, about 1 km. Superficial deposits such as glacial till were not used.
+
+\subsection{The model}
+
+The model is a mixing model:
+\[ H = \Big(\sum_k h_k\, s_k\Big) \times \left(\frac{P}{1000\ \mathrm{mm}}\right)^{c} \times f_{\mathrm{type}}, \]
+where $s_k$ is the share of rock group $k$ in a square window reaching $R$ km either side of the place, $h_k$ is the typical hardness of river water from group $k$ alone, $P$ is annual rainfall, and $f_{\mathrm{type}}$ lets groundwater and lakes or reservoirs differ from rivers. Waters from different rocks mix by concentration, which is why the shares enter linearly. I fitted the parameters by least squares on log10 hardness, weighting each station by one over the number of stations in its one degree square so that dense national networks do not dominate, with $h_k$ bounded between 5 and about 3,000 mg/l. The maps show the river baseline ($f_{\mathrm{type}} = 1$). Land with under {{model.dry_mask_mm|int}} mm of rain a year ({{model.land_share_too_dry|pct}} of land outside Antarctica) is left blank, because almost no stations are that dry and there is little surface water to describe. {{model.n_model_stations|int}} stations have mapped rock within their window and enter the world model.
+
+\subsection{Confidence}
+
+The zoom-4 tiles stitch together six regional maps. Two are very coarse world compilations, the Generalized Geology of the World (Chorlton 2007) and a map of Africa, with single units the size of countries and straight clip edges where they meet the detailed Arctic, Europe, North America and Australia maps; the Europe map also has a few plate-scale legend units named only after tectonic plates. I called a map unit detailed when it comes from a regional map, is not named only after a plate or sea, and has a lithology that is less than half ``sedimentary, type not stated''. Each estimate's confidence is the share of mapped land in its window that is detailed, and estimates below one half are marked low confidence; on the maps they are faded and hatched. Detailed units cover {{d.detailed_share|pct}} of mapped land outside Antarctica.
+
+\subsection{Validation}
+
+A model can look good by memorising its own data, especially when stations cluster. I therefore used spatial cross-validation: stations were grouped into 5 by 5 degree squares, the squares were split at random into ten folds, and each fold was predicted from a model fitted to the other nine. A harsher test leaves out one whole country at a time. I report the share of variance of log10 hardness explained ($R^2$), the share of stations in the right class and within one class, and the typical error, the median factor between measured and predicted values. The window radius was chosen by the same cross-validation among 10, 25 and 50 km ($R^2$ of {{d.r10|f2}}, {{d.r25|f2}} and {{d.r50|f2}}). Larger windows scored about the same at 100 km ({{d.r100|f2}}) and a little better at 200 km ({{d.r200|f2}}), as one would expect for big rivers that drain large areas, but they would blur the map, so I capped the choice at 50 km.
+
+\subsection{Britain and Ireland}
+
+The open archive has {{stories.ireland.n|int}} stations on the island of Ireland and none in Great Britain. For both islands I fitted the same model on the 1 km grid with four broader groups (carbonate and evaporite; sandstone, mudstone and other sediments; volcanic; crystalline), using only the Irish stations, with windows of 1 to 10 km and cross-validation by half-degree squares. Letting the Irish data fit their own rainfall effect gave an exponent of {{model.bi_free_rain_coef|f2}}, which, from rainfall alone, would make water in the wettest twentieth of Great Britain ({{bi_gb_rain.p95|int}} mm a year or more) about {{d.free_rain_factor|int}} times softer than in the driest twentieth ({{bi_gb_rain.p05|int}} mm or less). That is the Irish west to east contrast standing in for other things, and it would not transfer safely, so I kept the world model's rainfall exponent ({{d.rain_c|f2}}) and fitted the rest; this costs some accuracy in Ireland ($R^2$ {{model.bi_cv.rocks_type_and_world_rain_effect.r2|f2}} against {{model.bi_cv.rocks_type_and_free_rain_effect.r2|f2}}).
+
+\section{Results}
+
+\subsection{What the stations show}
+
+Figure~\ref{fig:measured} maps every station. The median station is {{overall.median|int}} mg/l, moderately hard; {{overall.share_by_class.5|pct}} are very hard and {{overall.share_by_class.0|pct}} soft. Groundwater is the hardest (median {{overall.by_type.Groundwater.median|int}} mg/l at {{overall.by_type.Groundwater.n|int}} stations), rivers next ({{overall.by_type.River.median|int}} mg/l at {{overall.by_type.River.n|int}}), and lakes and reservoirs the softest ({{overall.by_type.Lake.median|int}} and {{overall.by_type.Reservoir.median|int}} mg/l). Among the {{countries_measured_n20|int}} countries with at least 20 stations, Norway's network is the softest ({{softest_country.median|f1}} mg/l) and Belgium's the hardest ({{hardest_country.median|int}} mg/l); Table~\ref{tab:countries} gives the extremes. A country's figure reflects where its stations are: Mexico alone has {{stories.mexico.n|int}} stations, {{stories.mexico.groundwater_n|int}} of them wells, and India's are almost all on rivers.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{f_world_measured.png}
+\caption{GEMS/Water stations by median hardness (mg/l as CaCO\textsubscript{3}). Circles are rivers, squares lakes and reservoirs, triangles groundwater. Web Mercator, 78\textdegree\ N to 56\textdegree\ S.}
+\label{fig:measured}
+\end{figure}
+
+\begin{table}[!htbp]
+\centering
+\small
+\caption{The softest and hardest station networks among countries with at least 20 stations.}
+\label{tab:countries}
+\begin{tabular}{lrrr@{\hspace{2.2em}}lrr}
+\toprule
+Softest & Stations & Median, mg/l && Hardest & Stations & Median, mg/l\\
+\midrule
+{{TAB_COUNTRIES}}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Rocks and hardness}
+
+Figure~\ref{fig:rocks} sets station hardness against the rocks within {{model.world_radius_km|int}} km. The clearest signal is crystalline rock: where it covers more than four fifths of the window the median station has {{by_crystalline.3.median|int}} mg/l, against {{by_crystalline.0.median|int}} mg/l where it covers less than a fifth (Spearman's $\rho$ between crystalline share and log hardness {{corr_crys_spearman|f2}}). Carbonate rock pushes hardness up, from {{by_carbonate.0.median|int}} mg/l with almost none to {{by_carbonate.4.median|int}} mg/l where it covers half or more ($\rho$ = {{corr_carb_spearman|f2}}), a weaker gradient than one might expect, partly because carbonate rock hides in the many units the world map calls only ``sedimentary''.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{f_rocks.png}
+\caption{Median station hardness (dot) and interquartile range (bar) by the share of the land within {{model.world_radius_km|int}} km that is crystalline rock (left) or carbonate rock and evaporites (right).}
+\label{fig:rocks}
+\end{figure}
+
+The fitted typical hardness of river water from each rock group alone, at 1,000 mm of rain a year, runs from {{d.typ_crys|int}} mg/l for crystalline rock through {{d.typ_clas|int}} for sandstone and mudstone and {{d.typ_volc|int}} for volcanic rock to {{d.typ_carb|int}} for carbonate rock, {{d.typ_unc|int}} for loose young sediments such as loess, and {{d.typ_evap|int}} for evaporites (Figure~\ref{fig:coef}). Each doubling of rainfall makes water about {{d.rain_drop_pct|int}}\% softer; groundwater comes out about {{d.gw_factor|f1}} times as hard as river water nearby, and lake water about {{d.lake_factor|f2}} times. The Britain and Ireland model gives {{d.bi_crys|int}} mg/l for crystalline rock, {{d.bi_clas|int}} for sediments, {{d.bi_volc|int}} for volcanic rock and {{d.bi_carb|int}} for carbonate.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{f_coef.png}
+\caption{Typical hardness of river water from each rock group alone, as fitted by the two models, at 1,000 mm of rain a year (log scale).}
+\label{fig:coef}
+\end{figure}
+
+\subsection{How good is the estimate?}
+
+Table~\ref{tab:cv} compares the model with simpler versions under the same spatial cross-validation. Guessing the global median for every station puts {{model.world_cv.baseline_global_median.class_within1|pct}} within one class; rainfall and type of water alone reach {{model.world_cv.rain_and_type_only.class_within1|pct}}; the rocks alone {{model.world_cv.rocks_only.class_within1|pct}}; and the full model {{model.world_cv.rocks_rain_and_type.class_within1|pct}}, with {{model.world_cv.rocks_rain_and_type.class_exact|pct}} in exactly the right class and a typical error of a factor of {{model.world_cv.rocks_rain_and_type.median_factor|f1}}. Leaving out whole countries lowers $R^2$ from {{model.world_cv.rocks_rain_and_type.r2|f2}} to {{model.world_cv.rocks_rain_and_type_leave_country_out.r2|f2}}. Across the {{measured_vs_modelled_countries.n|int}} countries with at least 20 stations, the rank correlation between the measured median and the modelled country median is {{measured_vs_modelled_countries.spearman|f2}}. Confidence matters: stations whose window is mostly detailed geology reach {{model.world_cv_by_confidence.high.class_within1|pct}} within one class ($R^2$ {{model.world_cv_by_confidence.high.r2|f2}}, {{model.world_cv_by_confidence.high.n|int}} stations), while those resting mainly on coarse geology reach {{model.world_cv_by_confidence.low.class_within1|pct}} ($R^2$ {{model.world_cv_by_confidence.low.r2|f2}}, {{model.world_cv_by_confidence.low.n|int}} stations), no better than a constant guess for that subset. Figure~\ref{fig:check} shows every prediction: the model compresses the range, over-predicting the softest waters and under-predicting the hardest. The largest country-level misses are over-predictions in Norway (measured water typically {{d.nor_resid|pct}} of the prediction), Canada and Denmark, and under-predictions in Spain, the Netherlands, Serbia and Cyprus (by factors of about {{d.esp_resid|f1}} to {{d.cyp_resid|f1}}).
+
+\begin{table}[!htbp]
+\centering
+\small
+\caption{Spatial cross-validation. Right class and within one class refer to the six hardness classes; typical error is the median factor between measured and predicted hardness.}
+\label{tab:cv}
+\begin{tabular}{lrrrrr}
+\toprule
+Model and test & Stations & $R^2$ & Right class & Within one & Typical error\\
+\midrule
+{{TAB_CV}}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.66\textwidth]{f_check.png}
+\caption{Measured station medians against predictions made with each station's own 5 degree square hidden (log scales). The shaded band is within a factor of two; grid lines mark the class boundaries.}
+\label{fig:check}
+\end{figure}
+
+\subsection{The modelled world}
+
+Figure~\ref{fig:model} maps the river baseline wherever there is mapped rock and at least {{model.dry_mask_mm|int}} mm of rain. Of that land, {{d.wshare_soft|pct}} is modelled as soft or moderately soft and {{d.wshare_hard|pct}} as hard or very hard. The map is a patchwork in places, with straight seams where the regional source maps meet (for example along about 50 and 60 degrees north in Asia and Russia) and broad uniform areas where the map gives only an age. {{model.world_pred_low_conf_share|pct}} of the modelled land is low confidence, including all of China, Mongolia and Brazil; on the high-confidence land alone, {{d.hc_soft|pct}} is soft or moderately soft and {{d.hc_hard|pct}} hard or very hard. Across {{countries_modelled_n|int}} countries of at least 20,000 km\textsuperscript{2} with an estimate for at least half their land, the modelled medians run from {{d.cm_min_v|int}} mg/l ({{d.cm_min|raw}}) to {{d.cm_max_v|int}} mg/l ({{d.cm_max|raw}}).
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{f_world_model.png}
+\caption{Modelled hardness of river water from rocks within {{model.world_radius_km|int}} km and annual rainfall. Faded, hatched areas are low confidence (coarse geology). Grey land has no estimate (under {{model.dry_mask_mm|int}} mm of rain a year, or unmapped).}
+\label{fig:model}
+\end{figure}
+
+Some places illustrate what the model can and cannot see. Under the chalk of northern France, {{stories.northern_france_chalk.n|int}} stations between Rouen, Amiens and Paris have a median of {{stories.northern_france_chalk.median|int}} mg/l, {{stories.northern_france_chalk.share_hard_or_vhard|pct}} of them hard or very hard. On the limestone of the Yucatán Peninsula {{stories.yucatan.n|int}} stations, {{stories.yucatan.groundwater_n|int}} of them wells, have a median of {{stories.yucatan.median|int}} mg/l, yet the modelled map there is about {{stories.yucatan.model_map_median|int}} mg/l, because the world map describes the peninsula only as ``Eocene sedimentary''. In the karst of southern China there are no stations in the open archive and the map describes {{d.china_sedu|pct}} of the area only as sedimentary rock of a given age, so the estimate (about {{stories.south_china.pred_median|int}} mg/l) is probably too soft. On the old crystalline rocks of Norway, Sweden and Finland the {{stories.scandinavia.n|int}} stations have a median of {{stories.scandinavia.median|int}} mg/l, and the {{stories.canada.shield_n|int}} Canadian stations surrounded mostly by crystalline rock have {{stories.canada.shield_median|int}} mg/l.
+
+\subsection{Britain and Ireland}
+
+With 1 km bedrock the estimate improves markedly (Table~\ref{tab:cv}): in Ireland the model explains {{model.bi_cv.rocks_type_and_world_rain_effect.r2|pct}} of the variance and puts {{model.bi_cv.rocks_type_and_world_rain_effect.class_within1|pct}} of stations within one class, against {{model.bi_cv.world_model_at_irish_stations.class_within1|pct}} for the world model at the same stations. Irish stations where at least half the nearby rock is limestone have a median of {{stories.ireland.high_carb_median|int}} mg/l ({{stories.ireland.high_carb_n|int}} stations), those on almost none {{stories.ireland.low_carb_median|int}} mg/l ({{stories.ireland.low_carb_n|int}}).
+
+Applied to both islands (Figure~\ref{fig:britain}, Table~\ref{tab:bi}), the estimate reproduces the familiar pattern. South and east of a line from the Tees to the Exe the modelled median is {{bi_tees_exe.south_east.median|int}} mg/l and {{d.se_hard|pct}} of the land is hard or very hard; north and west of it the median is {{bi_tees_exe.north_west.median|int}} mg/l and {{d.nw_soft|pct}} is soft. The hardest areas are on the chalk: {{bi_counties_hardest.0.name|raw}} ({{bi_counties_hardest.0.median|int}} mg/l), {{bi_counties_hardest.1.name|raw}} ({{bi_counties_hardest.1.median|int}}) and {{bi_counties_hardest.2.name|raw}} ({{bi_counties_hardest.2.median|int}}); the softest are {{bi_counties_softest.0.name|raw}} and {{bi_counties_softest.1.name|raw}} (about {{bi_counties_softest.0.median|int}} and {{bi_counties_softest.1.median|int}} mg/l).
+
+The estimate also departs from the supply-zone maps in instructive ways. It puts London at {{d.london_bi|int}} mg/l, because London stands on clay; its water in fact comes from the chalk beneath and from the Thames and Lea, which gather hard water from chalk and limestone far upstream, beyond a 10 km window. Much of the Midlands is mapped as Mercia Mudstone, which carries gypsum that my rock groups count as plain mudstone. No single open dataset of tap water hardness by supply zone exists for the United Kingdom; each water company publishes its own lookup, so I could not test the estimate against taps.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{f_britain.png}
+\caption{Modelled hardness of river water in Britain and Ireland from 1 km bedrock and rainfall, with the measured Irish stations.}
+\label{fig:britain}
+\end{figure}
+
+\begin{table}[!htbp]
+\centering
+\small
+\caption{Modelled share of land in each class, by nation (1 km estimate).}
+\label{tab:bi}
+\begin{tabular}{lrrrrrrr}
+\toprule
+ & Median, mg/l & Soft & Mod.\ soft & Sl.\ hard & Mod.\ hard & Hard & Very hard\\
+\midrule
+{{TAB_BI}}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion}
+
+The rocks explain a good deal of the world's water hardness, but less than the textbook picture suggests. The strongest and most reliable signal is the absence of soluble rock: wherever crystalline rock dominates, from Scandinavia to the Canadian Shield and the Scottish Highlands, water is soft. Hard water needs carbonate rock, evaporites or young, carbonate-rich sediments such as loess, but the world map often fails to say where these are, and rivers carry water from far beyond any local window. At the scale of Britain and Ireland, with detailed bedrock maps and a local calibration, the same simple model does far better, and it recovers the outline of the familiar supply-zone maps from geology alone.
+
+The misses are as informative as the hits. The world model over-predicts in Norway and Canada, where ice-scoured rock and thin soils may give water little to dissolve, and under-predicts in parts of southern Europe and Cyprus, where gypsum, salty groundwater or dry summers may push hardness up; this model cannot tell these explanations apart. A better world map of lithology, such as the global lithological map GLiM (Hartmann and Moosdorf 2012), upstream catchments instead of square windows, and climate beyond annual rainfall would all be natural next steps.
+
+\section{Limitations}
+
+\begin{itemize}
+\item Monitoring stations are not taps. Supply zones blend sources, transfer water and may soften it.
+\item The open archive covers {{stations.countries|int}} countries, unevenly, and none in Great Britain, China, Russia, Africa or Australia. Station medians pool samples from different years ({{stations.years.0|raw}} to {{stations.years.1|raw}}) and seasons.
+\item The world geology is coarse; {{d.sedu_share|pct}} of mapped land outside Antarctica is described only as sedimentary rock of a given age, and {{model.world_pred_low_conf_share|pct}} of the modelled land is marked low confidence. Straight seams between source maps remain visible. My word rules are simple and some units will be misread.
+\item A square window is not a catchment. Large rivers carry water from far upstream, and groundwater may come from rocks below those mapped at the surface. Superficial deposits are ignored.
+\item The model knows only rock groups, annual rainfall and the type of water. It knows nothing of soils, evaporation, land use, pollution or treatment.
+\item The Britain and Ireland model is calibrated on Irish stations only, uses the world rainfall effect, and could not be checked against any British measurements.
+\end{itemize}
+
+\section{Conclusion}
+
+From {{overall.n|int}} open monitoring stations and a simple model of rocks and rain, a world map of water hardness is possible, with honest error bars: the right class about {{d.exact_tenths|raw}} times in ten and within one class about two times in three, and markedly better where the geology is mapped in detail. Granite gives soft water and limestone hard; the more interesting finding is how much of the world's geology is still too vaguely mapped for that rule to be applied.
+
+\section*{Data and code availability}
+
+The interactive map is at \url{https://tristan-hotham.github.io/hard-water/}. Data and code are at \url{https://github.com/Tristan-Hotham/hard-water}, and an archived release with this paper is at \url{https://doi.org/10.5281/zenodo.23735824}. The derived data (station medians and yearly series, rock group shares for every map unit, model coefficients, country and county tables, and modelled values for places) are released under CC BY 4.0, with credit to the sources below; the code is released under the MIT licence.
+
+\section*{AI statement}
+
+I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.
+
+\section*{References}
+\small
+\begin{description}\setlength{\itemsep}{0.2em}
+\item Asch, K. (2003) The 1:5M International Geological Map of Europe and Adjacent Areas: development and implementation of a GIS-enabled concept. \emph{Geologisches Jahrbuch} SA 3.
+\item British Geological Survey (2008) DiGMapGB-625: Digital Geological Map of Great Britain at 1:625,000 scale. Open Government Licence v3.0.
+\item Chorlton, L.B. (2007) Generalized geology of the world: bedrock domains and major faults in GIS format. Geological Survey of Canada, Open File 5529. \url{https://doi.org/10.4095/223767}
+\item Garrity, C.P. and Soller, D.R. (2009) Database of the Geologic Map of North America, adapted from the map by J.C. Reed, Jr. and others (2005). U.S. Geological Survey Data Series 424.
+\item Geological Survey Ireland and Geological Survey of Northern Ireland (2026) Bedrock geology 1:500,000. CC BY 4.0 and Open Government Licence.
+\item GeoNames (2026) cities15000. \url{https://www.geonames.org}. CC BY 4.0.
+\item Hartmann, J. and Moosdorf, N. (2012) The new global lithological map database GLiM: a representation of rock properties at the Earth surface. \emph{Geochemistry, Geophysics, Geosystems} 13, Q12004.
+\item Hotham, T. (2026) Sun and rain: the world's sunshine against its rainfall. Zenodo. \url{https://doi.org/10.5281/zenodo.23732580}
+\item Natural Earth (2026) 1:10m and 1:50m cultural and physical vectors. \url{https://www.naturalearthdata.com}. Public domain.
+\item New, M., Lister, D., Hulme, M. and Makin, I. (2002) A high-resolution data set of surface climate over global land areas. \emph{Climate Research} 21: 1 to 25.
+\item Office for National Statistics (2025) Local authority district boundaries. Open Government Licence v3.0.
+\item Peters, S.E., Husson, J.M. and Czaplewski, J. (2018) Macrostrat: a platform for geological data integration and deep-time Earth crust research. \emph{Geochemistry, Geophysics, Geosystems} 19. Map tiles at \url{https://macrostrat.org}, CC BY 4.0.
+\item Tilezen (2026) AWS Terrain Tiles. \url{https://registry.opendata.aws/terrain-tiles/}
+\item UNEP GEMS/Water (2026) Global Freshwater Quality Archive, version 3 (GFQA\_v3), open subset. Zenodo. \url{https://doi.org/10.5281/zenodo.18459694}. CC BY 4.0.
+\end{description}
+\end{document}
