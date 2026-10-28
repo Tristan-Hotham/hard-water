@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 Tristan Hotham
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+This licence covers the code in code/ and the page scripts. The data files in
+data/ are derived data released under CC BY 4.0 with these credits: water
+quality from UNEP GEMS/Water, Global Freshwater Quality Archive v3, open subset
+(CC BY 4.0; stations.csv, station_series.json, station_model.csv,
+page_stations.json, countries_measured.csv); world geology from Macrostrat map
+tiles (CC BY 4.0; units_world.csv and the modelled layers); bedrock geology
+from the British Geological Survey, Geology 625k (Open Government Licence
+v3.0), and from Geological Survey Ireland and Geological Survey of Northern
+Ireland, 1:500k bedrock (CC BY 4.0; Open Government Licence) (units_bi.csv,
+bi_model.png, bi_areas.csv); rainfall from CRU CL 2.0, Climatic Research Unit,
+University of East Anglia (New et al. 2002); places from GeoNames (CC BY 4.0;
+places.csv, places.json); outlines from Natural Earth (public domain;
+borders.json) and ONS boundaries (Open Government Licence v3.0); hill shading
+from AWS Terrain Tiles (Mapzen and Tilezen). The text of the page and the
+figures are released under CC BY 4.0.

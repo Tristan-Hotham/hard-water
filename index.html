@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hard Water</title>
+<meta name="description" content="A world map of water hardness from 16,682 river, lake and groundwater stations in 34 countries, with a simple, cross-validated estimate from the rocks and rainfall, and a sharper 1 km estimate for Britain and Ireland.">
+<meta property="og:title" content="Hard water: the world's water hardness and the rocks behind it">
+<meta property="og:description" content="16,682 stations, 611,858 samples. Soft over granite, hard over limestone and chalk: see where your water sits, and how well the rocks alone can guess it.">
+<meta property="og:image" content="https://tristan-hotham.github.io/hard-water/header.png">
+<meta property="og:url" content="https://tristan-hotham.github.io/hard-water/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Pale water and limestone. The six hardness colours run from pale to deep blue (my own palette). */
+:root{
+  --bg:#F4F7F8; --panel:#E7EEF1; --fg:#10232E; --muted:#5A6B74; --rule:#D3DEE3; --card:#FBFDFD; --border:#BFCDD4;
+  --deep:#0E3F66; --hot:#B5562A; --cool:#1F7FAE; --chalk:#E9E2CF; --land:#E3E1DA; --sea:#F4F7F8;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E171C; --panel:#16232A; --fg:#E7EEF1; --muted:#9AAEB8; --rule:#26363F; --card:#132027; --border:#33464F;
+  --deep:#9CCBE6; --hot:#E58B5C; --cool:#6CB8DE; --chalk:#3B3A33; --land:#2A3238; --sea:#0E171C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E171C; --panel:#16232A; --fg:#E7EEF1; --muted:#9AAEB8; --rule:#26363F; --card:#132027; --border:#33464F;
+  --deep:#9CCBE6; --hot:#E58B5C; --cool:#6CB8DE; --chalk:#3B3A33; --land:#2A3238; --sea:#0E171C; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:700px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1140px,calc(100vw - 32px));margin-left:calc((100% - min(1140px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--cool);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--deep);color:var(--bg);padding:5px 8px;font-weight:500}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(52px,13vw,112px)/.86 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--deep)} h1 span{color:var(--cool)}
+.mark{width:clamp(70px,15vw,118px);height:auto;display:block}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:50ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:56px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--cool);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--cool)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(22px,4.4vw,32px)/1 var(--display);letter-spacing:-.01em}
+.stats b.c{color:var(--cool)} .stats b.h{color:var(--hot)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:280px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.controls{display:flex;gap:8px 14px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
+.ctl-l{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:3px;overflow:hidden;max-width:100%;flex-wrap:wrap}
+.seg .btn{border:0;border-radius:0;border-right:1px solid var(--border)}
+.seg .btn:last-child{border-right:0}
+.grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.chk{font:500 12px/1 var(--mono);display:inline-flex;gap:6px;align-items:center;cursor:pointer;padding:6px 2px}
+.chk svg{display:block}
+.searchbox{position:relative;flex:1 1 260px;min-width:0}
+input[type=search]{font:400 15px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 11px;min-height:40px;width:100%}
+.suggest{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--border);z-index:1001;font:400 13px/1.3 var(--mono);display:none;max-height:340px;overflow:auto}
+.suggest li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--rule)}
+.suggest li span{color:var(--muted)}
+.suggest li[aria-selected="true"],.suggest li:hover{background:var(--panel)}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:14px;align-items:start}
+@media (max-width:900px){.mapgrid{grid-template-columns:1fr}}
+.side{background:var(--card);border:1px solid var(--border);padding:12px 12px 10px;font:400 13px/1.45 var(--mono)}
+.side h4{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.side h4:first-child{margin-top:2px}
+.key{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:4px 8px;align-items:center}
+.key i{display:block;width:22px;height:14px;border:1px solid rgba(0,0,0,.12)}
+.key span{color:var(--muted)}
+.shapes{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;color:var(--muted)}
+.shapes span{display:inline-flex;gap:5px;align-items:center}
+#lmap{height:620px;border:1px solid var(--border);background:var(--sea);border-radius:2px}
+@media (max-width:600px){#lmap{height:460px}}
+.leaflet-container{font:400 12px/1.4 var(--mono);background:var(--sea)}
+.leaflet-image-layer.px{image-rendering:pixelated;image-rendering:crisp-edges}
+.lyrBtn{background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;font:600 12px/1 var(--mono);padding:8px 10px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.lyrBtn[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.lyrPanel{background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 12px 8px;margin-top:6px;width:244px;box-shadow:0 2px 10px rgba(0,0,0,.15);font:400 12px/1.3 var(--mono)}
+.lyrPanel[hidden]{display:none}
+.lyrPanel .row{margin:0 0 9px}
+.lyrPanel label{display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:600}
+.lyrPanel input[type=range]{width:100%;accent-color:var(--fg)}
+.lyrPanel select{font:400 12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:2px;padding:2px 4px;width:100%}
+.lyrPanel .sub{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:11px;margin-top:3px}
+.lyrPanel .sub span{flex:0 0 58px}
+.lyrPanel .reset{font:400 11px var(--mono);color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.cityL{font:500 11px/1 var(--mono);color:var(--fg);white-space:nowrap;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg),0 0 2px var(--bg);pointer-events:none}
+.cityL i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--fg);margin-right:4px;vertical-align:1px}
+.cityL.s{font-size:10px;font-weight:400}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--fg);border-radius:3px}
+.leaflet-bar a,.leaflet-bar a:hover{background:var(--card);color:var(--fg);border-bottom-color:var(--border)}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--card) 85%,transparent)!important;color:var(--muted)}
+.leaflet-control-attribution a{color:var(--fg)}
+.mapbox{position:relative}
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:500 13px/1.4 var(--mono);color:var(--muted);z-index:900;pointer-events:none}
+#hov{min-height:40px;font:400 12.5px/1.45 var(--mono);color:var(--muted);margin:8px 0 0}
+#hov b{color:var(--fg);font-weight:500}
+.sw{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.2)}
+#card .big{font:800 22px/1.15 var(--display);margin:2px 0 4px;text-wrap:balance}
+#card .sub{color:var(--muted);margin:0 0 8px}
+#card .nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:8px 0 10px}
+#card .nums div{background:var(--bg);padding:8px}
+#card .nums b{display:block;font:800 21px/1 var(--display)}
+#card .nums span{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+#card ul{margin:4px 0 0;padding-left:18px}
+#card li{margin:2px 0}
+table{border-collapse:collapse;width:100%;font:400 13px/1.35 var(--mono)}
+th{font-weight:500;text-align:left;color:var(--muted);border-bottom:1px solid var(--border);padding:6px 6px;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+td{border-bottom:1px solid var(--rule);padding:6px 6px;vertical-align:middle}
+td.r,th.r{text-align:right}
+td .bar{display:block;height:10px;min-width:1px}
+.tblwrap{max-height:520px;overflow:auto;border:1px solid var(--rule)}
+.stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin:18px 0}
+.story{background:var(--card);border:1px solid var(--border);border-top:6px solid var(--cool);padding:14px 14px 12px}
+.story h3{margin:0 0 6px}
+.story p{font-size:16px;line-height:1.5;margin:0 0 10px}
+.story .num{font:900 30px/1 var(--display);color:var(--deep);margin:2px 0 8px}
+.story .num small{font:400 12px/1.3 var(--mono);color:var(--muted);display:block;margin-top:4px}
+.note{background:var(--panel);border-left:4px solid var(--hot);padding:12px 14px;margin:18px 0;font-size:16px}
+.methods li{margin:0 0 10px}
+details{border-top:1px solid var(--rule);padding:10px 0}
+summary{cursor:pointer;font:600 18px/1.3 var(--display)}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 12.5px/1.55 var(--mono);color:var(--muted)}
+footer a{color:var(--fg)}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1200;border-radius:50%;width:40px;height:40px;padding:0;font-size:18px}
+.unitnote{font:400 12px/1.4 var(--mono);color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>Water</span><span>·</span><span>16,682 stations</span><span>·</span><span>34 countries</span></div>
+<header class="hero">
+  <h1><em>Hard</em> <span>water</span></h1>
+  <svg class="mark" viewBox="0 0 100 130" aria-hidden="true" id="heroMark"></svg>
+  <p class="dek">The world's water hardness, from 611,858 samples of rivers, lakes and groundwater, and the rocks behind it.</p>
+</header>
+<div class="byline">Dr Tristan Hotham · Independent researcher · <a href="https://blog.tristanhotham.com/">blog.tristanhotham.com</a></div>
+
+<p class="lede" style="margin-top:26px">Fill a kettle in Cambridge and in Aberdeen and, after a few months, only one of them will be furred with white scale. That scale is calcium and magnesium carbonate, and it got into the water from the ground. Rain is a very weak acid: it picks up carbon dioxide on the way down and through the soil, and that carbonic acid dissolves limestone, chalk and dolomite readily, while granite, gneiss and most sandstones barely give anything up. So the hardness of water is, more than anything, a map of the rocks it has passed through.</p>
+<p>The familiar hardness maps of England and Wales show water supply zones, from soft in the west and north to very hard in the south and east. I wanted the world version. There is no open world map of tap water, so I used the next best thing: the UN's GEMS/Water archive of river, lake and groundwater measurements, 16,682 stations with a hardness figure in 34 countries. Then I asked how well the rocks alone could guess the answer where nobody has measured.</p>
+
+<div class="stats">
+  <div><b class="c">202</b><span>mg/l: the median station, "moderately hard"</span></div>
+  <div><b>14</b><span>mg/l: Norway, Sweden and Finland (571 stations)</span></div>
+  <div><b class="h">514</b><span>mg/l: the Yucatán Peninsula, Mexico (187 stations)</span></div>
+  <div><b>64%</b><span>of stations the rock model gets within one class, tested on places it never saw</span></div>
+</div>
+
+<div class="note"><b>Not a tap water map.</b> These are measurements of rivers, lakes and groundwater, and the modelled layer is an estimate from geology and rainfall. Tap water depends on where a supplier draws its water, how it blends sources and whether it softens it. Your water company's own postcode lookup is the authority for your tap.</div>
+
+<h2><span class="n">01 · THE MAP</span>Measured and modelled</h2>
+<p>Each dot is a monitoring station, coloured by its median hardness over all its samples, in the same six classes as the England and Wales maps. Circles are rivers, squares lakes and reservoirs, triangles groundwater. Behind them, the modelled layer shows the hardness a river would typically have given the rocks within about 10 km and the rainfall; zoom into Britain and Ireland for a sharper 1 km version. Faded, hatched areas (71% of the modelled land) rest mainly on coarse geology: two world compilations and some plate-scale legend units, where single map units cover areas the size of countries, straight edges mark where they meet the detailed regional maps, and the rock is often named only as "sedimentary". Treat them with extra caution, or switch the fading off under Map layers. Click a station for its record over time, or search for a place.</p>
+
+<div class="bleed">
+<div class="controls">
+  <div class="grp"><span class="ctl-l">Show</span><div class="seg" role="group" aria-label="What to show">
+    <button class="btn" data-show="both" aria-pressed="true">Both</button><button class="btn" data-show="measured" aria-pressed="false">Measured</button><button class="btn" data-show="modelled" aria-pressed="false">Modelled</button><button class="btn" data-show="check" aria-pressed="false">Model check</button></div></div>
+  <div class="grp"><span class="ctl-l">Units</span><div class="seg" role="group" aria-label="Units">
+    <button class="btn" data-unit="ppm" aria-pressed="true">mg/l</button><button class="btn" data-unit="dH" aria-pressed="false">°dH</button><button class="btn" data-unit="eH" aria-pressed="false">°Clark</button><button class="btn" data-unit="fH" aria-pressed="false">°f</button></div></div>
+  <div class="grp" id="typeChecks"><span class="ctl-l">Stations</span></div>
+</div>
+<div class="controls">
+  <div class="searchbox"><input type="search" id="q" placeholder="Search a town or city, e.g. Cambridge, Mérida, Oslo" autocomplete="off" aria-label="Search a place" aria-autocomplete="list" aria-controls="sug"><ul class="suggest" id="sug" role="listbox"></ul></div>
+</div>
+<div class="mapgrid">
+  <div class="mapbox"><div id="lmap" role="region" aria-label="Map of water hardness"></div><div class="loading" id="loading">Loading the map data...</div></div>
+  <aside class="side">
+    <h4 id="keyTitle" style="text-transform:none;letter-spacing:.02em">Hardness</h4>
+    <div class="key" id="key"></div>
+    <div class="shapes" id="shapes"></div>
+    <div class="unitnote" id="unitNote"></div>
+    <h4>Here</h4>
+    <div id="hov">Hover or tap the map to read the estimate.</div>
+    <div id="card"></div>
+  </aside>
+</div>
+<p class="src">Measured: UNEP GEMS/Water GFQA v3 (CC BY 4.0). Modelled: my estimate from Macrostrat, BGS and GSI geology and CRU CL 2.0 rainfall. Hill shading from AWS Terrain Tiles. Base map tiles © Esri when they load. Blank land on the modelled layer is too dry (under 200 mm of rain a year) or unmapped; faded and hatched land is low confidence.</p>
+</div>
+
+<h2><span class="n">02 · WHAT THE STATIONS SAY</span>A soft north, a hard middle</h2>
+<p>Across all 16,682 stations the median is 202 mg/l. A quarter are very hard (26% over 300 mg/l) and 12% are soft. Groundwater is the hardest (median 276 mg/l at 3,861 stations), because it sits in the rock for months or years; rivers come next (199 mg/l), and lakes and reservoirs, fed partly by rain straight onto their surface and often in hard, old rock, are the softest (139 and 111 mg/l).</p>
+<div class="figure"><div class="fig-h">Share of stations in each class, by type of water</div><div class="fig-sub">Station medians, all years</div><div class="chart" id="typeChart"></div></div>
+
+<p>By country, the softest network is Norway's (median 8.2 mg/l over 133 stations) and the hardest Belgium's (330 mg/l over 83), among the 28 countries with at least 20 stations. A country's figure says as much about where its stations are as about the country: Mexico alone has 5,242 of them, 2,173 in wells, while India's are almost all rivers. Switch to the modelled view to rank 132 countries by the estimate instead, including the many with no stations in the open archive.</p>
+<div class="figure">
+<div class="controls"><div class="seg" role="group" aria-label="Country table"><button class="btn" data-ct="m" aria-pressed="true">Measured (34 countries)</button><button class="btn" data-ct="e" aria-pressed="false">Modelled (132 countries)</button></div></div>
+<div class="tblwrap"><table id="ctable"></table></div>
+<p class="src" id="ctNote"></p>
+</div>
+
+<h2><span class="n">03 · THE ROCKS BEHIND IT</span>Granite gives soft water; limestone gives hard</h2>
+<p>To link each station to its rocks I gave every unit on the world geological map shares of seven rock groups from its description (so "limestone and shale" is half carbonate, half mudstone), and measured the share of each group within 10 km of the station. The clearest signal in the measurements is not limestone but its opposite: where crystalline rocks such as granite, gneiss and schist cover more than four fifths of the ground, the median station has just 34 mg/l, against 220 mg/l where they cover less than a fifth.</p>
+<div class="figure"><div class="fig-h">Measured hardness against the rocks nearby</div><div class="fig-sub">Median station (dot) and middle half (bar), by the share of the land within 10 km that is crystalline rock (left) or carbonate rock and evaporites (right)</div><div class="chart" id="rockChart"></div></div>
+<p>The model then asks what hardness each rock group gives on its own. It mixes the groups by their shares (as waters from different rocks mix), lets wetter places be softer and lets groundwater and lakes differ from rivers. Fitted to all the stations, it says a river draining only granite and gneiss under a metre of rain a year would carry about 22 mg/l; only carbonate rock about 211 mg/l; and loose young sediments such as loess and glacial clays about 257 mg/l. Each doubling of rainfall makes water about 21% softer, groundwater comes out about 2.0 times as hard as river water nearby, and lake water about half as hard (0.48 times).</p>
+<div class="figure"><div class="fig-h">Typical hardness of river water from each rock group alone</div><div class="fig-sub">Fitted values, mg/l, at 1,000 mm of rain a year. The Britain and Ireland model uses four broader groups and is fitted to Irish stations only.</div><div class="chart" id="coefChart"></div></div>
+
+<h2><span class="n">04 · HOW GOOD IS THE GUESS?</span>Right class three times in ten, close two times in three</h2>
+<p>A model can look good simply by remembering its own data, so I tested it the hard way: the world was cut into 5 by 5 degree squares, whole squares were hidden, and each hidden station was predicted only from the others (spatial cross-validation). On that test the rock model explains 24% of the variation in log hardness, puts 29% of stations in exactly the right class and 64% within one class, and is typically out by a factor of 1.8. Guessing the global median for everyone gets only 38% within one class. Hiding whole countries is harsher still (61% within one class).</p>
+<div class="figure"><div class="fig-h">Measured against predicted, each station predicted with its own 5 degree square hidden</div><div class="fig-sub">Log scales, mg/l. The shaded band is within a factor of two; the grid shows the six classes.</div><div class="chart" id="scatter"></div></div>
+<div class="tblwrap" style="max-height:none"><table id="mtable"></table></div>
+<p class="src">Within one class: predicted class is the measured class or next to it. Typical error: the median factor between measured and predicted.</p>
+<p>The map's own detail matters as much as the model. Where at least half of the land around a station comes from a detailed regional map unit that names its rock, the model gets 68% of 10,363 stations within one class (R² 0.36); where it rests mainly on the coarse compilations it gets 56% of 4,430 (R² -0.12, no better than a flat guess). That is why the map fades those areas.</p>
+<p>The misses are informative. The model over-predicts in Norway (measured water there is typically 24% of what it expects), Canada and Denmark, and under-predicts in Spain, the Netherlands, Serbia and Cyprus (by factors of about 2.0 to 4.6). The reasons will differ from place to place, from thin soils over ice-scoured rock to gypsum and salty groundwater, and this simple model cannot tell them apart. The biggest weakness is the map itself: over about half of the mapped land the world geology I used says only "sedimentary", without saying whether it is limestone or sandstone (50% of mapped land outside Antarctica).</p>
+
+<h2><span class="n">05 · BRITAIN AND IRELAND</span>A sharper look at home</h2>
+<p>The open archive has 388 stations in Ireland but none at all in Great Britain. For both islands I used the far more detailed BGS and GSI bedrock maps at about 1 km, merged into four groups (carbonate and evaporite; sandstone, mudstone and other sediments; volcanic; crystalline), and calibrated the model on the Irish stations, keeping the rainfall effect from the world model so it would not stretch too far across Britain's much wider range of rainfall. Under the same kind of test (hiding half-degree squares) it explains 60% of the variation in Ireland and gets 82% of stations within one class, far better than the world model does at the same Irish stations (71%).</p>
+<div class="figure"><div class="fig-h">Modelled share of land in each class</div><div class="fig-sub">River-water estimate from bedrock and rainfall, 1 km squares</div><div class="chart" id="biChart"></div></div>
+<p>The rocks alone reproduce the broad pattern: south and east of a line from the Tees to the Exe the modelled median is 92 mg/l and 21% of the land is hard or very hard; north and west of it the median is 35 mg/l and 71% is soft. The hardest counties are those on the chalk: East Riding of Yorkshire (330 mg/l), Hertfordshire (280) and Norfolk (251). The softest are in the Highlands and Islands, at about 20 to 23 mg/l.</p>
+<div class="note"><b>Where the rocks and the taps disagree.</b> The familiar supply maps show London and much of the Midlands as hard or very hard, yet this estimate puts London at 40 mg/l. London sits on clay, but its water comes from the chalk beneath and from the Thames and Lea, which gather hard water from chalk and limestone far upstream; my window of 10 km cannot see that far. Much of the Midlands sits on Mercia Mudstone, which carries gypsum that my rock groups count as plain mudstone. And supply zones often take water from far away. Water travels; rocks do not. There is no single open dataset of tap water hardness by supply zone for the UK: each water company publishes its own lookup.</div>
+<div class="figure"><div class="fig-h">Counties, unitary areas and council areas by modelled hardness</div><div class="fig-sub">Area median of the 1 km estimate; Great Britain only</div><div class="tblwrap"><table id="btable"></table></div></div>
+
+<h2><span class="n">06 · FIVE PLACES</span>Stories in the water</h2>
+<div class="stories" id="stories">
+  <div class="story"><h3>The chalk of the south-east</h3><div class="num">280 mg/l<small>modelled median, Hertfordshire</small></div><p>The chalk that makes the Chilterns, the Downs and the Yorkshire Wolds is almost pure calcium carbonate, laid down in a warm sea. There are no British stations in the archive, but the same chalk runs under the Channel into northern France, where 141 stations between Rouen, Amiens and Paris have a median of 301 mg/l and 96% are hard or very hard.</p><button class="btn" data-fly="51.4,0.5,7">Show on map</button></div>
+  <div class="story"><h3>The Yucatán</h3><div class="num">514 mg/l<small>median of 187 stations, 131 of them wells</small></div><p>The peninsula is a slab of limestone with almost no rivers on its surface: water runs underground and surfaces in cenotes. 92% of its stations are very hard. The world model misses this badly, at about 117 mg/l, because the map I used calls the rock simply "Eocene sedimentary". A good example of a model that is only as good as its map.</p><button class="btn" data-fly="20.3,-89.2,6">Show on map</button></div>
+  <div class="story"><h3>South China's karst</h3><div class="num">0<small>stations in the open archive</small></div><p>Guangxi and Guizhou hold some of the world's most famous limestone landscapes, the tower karst of Guilin among them. Here I have neither measurements nor a useful map: the world geology describes 81% of the area only as sedimentary rock of a given age, such as "Palaeozoic sedimentary rocks", so the estimate (about 108 mg/l) is probably too soft. I leave it on the map as a reminder of what this method cannot see.</p><button class="btn" data-fly="24.6,108.5,6">Show on map</button></div>
+  <div class="story"><h3>Scandinavia and the Shield</h3><div class="num">14 mg/l<small>median of 571 Nordic stations; 5 mg/l on the Canadian Shield</small></div><p>Norway, Sweden and Finland sit on some of the oldest crystalline rock in Europe, scraped bare by ice. 90% of their stations are soft. The Canadian Shield is the same story: 54 Canadian stations surrounded mostly by crystalline rock have a median of 5 mg/l, against 42 for the rest of Canada's.</p><button class="btn" data-fly="62,15,4">Show on map</button></div>
+  <div class="story"><h3>Ireland: a hard middle, a soft rim</h3><div class="num">192 against 17<small>mg/l: Irish stations on mostly limestone, and on almost none</small></div><p>Ireland is a saucer: a lowland middle floored with Carboniferous limestone and a rim of older, harder mountains. Its 117 stations where at least half of the nearby rock is limestone have a median of 192 mg/l; its 103 stations on almost no limestone, 17 mg/l.</p><button class="btn" data-fly="53.3,-8,7">Show on map</button></div>
+</div>
+
+<h2><span class="n">07 · UNITS</span>Parts per million, and three kinds of degree</h2>
+<p>Hardness is usually given as the calcium carbonate that would carry the same calcium and magnesium: milligrams per litre, the same as parts per million. Europe also uses degrees. One German degree (°dH) is 17.85 mg/l; one English or Clark degree is 14.25 mg/l; one French degree (°f) is 10 mg/l. The map's unit buttons convert everything. Where a station measured calcium and magnesium but not hardness, I computed it as 2.497 times calcium plus 4.118 times magnesium, both in mg/l.</p>
+
+<h2><span class="n">08 · METHODS AND CAVEATS</span>What I did, and what to doubt</h2>
+<ul class="methods">
+<li><b>Stations.</b> The GEMS/Water Global Freshwater Quality Archive (version 3, open subset) holds 473,383 hardness, 489,609 calcium and 461,585 magnesium records. Each sample's hardness is the measured total hardness, or, where that is missing, calcium and magnesium measured on the same day (184,864 of the 611,858 usable samples). Two countries (Bulgaria and Estonia) report total hardness in other units; their values were about 50 and 2,491 times smaller than calcium and magnesium imply, so for them I used calcium and magnesium only. Elsewhere total hardness and the calcium and magnesium figure agree within 20% for 95% of 247,576 same-day pairs. I dropped 401 values below 0.5 or above 10,000 mg/l. Each station's figure is the median of all its samples (1906 to 2023; half the stations have 18 or more). The licence field is empty on every row of this open subset, which the archive releases under CC BY 4.0, so I kept all rows. A few station names had accented letters lost in the copy I worked from; they show as "?".</li>
+<li><b>Coverage.</b> The open archive covers 34 countries, mostly in Europe, North America and India, with none in Great Britain, China, Russia, Africa or Australia. A country's figures reflect where its stations are.</li>
+<li><b>Rocks.</b> World: Macrostrat's generalised geological map tiles at zoom 4 (about 5 km), 4,668 map units, each given shares of seven rock groups from its lithology text by fixed word rules; summed into a 0.1 degree grid. Britain: BGS Geology 625k bedrock; island of Ireland: GSI and GSNI 1:500k bedrock; 1 km grid. Superficial deposits such as glacial till are not used.</li>
+<li><b>Model.</b> Hardness = (sum over groups of a typical hardness times the group's share) times a rainfall term times a water-type factor, fitted to the logarithm of hardness with each station weighted by one over the number of stations in its one degree square. Rock shares are averaged over a square window reaching 10 km either side of each place, for the world and for Britain and Ireland alike, chosen by cross-validation among windows up to 50 km (world) and 10 km (Britain and Ireland) so the maps keep local detail; windows of 100 and 200 km scored about the same or a little better (R² up to 0.27), as you would expect for big rivers, but blur the map. 14,793 stations have mapped rock within their window and are used in the world model. Rainfall: CRU CL 2.0 annual means, 1961 to 1990, half-degree cells. The maps show the river estimate; land with under 200 mm of rain a year is left blank (18% of land outside Antarctica), because almost no stations are that dry.</li>
+<li><b>Confidence.</b> The world tiles stitch together six regional maps. Two of them, the Generalized Geology of the World and a map of Africa, are very coarse, with single units the size of countries and straight clip edges where they meet the detailed Arctic, Europe, North America and Australia maps; these edges show as straight lines on the modelled layer, for example along about 50 and 60 degrees north in Asia and Russia. The Europe map also uses a few plate-scale legend units (named only after tectonic plates such as "East European, Scythian, West Siberian, Turanian plates") east of the Volga. Each estimate is marked low confidence when less than half of the mapped land in its window comes from a detailed unit: one from a regional map, not named only after a plate or sea, and with a lithology that is not just "sedimentary". That covers 71% of the modelled land, including all of China, Mongolia and Brazil and most of Kazakhstan.</li>
+<li><b>Honest limits.</b> Monitoring stations are not taps. A window of rock around a point is not its catchment: big rivers carry water from far upstream. The world map is coarse and often names only the age of the rock. The model knows nothing of soils, climate beyond rainfall, pollution or treatment. Treat the modelled layer as an educated guess with the error shown above, not as a measurement.</li>
+</ul>
+
+<h2><span class="n">09 · SOURCES</span>Data and licences</h2>
+<ul class="methods">
+<li>UNEP GEMS/Water, Global Freshwater Quality Archive v3 (GFQA_v3), open subset, Zenodo <a href="https://doi.org/10.5281/zenodo.18459694">10.5281/zenodo.18459694</a>, CC BY 4.0.</li>
+<li>Macrostrat geological map tiles (Peters, Husson and Czaplewski 2018), <a href="https://macrostrat.org">macrostrat.org</a>, CC BY 4.0, compiled from many regional maps including the Geologic Map of North America and the Generalized Geology of the World.</li>
+<li>BGS Geology 625k (DiGMapGB-625), British Geological Survey, Open Government Licence v3.0.</li>
+<li>Geological Survey Ireland and Geological Survey of Northern Ireland, 1:500,000 bedrock geology, CC BY 4.0 and Open Government Licence.</li>
+<li>CRU CL 2.0 (New, Lister, Hulme and Makin 2002, Climate Research 21: 1 to 25), Climatic Research Unit, University of East Anglia; annual rainfall on a half-degree grid as derived in my <a href="https://tristan-hotham.github.io/sun-and-rain/">Sun and rain</a> study.</li>
+<li>Natural Earth 1:10m and 1:50m land and countries (public domain); GeoNames cities15000 (CC BY 4.0); ONS local authority boundaries (Open Government Licence v3.0); AWS Terrain Tiles (Mapzen and Tilezen; ETOPO1, GMTED2010, SRTM and others) for hill shading.</li>
+<li>Leaflet 1.9.4; base map tiles © Esri when they load.</li>
+</ul>
+<p>Derived data, text and figures: CC BY 4.0. Code: MIT. <a href="https://github.com/Tristan-Hotham/hard-water">Data and code on GitHub</a>. Paper and archived release: <a href="https://doi.org/10.5281/zenodo.23735824">https://doi.org/10.5281/zenodo.23735824</a>.</p>
+
+<footer>
+  <p>Dr Tristan Hotham, Independent researcher. ORCID 0000-0003-4931-9349. Cite as: Hotham, T. (2026) Hard water: the world's water hardness and the rocks behind it. https://doi.org/10.5281/zenodo.23735824</p>
+  <p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+  <p>Other studies: <a href="https://tristan-hotham.github.io/sun-and-rain/">Sun and rain</a>, <a href="https://tristan-hotham.github.io/sea-level/">Drowned and rising</a>, <a href="https://blog.tristanhotham.com/">all posts</a>.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const R = {"classes":[{"key":"soft","label":"Soft","range":"0 to 50","colour":"#E6F2F7"},{"key":"msoft","label":"Moderately soft","range":"51 to 100","colour":"#BCDDEA"},{"key":"shard","label":"Slightly hard","range":"101 to 150","colour":"#86C1D9"},{"key":"mhard","label":"Moderately hard","range":"151 to 200","colour":"#4D9CC2"},{"key":"hard","label":"Hard","range":"201 to 300","colour":"#22709E"},{"key":"vhard","label":"Very hard","range":"over 300","colour":"#0E3F66"}],"units":{"ppm":1.0,"dH":0.056028686687584046,"eH":0.07015574575557738,"fH":0.1},"countries_measured":[{"country":"Liechtenstein","stations":1,"median":508.9,"share_hard":1.0},{"country":"Belgium","stations":83,"median":330.0,"share_hard":0.663},{"country":"Argentina","stations":1,"median":295.0,"share_hard":1.0},{"country":"Cyprus","stations":39,"median":292.0,"share_hard":0.872},{"country":"Greece","stations":579,"median":291.6,"share_hard":0.798},{"country":"Spain","stations":318,"median":289.9,"share_hard":0.645},{"country":"Switzerland","stations":45,"median":276.0,"share_hard":0.711},{"country":"Lithuania","stations":83,"median":268.4,"share_hard":0.892},{"country":"Latvia","stations":148,"median":252.0,"share_hard":0.662},{"country":"Italy","stations":2743,"median":244.0,"share_hard":0.658},{"country":"Croatia","stations":122,"median":242.3,"share_hard":0.738},{"country":"Poland","stations":2042,"median":232.0,"share_hard":0.652},{"country":"Estonia","stations":78,"median":226.1,"share_hard":0.615},{"country":"Bosnia and Herzegovina","stations":15,"median":225.5,"share_hard":0.8},{"country":"Serbia","stations":44,"median":210.0,"share_hard":0.568},{"country":"Netherlands","stations":456,"median":204.2,"share_hard":0.524},{"country":"Bulgaria","stations":108,"median":203.4,"share_hard":0.519},{"country":"Mexico","stations":5242,"median":197.7,"share_hard":0.494},{"country":"France","stations":1966,"median":189.8,"share_hard":0.471},{"country":"Denmark","stations":91,"median":184.6,"share_hard":0.473},{"country":"Romania","stations":79,"median":183.9,"share_hard":0.392},{"country":"North Macedonia","stations":19,"median":180.5,"share_hard":0.105},{"country":"Austria","stations":134,"median":159.3,"share_hard":0.261},{"country":"Montenegro","stations":11,"median":153.3,"share_hard":0.091},{"country":"United States","stations":113,"median":125.8,"share_hard":0.345},{"country":"India","stations":709,"median":110.4,"share_hard":0.09},{"country":"Portugal","stations":93,"median":84.0,"share_hard":0.183},{"country":"Ireland","stations":388,"median":69.4,"share_hard":0.211},{"country":"Uruguay","stations":82,"median":40.5,"share_hard":0.049},{"country":"Canada","stations":276,"median":31.6,"share_hard":0.054},{"country":"Iceland","stations":3,"median":16.8,"share_hard":0.0},{"country":"Finland","stations":202,"median":15.4,"share_hard":0.0},{"country":"Sweden","stations":236,"median":15.0,"share_hard":0.03},{"country":"Norway","stations":133,"median":8.2,"share_hard":0.008}],"countries_modelled":[{"country":"Moldova","coverage":1.0,"modelled_median":294.2,"share_low_confidence":0.119},{"country":"Belarus","coverage":1.0,"modelled_median":268.5,"share_low_confidence":0.012},{"country":"Ukraine","coverage":1.0,"modelled_median":259.0,"share_low_confidence":0.627},{"country":"Estonia","coverage":1.0,"modelled_median":209.1,"share_low_confidence":0.0},{"country":"Belgium","coverage":0.993,"modelled_median":204.5,"share_low_confidence":0.0},{"country":"Kazakhstan","coverage":0.662,"modelled_median":188.8,"share_low_confidence":0.976},{"country":"Pakistan","coverage":0.535,"modelled_median":183.8,"share_low_confidence":1.0},{"country":"Australia","coverage":0.885,"modelled_median":180.4,"share_low_confidence":0.391},{"country":"Somalia","coverage":0.678,"modelled_median":172.5,"share_low_confidence":1.0},{"country":"Botswana","coverage":0.997,"modelled_median":170.4,"share_low_confidence":1.0},{"country":"Afghanistan","coverage":0.721,"modelled_median":169.1,"share_low_confidence":1.0},{"country":"Italy","coverage":0.977,"modelled_median":169.0,"share_low_confidence":0.021},{"country":"Croatia","coverage":0.983,"modelled_median":166.5,"share_low_confidence":0.0},{"country":"Romania","coverage":1.0,"modelled_median":165.2,"share_low_confidence":0.003},{"country":"Falkland Is.","coverage":0.831,"modelled_median":158.2,"share_low_confidence":1.0},{"country":"Namibia","coverage":0.627,"modelled_median":157.2,"share_low_confidence":1.0},{"country":"Kyrgyzstan","coverage":0.986,"modelled_median":157.1,"share_low_confidence":1.0},{"country":"Spain","coverage":0.981,"modelled_median":150.8,"share_low_confidence":0.012},{"country":"Slovenia","coverage":0.997,"modelled_median":147.0,"share_low_confidence":0.0},{"country":"Bosnia and Herz.","coverage":1.0,"modelled_median":144.9,"share_low_confidence":0.0},{"country":"Senegal","coverage":0.998,"modelled_median":144.4,"share_low_confidence":1.0},{"country":"South Africa","coverage":0.86,"modelled_median":143.9,"share_low_confidence":1.0},{"country":"Argentina","coverage":0.808,"modelled_median":136.6,"share_low_confidence":1.0},{"country":"Russia","coverage":0.969,"modelled_median":136.2,"share_low_confidence":0.477},{"country":"Tajikistan","coverage":0.982,"modelled_median":135.6,"share_low_confidence":1.0},{"country":"Greece","coverage":0.948,"modelled_median":135.6,"share_low_confidence":0.0},{"country":"France","coverage":0.994,"modelled_median":134.5,"share_low_confidence":0.137},{"country":"Germany","coverage":0.976,"modelled_median":134.5,"share_low_confidence":0.0},{"country":"United States of America","coverage":0.943,"modelled_median":129.9,"share_low_confidence":0.565},{"country":"S. Sudan","coverage":1.0,"modelled_median":126.8,"share_low_confidence":1.0},{"country":"Hungary","coverage":1.0,"modelled_median":124.1,"share_low_confidence":0.001},{"country":"Malaysia","coverage":0.978,"modelled_median":121.9,"share_low_confidence":1.0},{"country":"Paraguay","coverage":1.0,"modelled_median":121.8,"share_low_confidence":1.0},{"country":"China","coverage":0.721,"modelled_median":121.5,"share_low_confidence":1.0},{"country":"Bahamas","coverage":0.985,"modelled_median":121.5,"share_low_confidence":1.0},{"country":"Ireland","coverage":0.997,"modelled_median":121.2,"share_low_confidence":0.033},{"country":"Azerbaijan","coverage":0.533,"modelled_median":120.2,"share_low_confidence":0.142},{"country":"Djibouti","coverage":0.709,"modelled_median":118.0,"share_low_confidence":1.0},{"country":"Timor-Leste","coverage":0.942,"modelled_median":117.9,"share_low_confidence":1.0},{"country":"Mexico","coverage":0.92,"modelled_median":117.2,"share_low_confidence":0.629},{"country":"Albania","coverage":0.977,"modelled_median":117.0,"share_low_confidence":0.0},{"country":"Bulgaria","coverage":1.0,"modelled_median":115.0,"share_low_confidence":0.006},{"country":"Angola","coverage":0.985,"modelled_median":114.1,"share_low_confidence":1.0},{"country":"Mongolia","coverage":0.567,"modelled_median":112.7,"share_low_confidence":1.0},{"country":"Slovakia","coverage":1.0,"modelled_median":111.0,"share_low_confidence":0.0},{"country":"Cuba","coverage":0.972,"modelled_median":110.4,"share_low_confidence":0.858},{"country":"Austria","coverage":1.0,"modelled_median":110.0,"share_low_confidence":0.0},{"country":"Georgia","coverage":1.0,"modelled_median":108.6,"share_low_confidence":0.041},{"country":"Thailand","coverage":0.988,"modelled_median":107.9,"share_low_confidence":1.0},{"country":"Bolivia","coverage":0.921,"modelled_median":107.8,"share_low_confidence":1.0},{"country":"Nepal","coverage":0.98,"modelled_median":104.9,"share_low_confidence":1.0},{"country":"Guinea-Bissau","coverage":0.945,"modelled_median":104.1,"share_low_confidence":1.0},{"country":"Cambodia","coverage":0.988,"modelled_median":103.8,"share_low_confidence":1.0},{"country":"Dem. Rep. Congo","coverage":0.994,"modelled_median":103.0,"share_low_confidence":1.0},{"country":"Congo","coverage":1.0,"modelled_median":102.9,"share_low_confidence":1.0},{"country":"Zambia","coverage":0.992,"modelled_median":100.9,"share_low_confidence":1.0},{"country":"Dominican Rep.","coverage":0.994,"modelled_median":100.6,"share_low_confidence":0.749},{"country":"Switzerland","coverage":0.998,"modelled_median":99.9,"share_low_confidence":0.002},{"country":"Venezuela","coverage":0.999,"modelled_median":97.4,"share_low_confidence":0.864},{"country":"Haiti","coverage":0.986,"modelled_median":97.2,"share_low_confidence":0.807},{"country":"Belize","coverage":0.972,"modelled_median":96.6,"share_low_confidence":1.0},{"country":"Eritrea","coverage":0.571,"modelled_median":96.1,"share_low_confidence":1.0},{"country":"Bangladesh","coverage":0.991,"modelled_median":96.0,"share_low_confidence":1.0},{"country":"Taiwan","coverage":0.941,"modelled_median":95.6,"share_low_confidence":1.0},{"country":"Peru","coverage":0.879,"modelled_median":95.6,"share_low_confidence":1.0},{"country":"Vietnam","coverage":0.988,"modelled_median":93.8,"share_low_confidence":1.0},{"country":"Kenya","coverage":0.987,"modelled_median":91.4,"share_low_confidence":1.0},{"country":"Nigeria","coverage":0.995,"modelled_median":91.2,"share_low_confidence":1.0},{"country":"Armenia","coverage":0.9,"modelled_median":90.2,"share_low_confidence":0.0},{"country":"Ecuador","coverage":0.987,"modelled_median":89.4,"share_low_confidence":1.0},{"country":"Colombia","coverage":0.997,"modelled_median":88.4,"share_low_confidence":0.957},{"country":"Myanmar","coverage":0.985,"modelled_median":88.0,"share_low_confidence":1.0},{"country":"Canada","coverage":0.861,"modelled_median":87.8,"share_low_confidence":0.265},{"country":"Ethiopia","coverage":0.972,"modelled_median":87.4,"share_low_confidence":1.0},{"country":"Ghana","coverage":0.988,"modelled_median":87.2,"share_low_confidence":1.0},{"country":"India","coverage":0.977,"modelled_median":87.1,"share_low_confidence":1.0},{"country":"Guatemala","coverage":0.989,"modelled_median":86.8,"share_low_confidence":0.706},{"country":"Indonesia","coverage":0.952,"modelled_median":86.6,"share_low_confidence":1.0},{"country":"Japan","coverage":0.94,"modelled_median":86.6,"share_low_confidence":1.0},{"country":"Serbia","coverage":1.0,"modelled_median":83.2,"share_low_confidence":0.0},{"country":"Philippines","coverage":0.909,"modelled_median":82.4,"share_low_confidence":1.0},{"country":"Laos","coverage":1.0,"modelled_median":82.3,"share_low_confidence":1.0},{"country":"United Kingdom","coverage":1.0,"modelled_median":82.0,"share_low_confidence":0.0},{"country":"Brazil","coverage":0.998,"modelled_median":80.6,"share_low_confidence":1.0},{"country":"Lesotho","coverage":1.0,"modelled_median":80.3,"share_low_confidence":1.0},{"country":"Papua New Guinea","coverage":0.957,"modelled_median":79.4,"share_low_confidence":1.0},{"country":"Burundi","coverage":0.94,"modelled_median":79.4,"share_low_confidence":1.0},{"country":"Czechia","coverage":1.0,"modelled_median":78.2,"share_low_confidence":0.024},{"country":"Turkey","coverage":0.612,"modelled_median":75.9,"share_low_confidence":0.024},{"country":"New Zealand","coverage":0.976,"modelled_median":74.4,"share_low_confidence":1.0},{"country":"Iceland","coverage":0.928,"modelled_median":71.9,"share_low_confidence":0.0},{"country":"Portugal","coverage":0.971,"modelled_median":71.4,"share_low_confidence":0.015},{"country":"Honduras","coverage":1.0,"modelled_median":69.5,"share_low_confidence":0.445},{"country":"Uruguay","coverage":0.999,"modelled_median":69.2,"share_low_confidence":1.0},{"country":"Nicaragua","coverage":0.956,"modelled_median":69.1,"share_low_confidence":0.415},{"country":"Bhutan","coverage":1.0,"modelled_median":68.1,"share_low_confidence":1.0},{"country":"Panama","coverage":0.995,"modelled_median":67.2,"share_low_confidence":0.424},{"country":"Guinea","coverage":0.999,"modelled_median":67.1,"share_low_confidence":1.0},{"country":"Costa Rica","coverage":0.985,"modelled_median":66.4,"share_low_confidence":0.485},{"country":"El Salvador","coverage":0.994,"modelled_median":65.6,"share_low_confidence":0.154},{"country":"Burkina Faso","coverage":1.0,"modelled_median":63.4,"share_low_confidence":1.0},{"country":"Chile","coverage":0.627,"modelled_median":63.2,"share_low_confidence":1.0},{"country":"Tanzania","coverage":0.951,"modelled_median":63.0,"share_low_confidence":1.0},{"country":"Rwanda","coverage":0.983,"modelled_median":62.4,"share_low_confidence":1.0},{"country":"Zimbabwe","coverage":0.993,"modelled_median":60.3,"share_low_confidence":1.0},{"country":"North Macedonia","coverage":0.741,"modelled_median":57.4,"share_low_confidence":0.0},{"country":"Fiji","coverage":0.715,"modelled_median":53.5,"share_low_confidence":1.0},{"country":"Mozambique","coverage":0.987,"modelled_median":52.7,"share_low_confidence":1.0},{"country":"Norway","coverage":0.999,"modelled_median":52.6,"share_low_confidence":0.001},{"country":"Vanuatu","coverage":0.82,"modelled_median":51.2,"share_low_confidence":1.0},{"country":"Madagascar","coverage":0.994,"modelled_median":50.4,"share_low_confidence":1.0},{"country":"Guyana","coverage":0.995,"modelled_median":49.8,"share_low_confidence":0.957},{"country":"Solomon Is.","coverage":0.793,"modelled_median":48.2,"share_low_confidence":1.0},{"country":"Côte d'Ivoire","coverage":0.996,"modelled_median":46.7,"share_low_confidence":1.0},{"country":"Central African Rep.","coverage":1.0,"modelled_median":43.1,"share_low_confidence":1.0},{"country":"Gabon","coverage":0.996,"modelled_median":42.2,"share_low_confidence":1.0},{"country":"Togo","coverage":1.0,"modelled_median":40.7,"share_low_confidence":1.0},{"country":"eSwatini","coverage":1.0,"modelled_median":40.5,"share_low_confidence":1.0},{"country":"Malawi","coverage":0.86,"modelled_median":40.5,"share_low_confidence":1.0},{"country":"South Korea","coverage":0.924,"modelled_median":39.5,"share_low_confidence":1.0},{"country":"Sweden","coverage":0.982,"modelled_median":38.4,"share_low_confidence":0.0},{"country":"New Caledonia","coverage":0.903,"modelled_median":37.9,"share_low_confidence":1.0},{"country":"Finland","coverage":1.0,"modelled_median":36.4,"share_low_confidence":0.0},{"country":"Uganda","coverage":0.868,"modelled_median":35.6,"share_low_confidence":1.0},{"country":"Sierra Leone","coverage":0.993,"modelled_median":32.4,"share_low_confidence":1.0},{"country":"Liberia","coverage":0.994,"modelled_median":30.0,"share_low_confidence":1.0},{"country":"Suriname","coverage":0.999,"modelled_median":28.7,"share_low_confidence":1.0},{"country":"North Korea","coverage":0.984,"modelled_median":24.2,"share_low_confidence":1.0},{"country":"Benin","coverage":1.0,"modelled_median":23.1,"share_low_confidence":1.0},{"country":"Cameroon","coverage":0.994,"modelled_median":19.2,"share_low_confidence":1.0},{"country":"Sri Lanka","coverage":0.96,"modelled_median":18.1,"share_low_confidence":1.0},{"country":"Eq. Guinea","coverage":0.981,"modelled_median":17.2,"share_low_confidence":1.0}],"by_crystalline":[{"lo":0,"hi":0.2,"n":11468,"median":220.3,"q25":133.3,"q75":324.7},{"lo":0.2,"hi":0.5,"n":1230,"median":163.8,"q25":77.0,"q75":279.725},{"lo":0.5,"hi":0.8,"n":1012,"median":75.1,"q25":24.375,"q75":168.8},{"lo":0.8,"hi":1,"n":1083,"median":33.6,"q25":13.2,"q75":92.4}],"by_carbonate":[{"lo":0,"hi":0.05,"n":8471,"median":153.0,"river":139.64999999999998,"q25":69.2,"q75":281.95},{"lo":0.05,"hi":0.15,"n":2442,"median":236.6,"river":227.5,"q25":138.525,"q75":325.0},{"lo":0.15,"hi":0.3,"n":1038,"median":219.75,"river":217.7,"q25":128.625,"q75":298.0},{"lo":0.3,"hi":0.5,"n":1107,"median":228.2,"river":218.4,"q25":160.95,"q75":314.2},{"lo":0.5,"hi":1,"n":1735,"median":247.5,"river":238.5,"q25":182.1,"q75":320.15}],"type_shares":[{"label":"Rivers","n":10515,"shares":[0.1129,0.1058,0.1267,0.1585,0.2809,0.2151]},{"label":"Lakes and reservoirs","n":2249,"shares":[0.2632,0.1458,0.1565,0.1472,0.1694,0.1178]},{"label":"Groundwater","n":3861,"shares":[0.0495,0.0904,0.1008,0.102,0.2095,0.4478]},{"label":"All stations","n":16682,"shares":[0.1184,0.1078,0.1246,0.1439,0.2494,0.2559]}],"model":{"world_cv":{"baseline_global_median":{"n":14793,"r2":-0.262775280039655,"rmse_log10":0.5332770557065063,"median_factor":2.5862845079676346,"within_factor_2":0.34272966943824784,"class_exact":0.11911039004934766,"class_within1":0.38186980328533765,"spearman":NaN},"rain_and_type_only":{"n":14793,"r2":-0.1596980590253283,"rmse_log10":0.5110487470680526,"median_factor":2.3566801284387595,"within_factor_2":0.40154126951936725,"class_exact":0.18380315013857906,"class_within1":0.48847427837490703,"spearman":0.3709908004850805},"rocks_only":{"n":14793,"r2":0.17015251845079016,"rmse_log10":0.4323037500663256,"median_factor":1.7908743153281366,"within_factor_2":0.566889745149733,"class_exact":0.26039342932468057,"class_within1":0.5949435543838302,"spearman":0.4256992214442032},"rocks_and_type":{"n":14793,"r2":0.21115405529880427,"rmse_log10":0.42148872480235594,"median_factor":1.7532748809895802,"within_factor_2":0.5848712228756845,"class_exact":0.2791185019941864,"class_within1":0.6401676468600014,"spearman":0.4876604029667258},"rocks_rain_and_type":{"n":14793,"r2":0.23565680830150693,"rmse_log10":0.4148910472448245,"median_factor":1.756587582274815,"within_factor_2":0.592712769553167,"class_exact":0.29203001419590346,"class_within1":0.6439532211180964,"spearman":0.5168012820379622},"rocks_rain_and_type_leave_country_out":{"n":14793,"r2":0.09985151880323218,"rmse_log10":0.4502429686398857,"median_factor":1.8432109908223586,"within_factor_2":0.5493814642060434,"class_exact":0.2633678090988981,"class_within1":0.6086662610694247,"spearman":0.4866765900874401}},"bi_cv":{"rocks_type_and_world_rain_effect":{"n":388,"r2":0.6022220948603814,"rmse_log10":0.34540503389138577,"median_factor":1.6811524528638313,"within_factor_2":0.6211340206185567,"class_exact":0.4896907216494845,"class_within1":0.8221649484536082,"spearman":0.7924979812741186},"baseline_median":{"n":388,"r2":-0.019285763933677647,"rmse_log10":0.5529123795782594,"median_factor":2.782085548648711,"within_factor_2":0.3324742268041237,"class_exact":0.13917525773195877,"class_within1":0.7087628865979382,"spearman":NaN},"rocks_only":{"n":388,"r2":0.41228511689217007,"rmse_log10":0.4198476038225829,"median_factor":2.008591490118874,"within_factor_2":0.49742268041237114,"class_exact":0.43556701030927836,"class_within1":0.75,"spearman":0.6995800990000595},"rocks_and_type":{"n":388,"r2":0.5725007537665654,"rmse_log10":0.3580766577123524,"median_factor":1.7260881165064283,"within_factor_2":0.615979381443299,"class_exact":0.4742268041237113,"class_within1":0.8092783505154639,"spearman":0.7741393378054039},"rocks_type_and_free_rain_effect":{"n":388,"r2":0.7022054946410123,"rmse_log10":0.2988592310091648,"median_factor":1.6164063276072118,"within_factor_2":0.6855670103092784,"class_exact":0.5541237113402062,"class_within1":0.8350515463917526,"spearman":0.8606773084537779},"world_model_at_irish_stations":{"n":388,"r2":0.4463655919765144,"rmse_log10":0.407492735844795,"median_factor":1.9706967476365291,"within_factor_2":0.5128865979381443,"class_exact":0.36597938144329895,"class_within1":0.7061855670103093,"spearman":0.7001057088859766}}},"bi_nations":[{"km2":132173,"median":74.9,"shares":[0.3621,0.2559,0.181,0.0593,0.0776,0.064],"name":"England","kind":"nation"},{"km2":21301,"median":37.8,"shares":[0.7368,0.2385,0.0247,0.0,0.0,0.0],"name":"Wales","kind":"nation"},{"km2":83475,"median":30.5,"shares":[0.7736,0.1748,0.0502,0.0014,0.0,0.0],"name":"Scotland","kind":"nation"},{"km2":14518,"median":99.9,"shares":[0.1956,0.3084,0.2425,0.2535,0.0,0.0],"name":"Northern Ireland","kind":"nation"},{"km2":70179,"median":105.1,"shares":[0.2444,0.239,0.1515,0.1524,0.2126,0.0],"name":"Republic of Ireland","kind":"nation"}],"bi_counties":[{"name":"East Riding of Yorkshire","nation":"England","median":329.8,"hard_share":0.712},{"name":"Hertfordshire","nation":"England","median":280.0,"hard_share":0.731},{"name":"Norfolk","nation":"England","median":251.2,"hard_share":0.584},{"name":"Wiltshire","nation":"England","median":224.8,"hard_share":0.557},{"name":"Hampshire","nation":"England","median":185.6,"hard_share":0.463},{"name":"Berkshire","nation":"England","median":157.8,"hard_share":0.369},{"name":"Dorset","nation":"England","median":154.8,"hard_share":0.302},{"name":"Kent","nation":"England","median":148.0,"hard_share":0.247},{"name":"East Renfrewshire","nation":"Scotland","median":137.5,"hard_share":0.0},{"name":"Renfrewshire","nation":"Scotland","median":127.4,"hard_share":0.0},{"name":"Durham","nation":"England","median":125.2,"hard_share":0.162},{"name":"Oxfordshire","nation":"England","median":119.5,"hard_share":0.227},{"name":"West Sussex","nation":"England","median":118.1,"hard_share":0.19},{"name":"Rutland","nation":"England","median":118.0,"hard_share":0.0},{"name":"Northamptonshire","nation":"England","median":117.8,"hard_share":0.0},{"name":"Northumberland","nation":"England","median":116.6,"hard_share":0.004},{"name":"Buckinghamshire","nation":"England","median":113.2,"hard_share":0.33},{"name":"Suffolk","nation":"England","median":111.7,"hard_share":0.3},{"name":"Gloucestershire","nation":"England","median":103.4,"hard_share":0.0},{"name":"Inverclyde","nation":"Scotland","median":98.6,"hard_share":0.0},{"name":"East Dunbartonshire","nation":"Scotland","median":96.9,"hard_share":0.0},{"name":"Glasgow City","nation":"Scotland","median":94.1,"hard_share":0.0},{"name":"Fife","nation":"Scotland","median":92.4,"hard_share":0.0},{"name":"Lincolnshire","nation":"England","median":90.0,"hard_share":0.187},{"name":"Bedfordshire","nation":"England","median":87.9,"hard_share":0.182},{"name":"City of Edinburgh","nation":"Scotland","median":87.9,"hard_share":0.0},{"name":"East Lothian","nation":"Scotland","median":84.6,"hard_share":0.0},{"name":"Clackmannanshire","nation":"Scotland","median":83.8,"hard_share":0.0},{"name":"West Lothian","nation":"Scotland","median":83.7,"hard_share":0.0},{"name":"Somerset","nation":"England","median":82.8,"hard_share":0.0},{"name":"Leicestershire","nation":"England","median":82.7,"hard_share":0.0},{"name":"South Glamorgan","nation":"Wales","median":80.3,"hard_share":0.0},{"name":"North Yorkshire","nation":"England","median":77.9,"hard_share":0.032},{"name":"Midlothian","nation":"Scotland","median":76.0,"hard_share":0.0},{"name":"Isle of Wight","nation":"England","median":74.6,"hard_share":0.0},{"name":"Dundee City","nation":"Scotland","median":74.4,"hard_share":0.0},{"name":"Cumbria","nation":"England","median":72.9,"hard_share":0.0},{"name":"Falkirk","nation":"Scotland","median":71.2,"hard_share":0.0},{"name":"West Dunbartonshire","nation":"Scotland","median":70.4,"hard_share":0.0},{"name":"Bristol","nation":"England","median":70.2,"hard_share":0.0},{"name":"South Lanarkshire","nation":"Scotland","median":67.9,"hard_share":0.0},{"name":"Warwickshire","nation":"England","median":67.1,"hard_share":0.0},{"name":"Surrey","nation":"England","median":66.6,"hard_share":0.0},{"name":"North Ayrshire","nation":"Scotland","median":64.3,"hard_share":0.0},{"name":"Nottinghamshire","nation":"England","median":61.9,"hard_share":0.0},{"name":"Tyne and Wear","nation":"England","median":58.7,"hard_share":0.042},{"name":"Cambridgeshire","nation":"England","median":56.8,"hard_share":0.241},{"name":"Derbyshire","nation":"England","median":55.7,"hard_share":0.0},{"name":"North Lanarkshire","nation":"Scotland","median":55.7,"hard_share":0.0},{"name":"Greater London","nation":"England","median":51.1,"hard_share":0.0},{"name":"Gwynedd","nation":"Wales","median":50.8,"hard_share":0.0},{"name":"Clwyd","nation":"Wales","median":49.9,"hard_share":0.0},{"name":"South Yorkshire","nation":"England","median":47.0,"hard_share":0.0},{"name":"Angus","nation":"Scotland","median":44.3,"hard_share":0.0},{"name":"East Ayrshire","nation":"Scotland","median":44.2,"hard_share":0.0},{"name":"Shropshire","nation":"England","median":44.0,"hard_share":0.0},{"name":"Worcestershire","nation":"England","median":43.6,"hard_share":0.0},{"name":"Mid Glamorgan","nation":"Wales","median":42.1,"hard_share":0.0},{"name":"Argyll and Bute","nation":"Scotland","median":41.7,"hard_share":0.0},{"name":"South Ayrshire","nation":"Scotland","median":41.7,"hard_share":0.0},{"name":"Scottish Borders","nation":"Scotland","median":40.3,"hard_share":0.0},{"name":"East Sussex","nation":"England","median":39.8,"hard_share":0.126},{"name":"Essex","nation":"England","median":39.8,"hard_share":0.108},{"name":"Gwent","nation":"Wales","median":39.7,"hard_share":0.0},{"name":"Herefordshire","nation":"England","median":39.1,"hard_share":0.0},{"name":"Perth and Kinross","nation":"Scotland","median":39.1,"hard_share":0.0},{"name":"West Midlands","nation":"England","median":37.7,"hard_share":0.0},{"name":"Moray","nation":"Scotland","median":37.5,"hard_share":0.0},{"name":"Staffordshire","nation":"England","median":36.2,"hard_share":0.0},{"name":"Cheshire","nation":"England","median":35.7,"hard_share":0.0},{"name":"Merseyside","nation":"England","median":35.7,"hard_share":0.0},{"name":"Lancashire","nation":"England","median":34.2,"hard_share":0.0},{"name":"Stirling","nation":"Scotland","median":33.8,"hard_share":0.0},{"name":"West Glamorgan","nation":"Wales","median":33.4,"hard_share":0.0},{"name":"Dyfed","nation":"Wales","median":32.9,"hard_share":0.0},{"name":"Shetland Islands","nation":"Scotland","median":32.8,"hard_share":0.0},{"name":"West Yorkshire","nation":"England","median":32.7,"hard_share":0.0},{"name":"Cornwall","nation":"England","median":32.3,"hard_share":0.0},{"name":"Orkney Islands","nation":"Scotland","median":31.7,"hard_share":0.0},{"name":"Greater Manchester","nation":"England","median":31.5,"hard_share":0.0},{"name":"Powys","nation":"Wales","median":31.3,"hard_share":0.0},{"name":"Devon","nation":"England","median":30.9,"hard_share":0.0},{"name":"Dumfries and Galloway","nation":"Scotland","median":28.7,"hard_share":0.0},{"name":"Aberdeenshire","nation":"Scotland","median":25.8,"hard_share":0.0},{"name":"Aberdeen City","nation":"Scotland","median":24.8,"hard_share":0.0},{"name":"Highland","nation":"Scotland","median":22.8,"hard_share":0.0},{"name":"Na h-Eileanan Siar","nation":"Scotland","median":20.4,"hard_share":0.0}],"coef_rows":[{"head":"World model, seven groups"},{"label":"Crystalline (granite, gneiss)","short":"Crystalline","v":21.71867674707011,"col":"#C1606A"},{"label":"Sandstone, mudstone, shale","short":"Sandstone, mudstone","v":66.89206796065807,"col":"#C9A66B"},{"label":"Volcanic (basalt, tuff)","short":"Volcanic","v":72.10453070448132,"col":"#8E6C8A"},{"label":"Sedimentary, type not stated","short":"Sedimentary, unstated","v":126.18645164992523,"col":"#B9B2A0"},{"label":"Carbonate (limestone, chalk, dolomite)","short":"Carbonate","v":210.90091766084043,"col":"#2B6F9E"},{"label":"Loose young sediments","short":"Loose sediments","v":257.0582016738897,"col":"#E3D3A8"},{"label":"Evaporites (gypsum, salt)","short":"Evaporites","v":511.77461324941487,"col":"#7A4F9A"},{"head":"Britain and Ireland model, four groups"},{"label":"Crystalline","short":"Crystalline","v":22.84308346910175,"col":"#C1606A"},{"label":"Sandstone, mudstone, other sediments","short":"Sediments","v":32.36683139713898,"col":"#C9A66B"},{"label":"Volcanic","short":"Volcanic","v":187.42932087937325,"col":"#8E6C8A"},{"label":"Carbonate and evaporite","short":"Carbonate","v":302.3143275337238,"col":"#2B6F9E"}]};
+const GM = {"world":{"w":3072,"h":2175,"lat_top":85,"lat_bot":-60,"lon0":-180,"lon1":180},"bi":{"w":1100,"h":1683,"lat_top":61.0,"lat_bot":49.8,"lon0":-11.0,"lon1":2.0},"code_lmax":3.4771212547196626};
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const fmt = n => n == null ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const pc = (x, d = 0) => (x * 100).toFixed(d) + "%";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+const redraws = [];
+function resp(box, render) { let last = 0; const go = (force) => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const hex = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+
+/* ---------------- classes and units ---------------- */
+const CL = R.classes, CC = CL.map(c => c.colour), CRGB = CC.map(hex), BRK = [50.5, 100.5, 150.5, 200.5, 300.5];
+const cls = v => { let k = 0; while (k < 5 && v >= BRK[k]) k++; return k; };
+const UNITS = { ppm: { f: 1, lab: "mg/l", dp: 0 }, dH: { f: R.units.dH, lab: "°dH", dp: 1 }, eH: { f: R.units.eH, lab: "°Clark", dp: 1 }, fH: { f: R.units.fH, lab: "°f", dp: 1 } };
+let UNIT = "ppm";
+try { const u = localStorage.getItem("hw_unit"); if (UNITS[u]) UNIT = u; } catch (e) {}
+const uv = v => { const U = UNITS[UNIT]; const x = v * U.f; return (U.dp ? (x < 10 ? x.toFixed(1) : Math.round(x).toString()) : Math.round(x).toLocaleString("en-GB")); };
+const uu = v => uv(v) + " " + UNITS[UNIT].lab;
+const rangeTxt = i => { const lo = [0, 51, 101, 151, 201, 301][i], hi = [50, 100, 150, 200, 300, null][i]; return hi == null ? "over " + uv(300) : uv(lo) + " to " + uv(hi); };
+const CODE_L = GM.code_lmax;
+const decode = c => Math.pow(10, (c - 1) / 249 * CODE_L);
+
+/* hero mark: a drop of six bands */
+(function () {
+  const g = document.getElementById("heroMark");
+  const d = "M50 4 C50 4 12 56 12 82 A38 38 0 0 0 88 82 C88 56 50 4 50 4 Z";
+  const defs = el("defs", {}, g), cp = el("clipPath", { id: "dropc" }, defs); el("path", { d }, cp);
+  for (let i = 0; i < 6; i++) el("rect", { x: 0, y: 4 + i * 20.5, width: 100, height: 21, fill: CC[i], "clip-path": "url(#dropc)" }, g);
+  el("path", { d, fill: "none", stroke: "currentColor", "stroke-width": 2.5 }, g);
+})();
+
+/* ---------------- stations ---------------- */
+let ST = null, SER = null, PLACES = null;
+const TYPE_SHAPE = [0, 1, 1, 2, 3];  // river circle, lake and reservoir square, groundwater triangle, wetland diamond
+const TYPE_ON = { 0: true, 1: true, 2: true, 3: true, 4: true };
+const TYPE_LAB = ["Rivers", "Lakes and reservoirs", "", "Groundwater", "Wetlands"];
+function shapePath(ctx, s, x, y, r) {
+  ctx.beginPath();
+  if (s === 0) ctx.arc(x, y, r, 0, 7);
+  else if (s === 1) ctx.rect(x - r * .88, y - r * .88, r * 1.76, r * 1.76);
+  else if (s === 2) { ctx.moveTo(x, y - r * 1.15); ctx.lineTo(x + r * 1.05, y + r * .75); ctx.lineTo(x - r * 1.05, y + r * .75); ctx.closePath(); }
+  else { ctx.moveTo(x, y - r * 1.2); ctx.lineTo(x + r, y); ctx.lineTo(x, y + r * 1.2); ctx.lineTo(x - r, y); ctx.closePath(); }
+}
+function shapeIcon(s, fill) { const c = document.createElement("canvas"); c.width = c.height = 32; const x = c.getContext("2d"); x.scale(2, 2); shapePath(x, s, 8, 8, 5); x.fillStyle = fill; x.fill(); x.lineWidth = 1; x.strokeStyle = isDark() ? "#E7EEF1" : "#10232E"; x.stroke(); c.style.width = c.style.height = "16px"; return c; }
+
+/* ---------------- the map ---------------- */
+const S = { show: "both", sel: null, place: null };
+const map = L.map("lmap", { minZoom: 1, maxZoom: 11, zoomSnap: .5, worldCopyJump: false, maxBounds: [[-75, -230], [88, 230]], scrollWheelZoom: false }).setView([30, 10], 2);
+map.on("click", () => map.scrollWheelZoom.enable());
+map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
+const LY = { base: "plain", tilesK: 70, hills: true, hillK: 60, names: true, nameLvl: 1, borders: true, borderK: 45, colour: 90, bi: true, lowconf: true };
+const LYDEF = { ...LY };
+try { Object.assign(LY, JSON.parse(localStorage.getItem("hw_layers") || "{}")); } catch (e) {}
+const saveLY = () => { try { localStorage.setItem("hw_layers", JSON.stringify(LY)); } catch (e) {} };
+const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/";
+const ESRI_ATT = "Tiles &copy; Esri";
+let base = null;
+function setTiles() {
+  if (base) map.removeLayer(base); base = null;
+  if (LY.base === "none") return;
+  const t = isDark() ? "Dark" : "Light";
+  const url = LY.base === "relief" ? ESRI + "World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}" : LY.base === "satellite" ? ESRI + "World_Imagery/MapServer/tile/{z}/{y}/{x}" : `${ESRI}Canvas/World_${t}_Gray_Base/MapServer/tile/{z}/{y}/{x}`;
+  base = L.tileLayer(url, { maxZoom: 16, maxNativeZoom: LY.base === "relief" ? 13 : 16, attribution: ESRI_ATT, opacity: LY.tilesK / 100 }).addTo(map);
+  base.bringToBack();
+}
+const CanvasOverlay = L.ImageOverlay.extend({ _initImage: function () { const e = this._image = this._url; L.DomUtil.addClass(e, "leaflet-image-layer"); L.DomUtil.addClass(e, "px"); if (this._zoomAnimated) L.DomUtil.addClass(e, "leaflet-zoom-animated"); e.onselectstart = L.Util.falseFn; e.onmousemove = L.Util.falseFn; } });
+map.createPane("model"); map.getPane("model").style.zIndex = 350;
+map.createPane("bimodel"); map.getPane("bimodel").style.zIndex = 360;
+map.createPane("bord"); map.getPane("bord").style.zIndex = 380; map.getPane("bord").style.pointerEvents = "none";
+map.createPane("names"); map.getPane("names").style.zIndex = 650; map.getPane("names").style.pointerEvents = "none";
+const RASTER = {};
+function loadRaster(name) {
+  return new Promise((ok, bad) => { const im = new Image(); im.onload = () => {
+    const g = GM[name], c = document.createElement("canvas"); c.width = g.w; c.height = g.h; const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(im, 0, 0);
+    const d = x.getImageData(0, 0, g.w, g.h).data; const out = document.createElement("canvas"); out.width = g.w; out.height = g.h;
+    RASTER[name] = { g, d, out, ctx: out.getContext("2d") }; ok(); }; im.onerror = bad; im.src = `data/${name}_model.png`; });
+}
+function paintRaster(name) {
+  const Q = RASTER[name]; if (!Q) return;
+  const { g, d, ctx } = Q, img = ctx.createImageData(g.w, g.h), o = img.data, dark = isDark();
+  const k = LY.hills ? Math.min(1.4, .2 + LY.hillK / 70) : 0, landC = dark ? [42, 50, 56] : [227, 225, 218], noC = dark ? [52, 58, 62] : [214, 212, 206];
+  const showModel = S.show !== "measured", fade = S.show === "check";
+  const under = name === "world" && LY.bi ? underBI(g) : null;
+  for (let p = 0, n = g.w * g.h; p < n; p++) {
+    const q = p * 4, b = d[q + 2]; if (!b || (under && under[p])) { o[q + 3] = 0; continue; }
+    let c;
+    if (b >= 2 && showModel) {
+      c = CRGB[cls(decode(d[q]))];
+      const low = b === 3 && LY.lowconf, a = fade ? .45 : low ? .5 : 1;
+      if (a < 1) c = [c[0] * a + landC[0] * (1 - a), c[1] * a + landC[1] * (1 - a), c[2] * a + landC[2] * (1 - a)];
+      if (low && !fade && ((p % g.w) + ((p / g.w) | 0)) % 6 === 0) c = [c[0] * .72, c[1] * .72, c[2] * .72];   // hatching
+    }
+    else c = b === 1 ? noC : landC;
+    let f = 1; if (k) { const v = d[q + 1] / 255; f = dark ? 1 + k * (v - .77) * 1.1 : 1 - k * (.77 - v) * 1.25; f = Math.max(.35, Math.min(1.25, f)); }
+    o[q] = Math.min(255, c[0] * f); o[q + 1] = Math.min(255, c[1] * f); o[q + 2] = Math.min(255, c[2] * f); o[q + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+let worldL = null, biL = null, UNDER = null;
+/* world pixels inside the Britain and Ireland box, outside France, are left to the sharper layer */
+function underBI(g) {
+  if (UNDER) return UNDER; const b = GM.bi, my = l => Math.log(Math.tan(Math.PI / 4 + l * Math.PI / 360)), yt = my(g.lat_top), yb = my(g.lat_bot);
+  UNDER = new Uint8Array(g.w * g.h);
+  for (let y = 0; y < g.h; y++) { const lat = (2 * Math.atan(Math.exp(yt - (y + .5) / g.h * (yt - yb))) - Math.PI / 2) * 180 / Math.PI; if (lat > b.lat_top || lat < b.lat_bot) continue;
+    for (let x = 0; x < g.w; x++) { const lon = g.lon0 + (x + .5) / g.w * (g.lon1 - g.lon0); if (lon < b.lon0 || lon > b.lon1) continue; if (lat < 51.05 && lon > 1.4) continue; UNDER[y * g.w + x] = 1; } }
+  return UNDER;
+}
+function rasterBounds(g) { return [[g.lat_bot, g.lon0], [g.lat_top, g.lon1]]; }
+function sampleRaster(name, lat, lon) {
+  const Q = RASTER[name]; if (!Q) return null; const g = Q.g;
+  if (lat > g.lat_top || lat < g.lat_bot || lon < g.lon0 || lon > g.lon1) return null;
+  const my = l => Math.log(Math.tan(Math.PI / 4 + l * Math.PI / 360));
+  const y = Math.floor((my(g.lat_top) - my(lat)) / (my(g.lat_top) - my(g.lat_bot)) * g.h), x = Math.floor((lon - g.lon0) / (g.lon1 - g.lon0) * g.w);
+  if (x < 0 || y < 0 || x >= g.w || y >= g.h) return null;
+  const q = (y * g.w + x) * 4; return { b: Q.d[q + 2], v: Q.d[q + 2] >= 2 ? decode(Q.d[q]) : null, low: Q.d[q + 2] === 3 };
+}
+
+/* stations drawn on their own canvas layer */
+const StationLayer = L.Layer.extend({
+  onAdd(m) { this._m = m; this._c = L.DomUtil.create("canvas", "leaflet-zoom-hide"); this._c.style.pointerEvents = "none"; m.getPanes().overlayPane.appendChild(this._c); m.on("moveend zoomend resize", this.redraw, this); this.redraw(); },
+  onRemove(m) { L.DomUtil.remove(this._c); m.off("moveend zoomend resize", this.redraw, this); },
+  redraw() {
+    if (!this._m || !ST) return; const m = this._m, sz = m.getSize(), c = this._c, dpr = window.devicePixelRatio || 1;
+    c.width = sz.x * dpr; c.height = sz.y * dpr; c.style.width = sz.x + "px"; c.style.height = sz.y + "px";
+    L.DomUtil.setPosition(c, m.containerPointToLayerPoint([0, 0]));
+    const x = c.getContext("2d"); x.scale(dpr, dpr);
+    if (S.show === "modelled") return;
+    const z = m.getZoom(), r = z < 2.5 ? 2.2 : z < 4 ? 3 : z < 6 ? 4 : 5.5, bb = m.getBounds().pad(.05), dark = isDark();
+    x.lineWidth = z < 3 ? .6 : 1; x.strokeStyle = dark ? "rgba(14,23,28,.9)" : "rgba(255,255,255,.9)";
+    const vis = [];
+    for (const s of ST) { if (!TYPE_ON[s[3]] || !bb.contains([s[1], s[2]])) continue; vis.push(s); }
+    if (S.show === "check") vis.sort((a, b) => Math.abs(Math.log10(a[4] / (a[9] || a[4]))) - Math.abs(Math.log10(b[4] / (b[9] || b[4])))); else vis.sort((a, b) => a[4] - b[4]);
+    for (const s of vis) {
+      const p = m.latLngToContainerPoint([s[1], s[2]]);
+      let col;
+      if (S.show === "check") { if (s[9] == null) continue; const e = Math.log10(s[4] / s[9]); col = resColour(e); }
+      else col = CC[cls(s[4])];
+      shapePath(x, TYPE_SHAPE[s[3]], p.x, p.y, r); x.fillStyle = col; x.fill(); x.stroke();
+    }
+    if (S.sel) { const p = m.latLngToContainerPoint([S.sel[1], S.sel[2]]); shapePath(x, TYPE_SHAPE[S.sel[3]], p.x, p.y, r + 4); x.lineWidth = 2.5; x.strokeStyle = css("--hot"); x.stroke(); }
+  }
+});
+const RES_N = ["#16706B", "#6DB8B0", "#B9B4AA", "#E3A27A", "#B5562A"];
+const RES_B = Math.log10(1.25), RES_2 = Math.log10(2);
+function resColour(e) { const i = e < -RES_2 ? 0 : e < -RES_B ? 1 : e <= RES_B ? 2 : e <= RES_2 ? 3 : 4; return RES_N[i]; }
+const stL = new StationLayer();
+
+/* borders and names */
+let bordL = null;
+const cityL = L.layerGroup();
+function cityNames() {
+  cityL.clearLayers(); if (!LY.names || !PLACES) return;
+  const z = map.getZoom(), bb = map.getBounds().pad(.05);
+  const shift = LY.nameLvl === 2 ? 1.5 : LY.nameLvl === 0 ? -1 : 0;
+  const minPop = [[2, 6e6], [3, 2.5e6], [4, 1e6], [5, 4e5], [6, 1.5e5], [7, 6e4], [99, 15000]].find(([zz]) => z < zz + shift)[1];
+  const boxes = []; let n = 0;
+  for (const c of PLACES) {
+    if (c[4] < minPop) break;
+    if (!bb.contains([c[2], c[3]])) continue;
+    const pt = map.latLngToContainerPoint([c[2], c[3]]), big = c[4] >= 1e6;
+    const bx = [pt.x - 4, pt.y - 8, pt.x + 10 + c[0].length * (big ? 6.9 : 6.3), pt.y + 7];
+    if (boxes.some(o => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1])) continue;
+    boxes.push(bx); L.marker([c[2], c[3]], { pane: "names", interactive: false, keyboard: false, icon: L.divIcon({ className: "cityL" + (big ? "" : " s"), html: `<i></i>${esc(c[0])}`, iconSize: null, iconAnchor: [3, 6] }) }).addTo(cityL);
+    if (++n >= 220) break;
+  }
+}
+map.on("zoomend moveend", cityNames);
+function applyLayers() {
+  if (base) base.setOpacity(LY.tilesK / 100);
+  ["world", "bi"].forEach(paintRaster);
+  if (worldL) worldL.setOpacity(LY.colour / 100);
+  if (biL) { if (LY.bi) { biL.addTo(map); biL.setOpacity(LY.colour / 100); } else biL.remove(); }
+  if (bordL) { if (LY.borders) { bordL.addTo(map); bordL.setStyle({ color: isDark() ? "#E7EEF1" : "#10232E", opacity: .15 + LY.borderK / 100 * .75 }); } else bordL.remove(); }
+  if (LY.names) cityL.addTo(map); else cityL.remove();
+  cityNames(); stL.redraw();
+}
+(function layerControl() {
+  const Ctl = L.Control.extend({ options: { position: "topright" }, onAdd() {
+    const d = L.DomUtil.create("div"); L.DomEvent.disableClickPropagation(d); L.DomEvent.disableScrollPropagation(d);
+    d.innerHTML = `<button class="lyrBtn" aria-expanded="false" aria-controls="lyrPanel">Map layers</button>
+<div class="lyrPanel" id="lyrPanel" hidden>
+ <div class="row"><label for="lyBase">Base map</label><div class="sub"><select id="lyBase" aria-label="Base map"><option value="plain">Plain grey</option><option value="relief">Shaded relief</option><option value="satellite">Satellite</option><option value="none">None (own map only)</option></select></div><div class="sub"><span>strength</span><input type="range" id="lyTilesK" min="20" max="100" step="5" aria-label="Base map strength"></div></div>
+ <div class="row"><label><input type="checkbox" id="lyHills"> Hills and mountains</label><div class="sub"><span>strength</span><input type="range" id="lyHillK" min="10" max="100" step="5" aria-label="Hill shading strength"></div></div>
+ <div class="row"><label><input type="checkbox" id="lyNames"> Place names</label><div class="sub"><span>how many</span><select id="lyNameLvl" aria-label="How many place names"><option value="0">Biggest only</option><option value="1">Some</option><option value="2">Lots</option></select></div></div>
+ <div class="row"><label><input type="checkbox" id="lyBorders"> Country borders</label><div class="sub"><span>strength</span><input type="range" id="lyBorderK" min="10" max="100" step="5" aria-label="Border strength"></div></div>
+ <div class="row"><label><input type="checkbox" id="lyBi"> Sharper Britain and Ireland</label></div>
+ <div class="row"><label><input type="checkbox" id="lyLow"> Fade low-confidence areas</label></div>
+ <div class="row"><label>Colour</label><div class="sub"><span>strength</span><input type="range" id="lyColour" min="25" max="100" step="5" aria-label="Colour strength"></div></div>
+ <button class="reset" id="lyReset">Reset layers</button>
+</div>`;
+    return d; } });
+  map.addControl(new Ctl());
+  const q = id => document.getElementById(id), btn = map.getContainer().querySelector(".lyrBtn"), pan = q("lyrPanel");
+  btn.onclick = () => { const o = pan.hidden; pan.hidden = !o; btn.setAttribute("aria-expanded", o); };
+  const sync = () => { q("lyBase").value = LY.base; q("lyTilesK").value = LY.tilesK; q("lyHills").checked = LY.hills; q("lyHillK").value = LY.hillK; q("lyNames").checked = LY.names; q("lyNameLvl").value = LY.nameLvl; q("lyBorders").checked = LY.borders; q("lyBorderK").value = LY.borderK; q("lyBi").checked = LY.bi; q("lyLow").checked = LY.lowconf; q("lyColour").value = LY.colour; };
+  const on = (id, ev, f, retile) => q(id).addEventListener(ev, e => { f(e.target); saveLY(); if (retile) setTiles(); applyLayers(); });
+  on("lyBase", "change", t => LY.base = t.value, true); on("lyTilesK", "input", t => LY.tilesK = +t.value);
+  on("lyHills", "change", t => LY.hills = t.checked); on("lyHillK", "change", t => { LY.hillK = +t.value; LY.hills = q("lyHills").checked = true; });
+  on("lyNames", "change", t => LY.names = t.checked); on("lyNameLvl", "change", t => { LY.nameLvl = +t.value; LY.names = q("lyNames").checked = true; });
+  on("lyBorders", "change", t => LY.borders = t.checked); on("lyBorderK", "input", t => { LY.borderK = +t.value; LY.borders = q("lyBorders").checked = true; });
+  on("lyBi", "change", t => LY.bi = t.checked);
+  on("lyLow", "change", t => LY.lowconf = t.checked);
+  on("lyColour", "input", t => LY.colour = +t.value);
+  q("lyReset").onclick = () => { Object.assign(LY, LYDEF); saveLY(); sync(); setTiles(); applyLayers(); };
+  sync();
+})();
+setTiles();
+
+/* legend */
+function drawKey() {
+  const k = document.getElementById("key"); k.innerHTML = "";
+  if (S.show === "check") {
+    document.getElementById("keyTitle").textContent = "Measured against modelled";
+    const labs = ["Much softer than modelled (under half)", "Softer (half to four fifths)", "About right (within a quarter)", "Harder (up to twice)", "Much harder (over twice)"];
+    RES_N.forEach((c, i) => { k.insertAdjacentHTML("beforeend", `<i style="background:${c}"></i><div>${labs[i]}</div><span></span>`); });
+  } else {
+    document.getElementById("keyTitle").textContent = "Hardness, " + UNITS[UNIT].lab + " as CaCO₃";
+    CL.forEach((c, i) => k.insertAdjacentHTML("beforeend", `<i style="background:${c.colour}"></i><div>${c.label}</div><span>${rangeTxt(i)}</span>`));
+    if (S.show !== "measured") k.insertAdjacentHTML("beforeend", `<i style="background:repeating-linear-gradient(135deg,#9FC9DC 0 2px,#C9DCE4 2px 6px)"></i><div>Low confidence (coarse geology)</div><span></span>`);
+  }
+  const sh = document.getElementById("shapes"); sh.innerHTML = "";
+  [[0, "River"], [1, "Lake or reservoir"], [2, "Groundwater"]].forEach(([s, t]) => { const sp = document.createElement("span"); sp.appendChild(shapeIcon(s, isDark() ? "#5B7F95" : "#86C1D9")); sp.append(t); sh.appendChild(sp); });
+  document.getElementById("unitNote").textContent = S.show === "check" ? "Each station's measured median divided by the model's prediction for it with its own 5 degree square hidden." : (UNIT === "ppm" ? "mg/l is the same as parts per million (ppm)." : "1 " + UNITS[UNIT].lab + " = " + (1 / UNITS[UNIT].f).toFixed(2) + " mg/l.");
+}
+const tc = document.getElementById("typeChecks");
+[[0, "Rivers"], [1, "Lakes"], [3, "Groundwater"]].forEach(([t, lab]) => {
+  const l = document.createElement("label"); l.className = "chk"; const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = true;
+  cb.onchange = () => { TYPE_ON[t] = cb.checked; if (t === 1) TYPE_ON[2] = cb.checked; if (t === 0) TYPE_ON[4] = cb.checked; stL.redraw(); };
+  l.append(cb, shapeIcon(TYPE_SHAPE[t], "#86C1D9"), lab); tc.appendChild(l);
+});
+document.querySelectorAll("[data-show]").forEach(b => b.onclick = () => { S.show = b.dataset.show; document.querySelectorAll("[data-show]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawKey(); applyLayers(); });
+document.querySelectorAll("[data-unit]").forEach(b => { b.setAttribute("aria-pressed", b.dataset.unit === UNIT); b.onclick = () => { UNIT = b.dataset.unit; try { localStorage.setItem("hw_unit", UNIT); } catch (e) {} document.querySelectorAll("[data-unit]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawKey(); if (S.sel) stationCard(S.sel); else if (S.place) placeCard(S.place); drawCountries(); redraws.forEach(f => f()); }; });
+
+/* reading the map */
+function nearestPlace(lat, lon, maxKm = 60) {
+  if (!PLACES) return null; let best = null, bd = 1e9; const cl = Math.cos(lat * Math.PI / 180);
+  for (const c of PLACES) { const dy = c[2] - lat, dx = (c[3] - lon) * cl; const d = dy * dy + dx * dx; if (d < bd) { bd = d; best = c; } }
+  const km = Math.sqrt(bd) * 111.2; return km <= maxKm ? { c: best, km } : null;
+}
+function estimateAt(lat, lon) {
+  if (LY.bi) { const b = sampleRaster("bi", lat, lon); if (b && b.v != null) return { v: b.v, src: "1 km Britain and Ireland estimate" }; }
+  const w = sampleRaster("world", lat, lon); if (!w) return null;
+  if (w.b >= 2) return { v: w.v, src: w.low ? "world estimate, low confidence: coarse geology map" : "world estimate", low: w.low };
+  if (w.b === 1) return { v: null, src: "no estimate (too dry or unmapped)" };
+  return null;
+}
+function readAt(ll) {
+  const e = estimateAt(ll.lat, ll.lng); if (!e) return "Sea or outside the map.";
+  const np = nearestPlace(ll.lat, ll.lng, 40);
+  const where = np ? `<b>${esc(np.c[0])}</b>${np.km > 4 ? " (" + Math.round(np.km) + " km)" : ""}` : `<b>${ll.lat.toFixed(2)}, ${ll.lng.toFixed(2)}</b>`;
+  if (e.v == null) return `${where}<br>${e.src}`;
+  const c = cls(e.v); return `${where}<br><span class="sw" style="background:${CC[c]}"></span>${CL[c].label}: about ${uu(e.v)} (${e.src})`;
+}
+map.on("mousemove", ev => { document.getElementById("hov").innerHTML = readAt(ev.latlng); });
+function nearestStation(pt, px = 10) {
+  if (!ST || S.show === "modelled") return null; let best = null, bd = px * px;
+  const bb = map.getBounds();
+  for (const s of ST) { if (!TYPE_ON[s[3]] || !bb.contains([s[1], s[2]])) continue; const p = map.latLngToContainerPoint([s[1], s[2]]); const d = (p.x - pt.x) ** 2 + (p.y - pt.y) ** 2; if (d < bd) { bd = d; best = s; } }
+  return best;
+}
+map.on("click", ev => {
+  const s = nearestStation(ev.containerPoint);
+  if (s) { S.sel = s; S.place = null; stationCard(s); stL.redraw(); }
+  else { S.sel = null; stL.redraw(); const np = nearestPlace(ev.latlng.lat, ev.latlng.lng, 40); placeCard({ name: np ? np.c[0] : "This spot", lat: ev.latlng.lat, lon: ev.latlng.lng, cc: np ? np.c[1] : "" }); }
+  document.getElementById("hov").innerHTML = readAt(ev.latlng);
+});
+const TYPES_ONE = ["River", "Lake", "Reservoir", "Groundwater", "Wetland"];
+function stationCard(s) {
+  const c = cls(s[4]), name = s[11] || s[0];
+  const box = document.getElementById("card");
+  box.innerHTML = `<div class="big">${esc(name)}</div><div class="sub">${TYPES_ONE[s[3]]} station${s[12] ? " · " + esc(s[12]) : ""} · ${esc(window.STC[s[13]])} · ${s[0]}</div>
+  <div class="nums"><div><b style="color:${c >= 4 ? css("--deep") : css("--fg")}">${uv(s[4])}</b><span>${UNITS[UNIT].lab}, median of ${fmt(s[5])} sample${s[5] === 1 ? "" : "s"}, ${s[6]}${s[7] !== s[6] ? " to " + s[7] : ""}</span></div><div><b>${CL[c].label}</b><span>class</span></div></div>
+  <div>Model for this spot: ${s[8] != null ? uu(s[8]) : "none"}${s[9] != null ? "; with its 5 degree square hidden " + uu(s[9]) : ""}${s[10] != null ? "; 1 km Ireland model " + uu(s[10]) : ""}.</div>
+  <div class="chart" id="serChart" style="margin-top:8px"></div>`;
+  const draw = () => { const ser = SER && SER[s[0]]; const cb = document.getElementById("serChart"); if (!cb) return; cb.innerHTML = ""; if (!ser) { cb.textContent = SER ? "No yearly record." : "Loading the yearly record..."; return; } seriesChart(cb, ser); };
+  if (!SER) fetch("data/station_series.json").then(r => r.json()).then(j => { SER = j; draw(); }); draw();
+}
+function seriesChart(box, ser) {
+  const W = Math.max(260, box.clientWidth || 280), H = 150, m = { l: 36, r: 8, t: 8, b: 22 };
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Yearly median hardness" }, box);
+  const ys = ser.map(r => r[0]), y0 = Math.min(...ys), y1 = Math.max(...ys) + (ys.length === 1 ? 1 : 0);
+  const vmax = Math.max(320, ...ser.map(r => r[1])) * 1.08;
+  const X = y => m.l + (y - y0) / Math.max(1, y1 - y0) * (W - m.l - m.r), Y = v => H - m.b - v / vmax * (H - m.t - m.b);
+  [0, 50.5, 100.5, 150.5, 200.5, 300.5, vmax].forEach((b, i, a) => { if (i < 6) el("rect", { x: m.l, y: Y(Math.min(a[i + 1], vmax)), width: W - m.l - m.r, height: Y(b) - Y(Math.min(a[i + 1], vmax)), fill: CC[i], opacity: .55 }, svg); });
+  [0, 100, 200, 300].forEach(v => { if (v < vmax) lbl(svg, m.l - 4, Y(v) + 4, uv(v), "lab s m", "end"); });
+  lbl(svg, m.l, H - 6, y0, "lab s m"); lbl(svg, W - m.r, H - 6, y1 === y0 ? y0 : y1, "lab s m", "end");
+  const pts = ser.map(r => [X(r[0]), Y(r[1])]);
+  el("polyline", { points: pts.map(p => p.join(",")).join(" "), fill: "none", stroke: css("--fg"), "stroke-width": 1.4 }, svg);
+  ser.forEach((r, i) => { const c = el("circle", { cx: pts[i][0], cy: pts[i][1], r: 3, fill: css("--fg") }, svg); c.addEventListener("pointerenter", e => showTip(`<b>${r[0]}</b>: ${uu(r[1])}, ${r[2]} sample${r[2] === 1 ? "" : "s"}`, e.pageX - scrollX, e.pageY - scrollY)); c.addEventListener("pointerleave", hideTip); });
+}
+function placeCard(p) {
+  S.place = p; const e = estimateAt(p.lat, p.lon), box = document.getElementById("card");
+  let near = [];
+  if (ST) { const cl = Math.cos(p.lat * Math.PI / 180); near = ST.map(s => [s, Math.hypot(s[1] - p.lat, (s[2] - p.lon) * cl) * 111.2]).filter(x => x[1] <= 50).sort((a, b) => a[1] - b[1]).slice(0, 4); }
+  const est = e && e.v != null ? `<div class="nums"><div><b>${uv(e.v)}</b><span>${UNITS[UNIT].lab}, ${e.src}</span></div><div><b>${CL[cls(e.v)].label}</b><span>modelled class</span></div></div>` : `<p class="sub">${e ? e.src : "Outside the modelled land."}</p>`;
+  box.innerHTML = `<div class="big">${esc(p.name)}</div><div class="sub">${p.lat.toFixed(2)}, ${p.lon.toFixed(2)}${p.cc ? " · " + esc(p.cc) : ""}</div>${est}
+  <div>${near.length ? "Measured stations within 50 km:<ul>" + near.map(([s, d]) => `<li><span class="sw" style="background:${CC[cls(s[4])]}"></span>${uu(s[4])}, ${TYPES_ONE[s[3]].toLowerCase()}, ${Math.round(d)} km${s[11] ? " (" + esc(s[11].slice(0, 40)) + ")" : ""}</li>`).join("") + "</ul>" : "No measured station within 50 km in the open archive."}</div>
+  <p class="sub" style="margin-top:8px">An estimate for river water from the rocks and rainfall around this spot, not your tap.</p>`;
+}
+
+/* search */
+const q = document.getElementById("q"), sug = document.getElementById("sug");
+let hits = [], hi = -1;
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+function loadPlaces() { if (PLACES) return Promise.resolve(); return fetch("data/places.json").then(r => r.json()).then(j => { PLACES = j; PLACES.forEach(p => p.n = norm(p[0])); cityNames(); }); }
+q.addEventListener("focus", loadPlaces);
+q.addEventListener("input", () => loadPlaces().then(() => {
+  const t = norm(q.value.trim()); if (t.length < 2) { sug.style.display = "none"; return; }
+  hits = PLACES.filter(p => p.n.startsWith(t)).slice(0, 8); if (hits.length < 8) hits = hits.concat(PLACES.filter(p => !p.n.startsWith(t) && p.n.includes(t)).slice(0, 8 - hits.length));
+  hi = -1; sug.innerHTML = hits.map((p, i) => `<li role="option" data-i="${i}">${esc(p[0])} <span>${esc(p[1])} · ${fmt(p[4])} people</span></li>`).join(""); sug.style.display = hits.length ? "block" : "none";
+}));
+q.addEventListener("keydown", e => {
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); hi = Math.max(0, Math.min(hits.length - 1, hi + (e.key === "ArrowDown" ? 1 : -1))); [...sug.children].forEach((li, i) => li.setAttribute("aria-selected", i === hi)); }
+  if (e.key === "Enter" && hits.length) choose(hits[Math.max(0, hi)]);
+  if (e.key === "Escape") sug.style.display = "none";
+});
+sug.addEventListener("click", e => { const li = e.target.closest("li"); if (li) choose(hits[+li.dataset.i]); });
+let pin = null;
+function choose(p) {
+  sug.style.display = "none"; q.value = p[0];
+  map.setView([p[2], p[3]], Math.max(map.getZoom(), 7));
+  if (pin) pin.remove(); pin = L.circleMarker([p[2], p[3]], { radius: 7, color: css("--hot"), weight: 3, fill: false }).addTo(map);
+  S.sel = null; stL.redraw(); placeCard({ name: p[0], lat: p[2], lon: p[3], cc: p[1] });
+}
+document.querySelectorAll("[data-fly]").forEach(b => b.onclick = () => { const [a, c, z] = b.dataset.fly.split(",").map(Number); document.getElementById("lmap").scrollIntoView({ behavior: "smooth", block: "center" }); map.setView([a, c], z); });
+
+/* load everything */
+Promise.all([loadRaster("world"), loadRaster("bi"), fetch("data/page_stations.json").then(r => r.json()), fetch("data/borders.json").then(r => r.json()), loadPlaces()]).then(([, , sj, bj]) => {
+  ST = sj.rows; window.STC = sj.countries;
+  const W = RASTER.world, B = RASTER.bi;
+  worldL = new CanvasOverlay(W.out, rasterBounds(W.g), { pane: "model", interactive: false, attribution: "GEMS/Water (CC BY 4.0), Macrostrat (CC BY 4.0), BGS (OGL), GSI (CC BY 4.0), CRU, Natural Earth, GeoNames" }).addTo(map);
+  biL = new CanvasOverlay(B.out, rasterBounds(B.g), { pane: "bimodel", interactive: false });
+  bordL = L.polyline(bj.map(a => { const o = []; for (let i = 0; i < a.length; i += 2) o.push([a[i], a[i + 1]]); return o; }), { pane: "bord", weight: .8, interactive: false, renderer: L.canvas({ pane: "bord" }) });
+  stL.addTo(map);
+  drawKey(); applyLayers(); scatter();
+  document.getElementById("loading").remove();
+}).catch(e => { document.getElementById("loading").textContent = "The map data did not load: " + e; });
+
+/* ---------------- charts ---------------- */
+function stackBars(box, rows, w, sm) {
+  const lw = sm ? 124 : 170, bh = 26, gap = 10, H = rows.length * (bh + gap) + 30;
+  const svg = el("svg", { viewBox: `0 0 ${w} ${H}` }, box);
+  rows.forEach((r, k) => {
+    const y = k * (bh + gap); let x = lw;
+    lbl(svg, 0, y + bh / 2 + 4, sm && r.short ? r.short : r.lab, "lab b");
+    lbl(svg, 0, y + bh / 2 + 17, r.sub || "", "lab s m");
+    r.sh.forEach((s, i) => { const ww = s * (w - lw); const rc = el("rect", { x, y, width: Math.max(0, ww - .5), height: bh, fill: CC[i] }, svg);
+      rc.addEventListener("pointerenter", e => showTip(`<b>${r.lab}</b><br>${CL[i].label} (${rangeTxt(i)} ${UNITS[UNIT].lab}): ${pc(s, 1)}`, e.pageX - scrollX, e.pageY - scrollY)); rc.addEventListener("pointerleave", hideTip);
+      if (s > .07) lbl(svg, x + ww / 2, y + bh / 2 + 4, pc(s), "lab s", "middle").setAttribute("style", `fill:${i >= 3 ? "#fff" : "#10232E"}`); x += ww; });
+  });
+  let ly = rows.length * (bh + gap) + 8, lx = sm ? 0 : lw;
+  CL.forEach((c, i) => { const t = c.label, tw = 20 + t.length * 6.8; if (lx + tw > w) { lx = sm ? 0 : lw; ly += 16; } el("rect", { x: lx, y: ly, width: 10, height: 10, fill: c.colour, stroke: "rgba(0,0,0,.15)" }, svg); lbl(svg, lx + 14, ly + 9, t, "lab s m"); lx += tw; });
+  svg.setAttribute("viewBox", `0 0 ${w} ${ly + 16}`);
+}
+resp(document.getElementById("typeChart"), (w, sm) => {
+  if (!window.ST_SHARES) return;
+  stackBars(document.getElementById("typeChart"), window.ST_SHARES, w, sm);
+});
+window.ST_SHARES = R.type_shares.map(r => ({ lab: r.label, short: r.label.replace("Lakes and reservoirs", "Lakes, reservoirs"), sub: fmt(r.n) + " stations", sh: r.shares }));
+redraws.forEach(f => f());
+
+function dotRange(svg, X, y, r, lab, n, col) {
+  el("line", { x1: X(r.q25), x2: X(r.q75), y1: y, y2: y, stroke: col, "stroke-width": 8, "stroke-linecap": "round", opacity: .35 }, svg);
+  el("circle", { cx: X(r.median), cy: y, r: 6, fill: col }, svg);
+  lbl(svg, X(r.median) + 10, y - 9, uv(r.median), "lab s b");
+}
+resp(document.getElementById("rockChart"), (w, sm) => {
+  const box = document.getElementById("rockChart"), H = 250, half = sm ? w : (w - 20) / 2;
+  const panels = [{ t: "Crystalline rock nearby", rows: R.by_crystalline, col: "#C1606A" }, { t: "Carbonate rock nearby", rows: R.by_carbonate, col: "#2B6F9E" }];
+  panels.forEach((P, k) => {
+    const svg = el("svg", { viewBox: `0 0 ${half} ${H}` }, box); if (!sm) svg.style.cssText = `width:${half}px;display:inline-block;margin-right:${k ? 0 : 20}px`;
+    const m = { l: 92, r: 16, t: 26, b: 34 }; const X = v => m.l + Math.log10(Math.max(5, v) / 5) / Math.log10(500 / 5) * (half - m.l - m.r);
+    lbl(svg, 0, 14, P.t, "lab b");
+    (half < 420 ? [5, 50, 500] : [5, 20, 50, 100, 200, 500]).forEach(v => { el("line", { x1: X(v), x2: X(v), y1: m.t, y2: H - m.b, stroke: css("--rule") }, svg); lbl(svg, X(v), H - m.b + 16, uv(v), "lab s m", "middle"); });
+    lbl(svg, (m.l + half - m.r) / 2, H - 4, UNITS[UNIT].lab + " (log scale)", "lab s m", "middle");
+    const step = (H - m.t - m.b) / P.rows.length;
+    P.rows.forEach((r, i) => { const y = m.t + step * (i + .5); const q25 = r.q25 ?? r.median, q75 = r.q75 ?? r.median;
+      lbl(svg, 0, y + 4, `${Math.round(r.lo * 100)} to ${Math.round(r.hi * 100)}%`, "lab"); lbl(svg, 0, y + 17, fmt(r.n) + " stations", "lab s m");
+      dotRange(svg, X, y, { median: r.median, q25, q75 }, "", r.n, P.col); });
+  });
+});
+resp(document.getElementById("coefChart"), (w, sm) => {
+  const rows = R.coef_rows, H = rows.length * 28 + 50, m = { l: sm ? 150 : 270, r: 50, t: 8, b: 34 };
+  const svg = el("svg", { viewBox: `0 0 ${w} ${H}` }, document.getElementById("coefChart"));
+  const X = v => m.l + Math.log10(Math.max(5, v) / 5) / Math.log10(800 / 5) * (w - m.l - m.r);
+  (sm ? [5, 50, 500] : [5, 20, 50, 100, 200, 500]).forEach(v => { el("line", { x1: X(v), x2: X(v), y1: m.t, y2: H - m.b, stroke: css("--rule") }, svg); lbl(svg, X(v), H - m.b + 16, uv(v), "lab s m", "middle"); });
+  CL.forEach((c, i) => { const lo = [5, 50.5, 100.5, 150.5, 200.5, 300.5][i], hi = [50.5, 100.5, 150.5, 200.5, 300.5, 800][i]; el("rect", { x: X(lo), y: H - m.b + 22, width: X(hi) - X(lo), height: 5, fill: c.colour }, svg); });
+  rows.forEach((r, i) => { const y = m.t + i * 28;
+    if (r.head) { lbl(svg, 0, y + 17, r.head, "lab b"); return; }
+    lbl(svg, 8, y + 17, sm ? r.short : r.label, "lab s");
+    el("rect", { x: m.l, y: y + 6, width: Math.max(1, X(r.v) - m.l), height: 14, fill: r.col }, svg);
+    lbl(svg, X(r.v) + 5, y + 17, uv(r.v), "lab s b");
+  });
+});
+
+/* model check scatter: drawn on a canvas once the stations are in */
+function scatter() {
+  const box = document.getElementById("scatter");
+  resp(box, (w, sm) => {
+    if (!ST) return;
+    const H = Math.min(520, w), m = { l: 52, r: 12, t: 10, b: 44 }, dpr = window.devicePixelRatio || 1;
+    const c = document.createElement("canvas"); c.width = w * dpr; c.height = H * dpr; c.style.width = "100%"; c.style.height = "auto"; box.appendChild(c);
+    const x = c.getContext("2d"); x.scale(dpr, dpr);
+    const L0 = Math.log10(2), L1 = Math.log10(3000), X = v => m.l + (Math.log10(Math.max(2, v)) - L0) / (L1 - L0) * (w - m.l - m.r), Y = v => H - m.b - (Math.log10(Math.max(2, v)) - L0) / (L1 - L0) * (H - m.t - m.b);
+    x.fillStyle = isDark() ? "rgba(108,184,222,.10)" : "rgba(31,127,174,.08)";
+    x.beginPath(); x.moveTo(X(2), Y(4)); x.lineTo(X(1500), Y(3000)); x.lineTo(X(3000), Y(3000)); x.lineTo(X(3000), Y(1500)); x.lineTo(X(4), Y(2)); x.lineTo(X(2), Y(2)); x.closePath(); x.fill();
+    x.strokeStyle = css("--rule"); x.lineWidth = 1; x.font = "11px IBM Plex Mono, monospace"; x.fillStyle = css("--muted");
+    [50.5, 100.5, 150.5, 200.5, 300.5].forEach(b => { x.beginPath(); x.moveTo(X(b), m.t); x.lineTo(X(b), H - m.b); x.moveTo(m.l, Y(b)); x.lineTo(w - m.r, Y(b)); x.stroke(); });
+    [5, 10, 50, 100, 300, 1000].forEach(v => { x.textAlign = "center"; x.fillText(uv(v), X(v), H - m.b + 16); x.textAlign = "right"; x.fillText(uv(v), m.l - 6, Y(v) + 4); });
+    x.textAlign = "center"; x.fillText("Predicted, " + UNITS[UNIT].lab, (m.l + w - m.r) / 2, H - 6);
+    x.save(); x.translate(12, (m.t + H - m.b) / 2); x.rotate(-Math.PI / 2); x.fillText("Measured, " + UNITS[UNIT].lab, 0, 0); x.restore();
+    x.strokeStyle = css("--fg"); x.beginPath(); x.moveTo(X(2), Y(2)); x.lineTo(X(3000), Y(3000)); x.stroke();
+    for (const s of ST) { if (s[9] == null) continue; x.fillStyle = CC[cls(s[4])]; x.globalAlpha = .55; x.beginPath(); x.arc(X(Math.min(3000, s[9])), Y(Math.min(3000, s[4])), sm ? 1.4 : 1.8, 0, 7); x.fill(); }
+    x.globalAlpha = 1;
+  });
+}
+(function mtable() {
+  const t = document.getElementById("mtable"), M = R.model, rows = [
+    ["Guess the global median", M.world_cv.baseline_global_median], ["Rainfall and water type only", M.world_cv.rain_and_type_only], ["Rocks only", M.world_cv.rocks_only],
+    ["Rocks and water type", M.world_cv.rocks_and_type], ["Rocks, rainfall and water type (the map)", M.world_cv.rocks_rain_and_type], ["The same, hiding whole countries", M.world_cv.rocks_rain_and_type_leave_country_out],
+    ["Britain and Ireland model, Irish stations", M.bi_cv.rocks_type_and_world_rain_effect], ["World model at the same Irish stations", M.bi_cv.world_model_at_irish_stations]];
+  t.innerHTML = `<tr><th>Test (spatial cross-validation)</th><th class="r">Stations</th><th class="r">Right class</th><th class="r">Within one</th><th class="r">Typical error</th></tr>` +
+    rows.map(([n, r]) => `<tr><td>${n}</td><td class="r">${fmt(r.n)}</td><td class="r">${pc(r.class_exact)}</td><td class="r">${pc(r.class_within1)}</td><td class="r">×${r.median_factor.toFixed(1)}</td></tr>`).join("");
+})();
+resp(document.getElementById("biChart"), (w, sm) => stackBars(document.getElementById("biChart"), R.bi_nations.map(n => ({ lab: n.name, sub: "median " + uv(n.median) + " " + UNITS[UNIT].lab, sh: n.shares })), w, sm));
+
+let CT = "m";
+function drawCountries() {
+  const t = document.getElementById("ctable"), m = CT === "m";
+  const rows = m ? R.countries_measured.filter(r => r.stations >= 10) : R.countries_modelled, mx = Math.max(...rows.map(r => m ? r.median : r.modelled_median));
+  t.innerHTML = `<tr><th>#</th><th>Country</th><th class="r">${m ? "Stations" : "Low confidence"}</th><th class="r">Median, ${UNITS[UNIT].lab}</th><th style="width:34%"></th></tr>` +
+    rows.map((r, i) => { const v = m ? r.median : r.modelled_median, lo = !m && r.share_low_confidence >= .5; return `<tr><td>${i + 1}</td><td>${esc(r.country)}</td><td class="r">${m ? fmt(r.stations) : pc(r.share_low_confidence)}</td><td class="r">${uv(v)}</td><td><span class="bar" style="width:${v / mx * 100}%;background:${CC[cls(v)]};opacity:${lo ? .45 : 1}"></span></td></tr>`; }).join("");
+  document.getElementById("ctNote").textContent = m ? `Median of station medians, for the ${rows.length} countries with at least 10 stations (${R.countries_measured.length - rows.length} with fewer are left out). Countries with few stations can be far from typical.` : "Area median of the modelled river estimate over each country's land (Natural Earth), for countries of at least 20,000 km² with an estimate for at least half their land. Desert land is left out. Low confidence: share of that land where the estimate rests mainly on coarse world geology; faded bars mark countries where that is half or more.";
+}
+document.querySelectorAll("[data-ct]").forEach(b => b.onclick = () => { CT = b.dataset.ct; document.querySelectorAll("[data-ct]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawCountries(); });
+drawCountries();
+(function btable() {
+  const t = document.getElementById("btable"), rows = R.bi_counties, mx = Math.max(...rows.map(r => r.median));
+  const draw = () => { t.innerHTML = `<tr><th>#</th><th>Area</th><th>Nation</th><th class="r">Median, ${UNITS[UNIT].lab}</th><th class="r">Hard or very hard</th><th style="width:26%"></th></tr>` +
+    rows.map((r, i) => `<tr><td>${i + 1}</td><td>${esc(r.name)}</td><td>${r.nation}</td><td class="r">${uv(r.median)}</td><td class="r">${pc(r.hard_share)}</td><td><span class="bar" style="width:${r.median / mx * 100}%;background:${CC[cls(r.median)]}"></span></td></tr>`).join(""); };
+  draw(); redraws.push(draw);
+})();
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; setTiles(); drawKey(); applyLayers(); redraws.forEach(f => f()); };
+</script>
+</body>
+</html>
