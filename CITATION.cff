@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this data or code, please cite it as below."
+title: "Hard Water: Measured and Modelled Hardness of the World's Rivers, Lakes and Groundwater, and the Rocks Behind It"
+type: dataset
+authors:
+  - family-names: Hotham
+    given-names: Tristan
+    orcid: "https://orcid.org/0000-0003-4931-9349"
+    affiliation: "Independent researcher"
+doi: "10.5281/zenodo.23735824"
+url: "https://maps.tristanhotham.com/hard-water/"
+repository-code: "https://github.com/Tristan-Hotham/hard-water"
+license: CC-BY-4.0
+keywords:
+  - "water hardness"
+  - "calcium carbonate"
+  - "GEMS/Water"
+  - "geology"
+  - "lithology"
+  - "limestone"
+  - "chalk"
+  - "spatial cross-validation"
+  - "Britain and Ireland"
+  - "open data"
